@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="user_detail.css">
+</head>
+<body>
+	<!-- ヘッダー -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand title bold" href="#">学習管理システム</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#">成績</a>
+				</li>
+
+				<!-- JQueryがないと動かない！！ -->
+				<li class="nav-item dropdown active">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> 講座一覧
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">通常授業</a>
+						<a class="dropdown-item" href="#">講習会</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">模試・イベント</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+		</div>
+		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
+	</nav>
+
+	<h1 class="sub-title"> アカウント情報 </h1>
+
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> ログインID </div>
+			<div class="col col-lg-5"> id0001 </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 学年 </div>
+			<div class="col col-lg-5"> 中学１年生 </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 生徒氏名 </div>
+			<div class="col col-lg-5"> 田中　太郎 </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 生年月日 </div>
+			<div class="col col-lg-5"> 2005年11月2日 </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 連絡先 </div>
+			<div class="col col-lg-5"> 03-****-**** </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 住所 </div>
+			<div class="col col-lg-5"> 東京都墨田区太平2丁目10-11 </div>
+		</div>
+	</div>
+
+	<div class="table-container">
+		<h3 class="table-name"> 受講講座一覧 </h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">講座名</th>
+					<th scope="col">担当教員</th>
+					<th scope="col">期間</th>
+					<th scope="col">料金</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">国語</th>
+					<td>佐藤</td>
+					<td>1学期（4月～7月）</td>
+					<td>***** 円/月</td>
+				</tr>
+				<tr>
+					<th scope="row"></th>
+					<td></td>
+					<td>合計料金</td>
+					<td>\ *****</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

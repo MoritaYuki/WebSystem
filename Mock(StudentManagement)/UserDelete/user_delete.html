@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="user_delete.css">
+</head>
+<body>
+	<!-- ヘッダー -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand title bold" href="#">学習管理システム</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#">成績</a>
+				</li>
+
+				<!-- JQueryがないと動かない！！ -->
+				<li class="nav-item dropdown active">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> 講座一覧
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">通常授業</a>
+						<a class="dropdown-item" href="#">講習会</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">模試・イベント</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+		</div>
+		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
+	</nav>
+
+	<h1 class="sub-title"> アカウント削除 </h1>
+	<div class="delete-msg">
+		<p class="info-msg"> ログインID：id0001</p>
+		<p class="info-msg"> 生徒氏名：田中　太郎 </p>
+		<p class="tale-msg"> のアカウントを本当に削除してもよろしいですか？ </p>
+	</div>
+	<div class="btn-box">
+		<a class="btn btn-primary no" href="#" role="button">キャンセル</a>
+		<a class="btn btn-primary yes" href="#" role="button">OK</a>
+	</div>
+</body>
+</html>
