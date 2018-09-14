@@ -29,6 +29,14 @@ body{
 	margin: 70px auto;
 }
 
+.event{
+	margin-left: 25px;
+}
+
+.event-lavel{
+	margin-left: 45px;
+}
+
 .navbar-brand{
 	margin: 0 100px 0 40px;
 }
@@ -46,13 +54,6 @@ body{
 	padding: .2rem 4rem;
 }
 
-.table{
-	table-layout: fixed;
-	width: 70%;
-	margin: 80px auto;
-}
-
-table a {
-   display: block;       /* リンクをブロックレベル化して表示 */
-   color: black;
+.container{
+	margin-top: 100px;
 }
