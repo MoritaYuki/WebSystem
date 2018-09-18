@@ -46,6 +46,17 @@ body{
 	padding: .2rem 4rem;
 }
 
+.term{
+	margin: 70px auto 0 auto;
+	width: 75%;
+	text-align: center;
+}
+
+.term-btn{
+	padding: 8px 20px;
+	margin: 0 10px;
+}
+
 .table{
 	table-layout: fixed;
 	width: 70%;
@@ -61,4 +72,8 @@ table a {
 	font-size: 15px;
 	padding: 5px 5px;
 	border-color: transparent!important;
+}
+
+.delete{
+	background-color: red !important;
 }

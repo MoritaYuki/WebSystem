@@ -20,13 +20,9 @@ body{
 
 .sub-title{
 	text-align: center;
-	margin-top: 50px;
-	letter-spacing: 15px;
-}
-
-.txarea{
-	width: 75%;
-	margin: 70px auto;
+	font-size: 49px;
+	margin: 50px 0 80px 0;
+	letter-spacing: 20px;
 }
 
 .navbar-brand{
@@ -37,28 +33,25 @@ body{
 	margin: 0 10px;
 }
 
-.search{
-	text-align: right;
-	padding-right: 100px;
+.container{
+	font-size: 20px;
+	padding: 20px 0px;
 }
 
-.search-btn{
-	padding: .2rem 4rem;
+.col-lg-4{
+	font-weight: bold;
+}
+
+
+.table-container{
+	width: 60%;
+	margin: 65px auto;
 }
 
 .table{
 	table-layout: fixed;
-	width: 70%;
-	margin: 80px auto;
 }
 
-table a {
-   display: block;       /* リンクをブロックレベル化して表示 */
-   color: black;
-}
-
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
+.table-name{
+	padding: 0 0 10px 50px;
 }

@@ -25,6 +25,14 @@ body{
 	letter-spacing: 20px;
 }
 
+.navbar-brand{
+	margin: 0 100px 0 40px;
+}
+
+.nav-link{
+	margin: 0 10px;
+}
+
 .welcome-msg{
 	font-size: 30px;
 	text-align: center;

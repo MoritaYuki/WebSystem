@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="application_list.css">
+<link rel="stylesheet" href="exam_master.css">
 </head>
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="../MyPage/my_page.html">学習管理システム</a>
+		<a class="navbar-brand title bold" href="#">学習管理システム</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,22 +20,35 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="../UserDetail/user_detail.html">プロフィール<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="../ExamResult/exam_result.html">成績</a>
+					<a class="nav-link" href="#">成績</a>
 				</li>
 
+				<!-- JQueryがないと動かない！！ -->
+				<li class="nav-item dropdown active">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> 講座一覧
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">通常授業</a>
+						<a class="dropdown-item" href="#">講習会</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">模試・イベント</a>
+					</div>
+				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="../CourseList/course_list.html" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
+					<a class="nav-link disabled" href="#">Disabled</a>
 				</li>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
 	<!-- 検索フォーム -->
-	<h1 class="sub-title"> 申込一覧 </h1>
+	<h1 class="sub-title"> テスト結果マスタ一覧 </h1>
 	<form class="form bold" method="post" action="">
 		<div class="txarea">
 			<div class="form-group row">
@@ -83,6 +96,12 @@
 		</div>
 	</form>
 
+	<form class="form term" method="post" action="">
+		<button type="button" class="term-btn btn btn-secondary btn-lg" disabled>１学期末</button>
+		<button type="button" class="term-btn btn btn-secondary btn-lg">２学期末</button>
+		<button type="button" class="term-btn btn btn-secondary btn-lg">３学期末</button>
+	</form>
+
 	<!-- ユーザ一覧表 -->
 	<table class="table">
 		<thead class="thead-light">
@@ -92,31 +111,40 @@
 				<th scope="col">読み仮名</th>
 				<th scope="col">名前</th>
 				<th scope="col">性別</th>
-				<th scope="col">申込日</th>
+				<th scope="col">国語</th>
+				<th scope="col">数学</th>
+				<th scope="col">英語</th>
+				<th scope="col">理科</th>
+				<th scope="col">社会</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<th scope="row">id0001</th>
-				<td>中１</td>
-				<td>ﾀﾅｶ ﾀﾛｳ</td>
-				<td>田中 太郎</td>
-				<td>男</td>
-				<td>**** 年 **月 **日</td>
-				<td><a href="../ApplicationDetail/application_detail.html" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a></td>
+				<th scope="row"><a href="#">id0001</a></th>
+				<td><a href="#">中１</a></td>
+				<td><a href="#">ﾀﾅｶ ﾀﾛｳ</a></td>
+				<td><a href="#">田中 太郎</a></td>
+				<td><a href="#">男</a></td>
+				<td><a href="#">100</a></td>
+				<td><a href="#">100</a></td>
+				<td><a href="#">100</a></td>
+				<td><a href="#">100</a></td>
+				<td><a href="#">100</a></td>
+				<td>
+					<a href="#" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
+					<a href="#" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="text-center">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">前</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">後</a></li>
-			</ul>
-		</nav>
-	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
+	</nav>
 </body>
 </html>
