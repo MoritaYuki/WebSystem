@@ -25,7 +25,7 @@ body{
 }
 
 .txarea{
-	width: 75%;
+	width: 50%;
 	margin: 70px auto;
 }
 
@@ -39,7 +39,7 @@ body{
 
 .search{
 	text-align: right;
-	padding-right: 100px;
+	padding-right: 150px;
 }
 
 .search-btn{
@@ -54,7 +54,8 @@ body{
 
 .term-btn{
 	padding: 8px 20px;
-	margin: 0 10px;
+	margin: 40px 10px 0px 0px;
+	color: white!important;
 }
 
 .table{

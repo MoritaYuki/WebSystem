@@ -24,8 +24,8 @@ body{
 	letter-spacing: 15px;
 }
 
-.txarea{
-	width: 75%;
+.comment-box{
+	width: 77%;
 	margin: 70px auto;
 }
 
@@ -37,26 +37,6 @@ body{
 	margin: 0 10px;
 }
 
-.search{
-	text-align: right;
-	padding-right: 100px;
-}
-
-.search-btn{
-	padding: .2rem 4rem;
-}
-
-.term{
-	margin: 70px auto 0 auto;
-	width: 75%;
-	text-align: center;
-}
-
-.term-btn{
-	padding: 8px 20px;
-	margin: 0 10px;
-}
-
 .table{
 	width: 75%;
 	margin: 80px auto;
@@ -65,14 +45,4 @@ body{
 table a {
    display: block;       /* リンクをブロックレベル化して表示 */
    color: black;
-}
-
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
-}
-
-.delete{
-	background-color: red !important;
 }

@@ -9,7 +9,7 @@
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="#">学習管理システム</a>
+		<a class="navbar-brand title bold" href="../MyPage/my_page.html">学習管理システム</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,31 +20,18 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="../UserDetail/user_detail.html">プロフィール<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="#">成績</a>
+					<a class="nav-link" href="../ExamResult/exam_result.html">成績</a>
 				</li>
 
-				<!-- JQueryがないと動かない！！ -->
-				<li class="nav-item dropdown active">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> 講座一覧
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">通常授業</a>
-						<a class="dropdown-item" href="#">講習会</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">模試・イベント</a>
-					</div>
-				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
+					<a class="nav-link" href="../CourseList/course_list.html" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
 				</li>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
 	<!-- 検索フォーム -->
@@ -150,8 +137,8 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-11 signup">
-				<button type="submit" class="btn btn-primary search-btn list-in">選択した講座を登録講座リストに移す</button>
-				<button type="submit" class="btn btn-primary search-btn">登録講座リストの内容で登録</button>
+				<button type="submit" name="export" class="btn btn-primary search-btn list-in">選択した講座を登録講座リストに移す</button>
+				<button type="submit" name="sign" class="btn btn-primary search-btn">登録講座リストの内容で登録</button>
 			</div>
 		</div>
 	</form>

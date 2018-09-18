@@ -9,7 +9,7 @@
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="#">学習管理システム</a>
+		<a class="navbar-brand title bold" href="../MyPage/my_page.html">学習管理システム</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,49 +20,24 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="../UserDetail/user_detail.html">プロフィール<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="#">成績</a>
+					<a class="nav-link" href="../ExamResult/exam_result.html">成績</a>
 				</li>
 
-				<!-- JQueryがないと動かない！！ -->
-				<li class="nav-item dropdown active">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> 講座一覧
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">通常授業</a>
-						<a class="dropdown-item" href="#">講習会</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">模試・イベント</a>
-					</div>
-				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
+					<a class="nav-link" href="../CourseList/course_list.html" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
 				</li>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
 	<!-- 検索フォーム -->
 	<h1 class="sub-title"> 講座マスタ一覧 </h1>
 	<form class="form bold" method="post" action="">
 		<div class="txarea">
-			<div class="form-group row">
-				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputLoginId">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputUserName" class="col-sm-2 col-form-label">ユーザ名</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputUserName">
-				</div>
-			</div>
 			<fieldset class="form-group">
 				<div class="row">
 					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
@@ -83,9 +58,15 @@
 				</div>
 			</fieldset>
 			<div class="form-group row">
-				<label for="inputAddress" class="col-sm-2 col-form-label">住所</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputAddress">
+				<label for="inputCourseName" class="col-sm-2 col-form-label">講座名</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="inputCourseName">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="inputTeacher" class="col-sm-2 col-form-label">担当教員</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="inputTeacher">
 				</div>
 			</div>
 		</div>
@@ -95,12 +76,11 @@
 			</div>
 		</div>
 	</form>
-
-	<form class="form term" method="post" action="">
-		<button type="button" class="term-btn btn btn-secondary btn-lg" disabled>１学期</button>
-		<button type="button" class="term-btn btn btn-secondary btn-lg">２学期</button>
-		<button type="button" class="term-btn btn btn-secondary btn-lg">３学期</button>
-	</form>
+	<div class="text-center">
+		<a class="term-btn btn btn-secondary btn-lg disabled">１学期</a>
+		<a class="term-btn btn btn-secondary btn-lg">２学期</a>
+		<a class="term-btn btn btn-secondary btn-lg">３学期</a>
+	</div>
 
 	<!-- ユーザ一覧表 -->
 	<table class="table">
@@ -111,6 +91,7 @@
 				<th scope="col">担当教員</th>
 				<th scope="col">期間</th>
 				<th scope="col">料金</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -121,9 +102,9 @@
 				<td>１学期</td>
 				<td>\ ****</td>
 				<td>
-					<a href="#" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
-					<a href="#" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
-					<a href="#" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
+					<a href="../CourseDetail/course_detail.html" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
+					<a href="../CourseMasterUpdate/course_master_update.html" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
+					<a href="../CourseMasterDelete/course_master_delete.html" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
 				</td>
 			</tr>
 		</tbody>
