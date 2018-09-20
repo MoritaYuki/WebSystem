@@ -39,6 +39,16 @@
 	<form class="form bold" method="post" action="">
 		<div class="txarea">
 			<div class="form-group row">
+				<label for="inputBetween" class="col-sm-2 col-form-label">申込日</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="inputBetween">
+				</div>
+				<div class="between col-sm-1">～</div>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="inputBetween">
+				</div>
+			</div>
+			<div class="form-group row">
 				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
 				<div class="col-sm-7">
 					<input type="text" class="form-control" id="inputLoginId">
@@ -69,12 +79,6 @@
 					</div>
 				</div>
 			</fieldset>
-			<div class="form-group row">
-				<label for="inputAddress" class="col-sm-2 col-form-label">住所</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputAddress">
-				</div>
-			</div>
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-10 search">
@@ -87,23 +91,27 @@
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
+				<th scope="col">申込日</th>
+				<th scope="col">申込番号</th>
 				<th scope="col">ログインID</th>
 				<th scope="col">学年</th>
 				<th scope="col">読み仮名</th>
 				<th scope="col">名前</th>
-				<th scope="col">性別</th>
-				<th scope="col">申込日</th>
+				<th scope="col">申込金額</th>
+				<th scope="col">入金状況</th>
 				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
+				<td>2018年9月18日 21:36</td>
+				<th scope="col">0000-0000</th>
 				<th scope="row">id0001</th>
 				<td>中１</td>
 				<td>ﾀﾅｶ ﾀﾛｳ</td>
 				<td>田中 太郎</td>
-				<td>男</td>
-				<td>**** 年 **月 **日</td>
+				<td>\ ****</td>
+				<td>未</td>
 				<td>
 					<a href="../ApplicationDetail/application_detail.html" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
 					<a href="../PaymentCheck/payment_check.html" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">入力</a>

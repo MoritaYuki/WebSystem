@@ -37,6 +37,12 @@ body{
 	margin: 0 10px;
 }
 
+.signup{
+	width: 70%;
+	margin: 30px auto;
+	text-align: right;
+}
+
 .search{
 	text-align: right;
 	padding-right: 100px;

@@ -24,9 +24,9 @@ body{
 	letter-spacing: 15px;
 }
 
-.subsub-title{
-	font-size: 20px;
-	font-weight: bold;
+.txarea{
+	width: 65%;
+	margin: 70px auto;
 }
 
 .form-group{
@@ -41,43 +41,30 @@ body{
 	margin: 0 10px;
 }
 
-.txarea{
-	width: 75%;
-	margin: 70px auto;
+.event{
+	margin-left: 25px;
 }
 
-.table{
-	background-color: #CCCCCC;
-	table-layout: fixed;
+.event-lavel{
+	margin-left: 45px;
 }
 
-.table-box{
-	width: 85%;
-	margin: 100px auto;
-	text-align: center;
-}
-
-.vector-box{
-	font-size: 80px;
-	margin: auto;
-}
-
-.search,.signup{
+.search{
 	text-align: right;
+	padding-right: 100px;
 }
 
 .search-btn{
 	padding: .2rem 4rem;
 }
 
-.list-in{
-	margin-right: 150px;
+.table{
+	table-layout: fixed;
+	width: 70%;
+	margin: 80px auto;
 }
 
-.balance{
-	padding-right: 138px;
-}
-
-.signup{
-	margin-top: 50px;
+table a {
+   display: block;       /* リンクをブロックレベル化して表示 */
+   color: black;
 }

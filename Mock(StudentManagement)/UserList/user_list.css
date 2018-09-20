@@ -24,6 +24,16 @@ body{
 	letter-spacing: 30px;
 }
 
+.signup{
+	width: 70%;
+	margin: 30px auto;
+	text-align: right;
+}
+
+.signup-btn{
+	padding: 7px 15px;
+}
+
 .txarea{
 	width: 75%;
 	margin: 70px auto;
