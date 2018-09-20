@@ -9,7 +9,7 @@
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="#">学習管理システム</a>
+		<a class="navbar-brand title bold" href="../ManagementMenu/management_menu.html">学習管理システム</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,31 +20,20 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">プロフィール<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="../UserList/user_list.html">生徒一覧<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="#">成績</a>
+					<a class="nav-link" href="../ApplicationList/application_list.html">申込管理</a>
 				</li>
-
-				<!-- JQueryがないと動かない！！ -->
-				<li class="nav-item dropdown active">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> 講座一覧
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">通常授業</a>
-						<a class="dropdown-item" href="#">講習会</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">模試・イベント</a>
-					</div>
+				<li class="nav-item active">
+					<a class="nav-link" href="../ExamMaster/exam_master.html">成績マスタ</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
+					<a class="nav-link" href="../CourseMaster/course_master.html" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 				</li>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="#">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
 	<!-- 検索フォーム -->
@@ -116,6 +105,11 @@
 				<td><a href="#">田中 太郎</a></td>
 				<td><a href="#">男</a></td>
 				<td><a href="#">03-****-****</a></td>
+				<td>
+					<a href="../UserDetail/user_detail.html" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
+					<a href="../UserUpdate/user_update.html" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
+					<a href="../UserDelete/user_delete.html" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>

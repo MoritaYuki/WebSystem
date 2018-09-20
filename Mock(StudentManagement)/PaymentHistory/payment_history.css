@@ -21,7 +21,7 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 30px;
+	letter-spacing: 15px;
 }
 
 .navbar-brand{
@@ -47,28 +47,16 @@ body{
 	table-layout: fixed;
 }
 
-.payment-form{
-	font-size: 20px;
+.check{
+	color: blue;
 	font-weight: bold;
 }
 
-.pm{
-	width: 55%;
-	margin: auto;
+.check2{
+	color: red;
+	font-weight: bold;
 }
 
-.vector{
-	text-align: center;
-	font-size: 30px;
-}
-
-.search{
-	text-align: right;
-	margin-top: 50px;
-}
-
-.ok{
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-left: 100px;
+.btn{
+	padding: 2px 20px;
 }

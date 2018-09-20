@@ -56,3 +56,13 @@ table a {
    display: block;       /* リンクをブロックレベル化して表示 */
    color: black;
 }
+
+.button{
+	font-size: 15px;
+	padding: 5px 5px;
+	border-color: transparent!important;
+}
+
+.delete{
+	background-color: red !important;
+}
