@@ -6,12 +6,11 @@ import java.sql.SQLException;
 
 public class DBManager {
 	//Timezoneの設定を忘れずに！！
-	private static String url = "jdbc:mysql://localhost:3306/webpro?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
+	private static String url = "jdbc:mysql://localhost:3306/sm_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
 	private static String user = "root";
 	private static String pass = "password";
 
 	//DBへ接続するコネクションを返す
-
 	public static Connection getConnection(){
 		Connection con = null;
 		try {

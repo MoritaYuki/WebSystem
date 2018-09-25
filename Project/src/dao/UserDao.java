@@ -34,8 +34,7 @@ public class UserDao {
 			//DBに接続
 			conn = DBManager.getConnection();
 			//SELECT文準備
-			String sql = "SELECT * FROM user WHERE login_id = ? and password = ? ";
-
+			String sql = "SELECT * FROM user WHERE login_id = ? and password = ?";
 			/*
 			 * ・createStatement()は入力した文章をそのままステートメントにするだけだから、最後の
 			 * executeQuery()の引数にsql分を指定する。

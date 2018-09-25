@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class UserDetailServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/UserDetailServlet")
+public class UserDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public UserDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,12 +27,18 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ユーザテーブルの情報を持ってくる
+		// 申込テーブルなどからも持ってくる
 
-		// ログイン時に保存したセッションスコープのユーザ情報を削除
-		request.getSession().removeAttribute("loginInfo");
+		// とりあえず申込関係、新規登録関係から作ろうか
+	}
 
-		// ログイン画面にリダイレクト
-		response.sendRedirect("LoginServlet");
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

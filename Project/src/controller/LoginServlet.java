@@ -32,19 +32,18 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//ログインセッションがある場合、ユーザ一覧画面にリダイレクトさせる。
-		User user = (User) request.getSession().getAttribute("userInfo");
-		if (user.equals("admin")) {
-			response.sendRedirect("ManagementMenuServlet");
-			return;
-		}else if(!(user == null)) {
+		User user = (User) request.getSession().getAttribute("loginInfo");
+		if(!(user == null)){
+			if (user.getLoginId().equals("admin")) {
+				response.sendRedirect("ManagementMenuServlet");
+				return;
+			}
 			response.sendRedirect("MyPageServlet");
 			return;
-		}else {
-			//login.jspにフォワード
-			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 		}
 
-
+		//login.jspにフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -58,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-        //UserDaoに引数を渡して、DB(sm_db)上に合致するものがあるかどうかを評価
+        //DB(sm_db)上に合致するものがあるかどうかを評価
         User user = new UserDao().findByLoginInfo(loginId, password);
 
         //合致するものがなかった場合
@@ -71,10 +70,16 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        //合致するものがあった場合はユーザの情報をセッションスコープに保管して
-        //ユーザ一覧へ遷移
-        request.getSession().setAttribute("userInfo", user);
-        response.sendRedirect("UserListServlet");
+        // 合致するものがあった場合はユーザの情報をセッションスコープに保管して
+        // 管理者 ⇒ 管理メニュー
+        // 一般   ⇒ マイページ
+        // へ遷移
+        request.getSession().setAttribute("loginInfo", user);
+        if (user.getLoginId().equals("admin")) {
+			response.sendRedirect("ManagementMenuServlet");
+			return;
+        }
+			response.sendRedirect("MyPageServlet");
 	}
 
 }

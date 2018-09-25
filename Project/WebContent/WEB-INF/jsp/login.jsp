@@ -16,9 +16,9 @@
 			<div id="output"></div>
 			<div class="avatar"></div>
 			<div class="form-box">
-				<form action="MyPageServlet" method="post">
-					<input type="text" placeholder="login id">
-					<input type="password" placeholder="password">
+				<form action="LoginServlet" method="post">
+					<input name="loginId" type="text" placeholder="login id">
+					<input name="password" type="password" placeholder="password">
 					<button class="btn btn-info btn-block login" type="submit">Login</button>
 				</form>
 			</div>
