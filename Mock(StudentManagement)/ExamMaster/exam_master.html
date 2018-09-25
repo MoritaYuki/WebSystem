@@ -44,42 +44,30 @@
 	<form class="form bold" method="post" action="">
 		<div class="txarea">
 			<div class="form-group row">
-				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputLoginId">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputUserName" class="col-sm-2 col-form-label">ユーザ名</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputUserName">
+				<label for="inputYear" class="col-sm-2 col-form-label">年度</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="inputYear">
 				</div>
 			</div>
 			<fieldset class="form-group">
 				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
+					<legend class="col-form-label col-sm-2 pt-0">テスト名</legend>
 					<div class="col-sm-7">
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-							<label class="form-check-label" for="gridRadios1"> １年生</label>
+							<label class="form-check-label" for="gridRadios1"> １学期末</label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label" for="gridRadios2"> ２年生 </label>
+							<label class="form-check-label" for="gridRadios2"> ２学期末 </label>
 						</div>
-						<div class="form-check disabled">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-							<label class="form-check-label" for="gridRadios3"> ３年生 </label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+							<label class="form-check-label" for="gridRadios2"> ３学期末 </label>
 						</div>
 					</div>
 				</div>
 			</fieldset>
-			<div class="form-group row">
-				<label for="inputAddress" class="col-sm-2 col-form-label">住所</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputAddress">
-				</div>
-			</div>
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-10 search">
@@ -89,47 +77,50 @@
 	</form>
 
 	<div class="text-center">
-		<a class="term-btn btn btn-secondary btn-lg disabled">１学期</a>
-		<a class="term-btn btn btn-secondary btn-lg">２学期</a>
-		<a class="term-btn btn btn-secondary btn-lg">３学期</a>
+		<a class="term-btn btn btn-secondary btn-lg disabled">１学年</a>
+		<a class="term-btn btn btn-secondary btn-lg">２学年</a>
+		<a class="term-btn btn btn-secondary btn-lg">３学年</a>
 	</div>
 
 	<!-- ユーザ一覧表 -->
-	<table class="table">
-		<thead class="thead-light">
-			<tr>
-				<th scope="col">ログインID</th>
-				<th scope="col">学年</th>
-				<th scope="col">読み仮名</th>
-				<th scope="col">名前</th>
-				<th scope="col">性別</th>
-				<th scope="col">国語</th>
-				<th scope="col">数学</th>
-				<th scope="col">英語</th>
-				<th scope="col">理科</th>
-				<th scope="col">社会</th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row"><a href="#">id0001</a></th>
-				<td><a href="#">中１</a></td>
-				<td><a href="#">ﾀﾅｶ ﾀﾛｳ</a></td>
-				<td><a href="#">田中 太郎</a></td>
-				<td><a href="#">男</a></td>
-				<td><a href="#">100</a></td>
-				<td><a href="#">100</a></td>
-				<td><a href="#">100</a></td>
-				<td><a href="#">100</a></td>
-				<td><a href="#">100</a></td>
-				<td>
-					<a href="../ExamMasterUpdate/exam_master_update.html" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
-					<a href="../ExamMasterDelete/exam_master_delete.html" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-box">
+		<p class="table-title"> ２０１８年度　１学年　１学期末テスト </p>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">ログインID</th>
+					<th scope="col">読み仮名</th>
+					<th scope="col">名前</th>
+					<th scope="col">性別</th>
+					<th scope="col">国語</th>
+					<th scope="col">数学</th>
+					<th scope="col">英語</th>
+					<th scope="col">理科</th>
+					<th scope="col">社会</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">id0001</th>
+					<td>ﾀﾅｶ ﾀﾛｳ</td>
+					<td>田中 太郎</td>
+					<td>男</td>
+					<td>100</td>
+					<td>100</td>
+					<td>100</td>
+					<td>100</td>
+					<td>100</td>
+					<td>
+						<a href="../ExamResult/exam_result.html" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
+						<a href="../ExamMasterUpdate/exam_master_update.html" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
+						<a href="../ExamMasterDelete/exam_master_delete.html" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 	<div class="text-center">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">

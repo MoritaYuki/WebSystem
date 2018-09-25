@@ -70,9 +70,19 @@ body{
 	color: white!important;
 }
 
-.table{
+.table-title{
+	font-weight: bold;
+	font-size: 25px;
+	background-color: #DDDDDD;
+	width: 33%;
+	text-align: center;
+	padding: 8px 10px;
+	margin-top: 30px;
+}
+
+.table-box{
 	width: 75%;
-	margin: 80px auto;
+	margin: 0 auto;
 }
 
 table a {
