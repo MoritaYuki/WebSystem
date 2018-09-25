@@ -1,0 +1,56 @@
+CREATE DATABASE sm_db DEFAULT CHARACTER SET utf8;
+
+USE sm_db;
+
+CREATE TABLE user(
+user_id SERIAL,
+login_id varchar(30) NOT NULL UNIQUE,
+password varchar(30) NOT NULL
+);
+
+CREATE TABLE user_detail(
+user_id int NOT NULL,
+grade int NOT NULL,
+user_name varchar(30) NOT NULL,
+birthday DATE NOT NULL,
+contact_info varchar(30) NOT NULL,
+address varchar(50) NOT NULL,
+create_date TIMESTAMP NOT NULL,
+update_date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE score(
+user_id int NOT NULL,
+year int NOT NULL,
+grade int NOT NULL,
+term int NOT NULL,
+japanese int DEFAULT 0,
+math int DEFAULT 0,
+english int DEFAULT 0,
+science int DEFAULT 0,
+social int DEFAULT 0,
+comment varchar(100)
+);
+
+CREATE TABLE application(
+application_no SERIAL,
+user_id int NOT NULL,
+app_date TIMESTAMP NOT NULL,
+app_amount int NOT NULL DEFAULT 0,
+pay_amount int NOT NULL DEFAULT 0,
+pay_fg int DEFAULT 0
+);
+
+CREATE TABLE application_detail(
+application_no int NOT NULL,
+course_id int NOT NULL
+);
+
+CREATE TABLE course(
+course_id SERIAL,
+course_name varchar(30) NOT NULL,
+teacher varchar(30) NOT NULL,
+term int NOT NULL,
+price int NOT NULL,
+course_detail varchar(256)
+);
