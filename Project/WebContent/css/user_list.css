@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+body{
+	background: #eee url(http://subtlepatterns.com/patterns/sativa.png);
+	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック','Yu Gothic UI', YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'
+}
+
+.bold{ font-weight: bold;}
+
+.bg-light{
+	background-color: #D3D3D3!important;
+}
+
+.header-right {
+	float: right;
+	display: block; /* リンクをブロックレベル化して表示 */
+	color: black;
+	padding-right: 60px;
+}
+
+.sub-title{
+	text-align: center;
+	margin-top: 50px;
+	letter-spacing: 30px;
+}
+
+.signup{
+	width: 70%;
+	margin: 30px auto;
+	text-align: right;
+}
+
+.signup-btn{
+	padding: 7px 15px;
+}
+
+.txarea{
+	width: 75%;
+	margin: 70px auto;
+}
+
+.navbar-brand{
+	margin: 0 100px 0 40px;
+}
+
+.nav-link{
+	margin: 0 10px;
+}
+
+.search{
+	text-align: right;
+	padding-right: 100px;
+}
+
+.search-btn{
+	padding: .2rem 4rem;
+}
+
+.table{
+	table-layout: fixed;
+	width: 70%;
+	margin: 80px auto;
+}
+
+table a {
+   display: block;       /* リンクをブロックレベル化して表示 */
+   color: black;
+}
+
+.button{
+	font-size: 15px;
+	padding: 5px 5px;
+	border-color: transparent!important;
+}
+
+.delete{
+	background-color: red !important;
+}

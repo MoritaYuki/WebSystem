@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ import model.User;
 @WebServlet("/UserListServlet")
 public class UserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,7 +34,7 @@ public class UserListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
 		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("userInfo");
+		User u = (User)session.getAttribute("loginInfo");
 		if(u == null) {
 			response.sendRedirect("LoginServlet");
 			return;
@@ -49,8 +48,7 @@ public class UserListServlet extends HttpServlet {
 		request.setAttribute("userList", userList);
 
 		// ユーザ一覧のjspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/user_list.jsp").forward(request, response);
 	}
 
 	/**
@@ -64,20 +62,19 @@ public class UserListServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String loginId = request.getParameter("inputId");
+		String loginId = request.getParameter("inputLoginId");
 		String userName = request.getParameter("inputUserName");
-		String startBirthday = request.getParameter("inputStartBirthday");
-		String endBirthday = request.getParameter("inputEndBirthday");
+		String grade = request.getParameter("inputGrade");
+		String address = request.getParameter("inputAddress");
 
 		// 入力情報を元に該当ユーザを検索
-		List<User> userList = userDao.search(loginId, userName, startBirthday, endBirthday);
+		List<User> userList = userDao.search(loginId, userName, grade, address);
 
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", userList);
 
 		// ユーザ一覧のjspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/user_list.jsp").forward(request, response);
 	}
 
 }

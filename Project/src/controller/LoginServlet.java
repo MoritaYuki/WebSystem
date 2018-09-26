@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         //合致するものがなかった場合
         if(user == null) { //←.equals()は使わない。userがnullの場合はnullインスタンスのメソッドを使用してぬるぽが起こるため
         	//エラーメッセージをリクエストスコープに保管
-        	request.setAttribute("errorMessage", "ログインIDまたはパスワードが異なります");
+        	request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
 
         	//login.jspにフォワード
         	request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);

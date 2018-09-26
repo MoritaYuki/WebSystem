@@ -9,11 +9,13 @@ user_id SERIAL,
 login_id varchar(30) NOT NULL UNIQUE,
 password varchar(100) NOT NULL,
 grade int NOT NULL,
+user_name_phonetic varchar(50) NOT NULL,
 user_name varchar(30) NOT NULL,
+sex varchar(1) NOT NULL,
 birthday DATE NOT NULL,
 contact_info varchar(30) NOT NULL,
 address varchar(50) NOT NULL,
-create_date TIMESTAMP NOT NULL,
+create_date DATETIME NOT NULL,
 update_date TIMESTAMP NOT NULL
 );
 
@@ -59,6 +61,12 @@ course_detail varchar(256)
 
 
 INSERT INTO user
-(login_id, password, grade, user_name, birthday, contact_info, address)
+(login_id, password, grade, user_name_phonetic, user_name, sex, birthday, contact_info, address, create_date)
 VALUES
-('admin', MD5('mori'), '0', 'ŠÇ—Ò', '1994-11-01', '080-6893-4348', '“Œ‹“s–n“c‹æ‘¾•½2’š–Ú10]11');
+('admin', MD5('moripasu'), '0', '¶İØ¼¬', 'ŠÇ—Ò', '–³', '1990-4-19', '03-0000-0000', '“Œ‹“s–n“c‹æ‘¾•½0-00-00', NOW());
+
+INSERT INTO user
+(login_id, password, grade, user_name_phonetic, user_name, sex, birthday, contact_info, address, create_date)
+VALUES
+('id0001', MD5('tarou'), '1', 'ÀÅ¶ ÀÛ³', '“c’† ‘¾˜Y', '’j', '1994-11-1', '080-6893-4348', '“Œ‹“s–n“c‹æ‘¾•½2-10-11', NOW());
+

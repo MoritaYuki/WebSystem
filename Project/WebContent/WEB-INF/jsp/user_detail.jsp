@@ -5,12 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>プロフィール</title>
+<title>アカウント詳細</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="/StudentManagement/css/user_detail.css">
 </head>
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="../MyPage/my_page.html">学習管理システム</a>
+		<c:if test="${loginInfo.userId == 1}">
+			<a class="navbar-brand title bold" href="ManagementMenuServlet">学習管理システム</a>
+		</c:if>
+		<c:if test="${loginInfo.userId != 1}">
+			<a class="navbar-brand title bold" href="MyPageServlet">学習管理システム</a>
+		</c:if>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,6 +27,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
+				<!-- アカウントが管理者と一般でヘッダーの表示を変更 -->
 				<c:if test="${loginInfo.userId == 1}">
 					<li class="nav-item active">
 						<a class="nav-link" href="UserListServlet">生徒一覧<span class="sr-only">(current)</span></a>
@@ -47,8 +55,9 @@
 				</c:if>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="LogoutServlet">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
+
 
 	<h1 class="sub-title"> アカウント情報 </h1>
 
