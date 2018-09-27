@@ -297,7 +297,7 @@ public class UserDao {
 		return false;
 	}
 
-	public boolean formCheck(String[] userData) {
+	public boolean formCheck(String[] userData, String passwordRe) {
 
 		// 同じログインID(userData[0]に配置)がないか判定
 		List<User> userList = findAll();
@@ -308,14 +308,18 @@ public class UserDao {
 		}
 
 		// 入力フォームに空欄があるか(loginIDはログインIDの一意性を調べた際に確認済) 判定
+		if(strCheck(passwordRe)) {
+			return true;
+		}
+
 		for(String x: userData) {
 			if( strCheck(x) ) {
 				return true;
 			}
 		}
 
-		// パスワード(userData[1]に配置)が確認用(userData[2]に配置)のものと一致しているか判定
-		if(!userData[1].equals(userData[2])) {
+		// パスワード(userData[1]に配置)が確認用のもの(passwordRe)と一致しているか判定
+		if(!userData[1].equals(passwordRe)) {
 			return true;
 		}
 		return false;

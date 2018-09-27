@@ -52,38 +52,50 @@ public class UserSignUpServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を配列に取得
+        String passwordRe = request.getParameter("inputPasswordRe");
+
 		String [] userData = {request.getParameter("inputLoginId"),
 							   request.getParameter("inputPassword"),
-							   request.getParameter("inputPasswordRe"),
 							   request.getParameter("inputGrade"),
 							   request.getParameter("inputUserNamePhonetic"),
 							   request.getParameter("inputUserName"),
 							   request.getParameter("inputSex"),
 							   request.getParameter("inputBirthday"),
+							   request.getParameter("inputContactInfo"),
 							   request.getParameter("inputAddress")
 							   };
 
 		String [] lavelList = {"loginId",
 							   "password",
-							   "passwordRe",
 							   "grade",
 							   "userNamePhonetic",
 							   "userName",
 							   "sex",
 							   "birthday",
+							   "contactInfo",
 							   "address"
 							   };
 
 		// 入力フォームに不備がある場合は再度入力フォームに戻る
-		if(userDao.formCheck(userData)) {
+		if(userDao.formCheck(userData, passwordRe)) {
 
 			//エラーメッセージをリクエストスコープに保管
         	request.setAttribute("errMsg", "入力内容が正しくありません");
 
         	//フォームの入力内容をリクエストスコープに保存
-        	for(int i=0, j=0; i<lavelList.length || j<userData.length; i++,j++) {
-        		request.setAttribute(lavelList[i], userData[j]);
+        	request.setAttribute("passwordRe", passwordRe);
+
+        	for(int i=0; i<lavelList.length; i++) {
+        		if(lavelList[i].equals("grade")) {
+        			request.setAttribute(lavelList[i], Integer.parseInt(userData[i]));
+        			continue;
+        		}
+        		request.setAttribute(lavelList[i], userData[i]);
         	}
+
+        	// 性別ラジオボタンの値保存用
+        	String[] sexlist = {"男","女"};
+        	request.setAttribute("sexlist", sexlist);
 
         	//signUp.jspにフォワード
         	request.getRequestDispatcher("/WEB-INF/jsp/user_signup.jsp").forward(request, response);
@@ -96,6 +108,7 @@ public class UserSignUpServlet extends HttpServlet {
         System.out.println(insertNum);
 
         // 登録が成功した場合はユーザ一覧へリダイレクト
-        response.sendRedirect("UserListServlet");
+        request.getSession().setAttribute("signMsg", "アカウント情報を登録しました");
+        response.sendRedirect("CourseSignUpServlet");
 	}
 }

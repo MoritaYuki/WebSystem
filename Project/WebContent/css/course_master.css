@@ -21,21 +21,11 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 30px;
-}
-
-.signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
-}
-
-.signup-btn{
-	padding: 7px 15px;
+	letter-spacing: 15px;
 }
 
 .txarea{
-	width: 75%;
+	width: 50%;
 	margin: 70px auto;
 }
 
@@ -47,18 +37,36 @@ body{
 	margin: 0 10px;
 }
 
+.signup{
+	width: 70%;
+	margin: 30px auto;
+	text-align: right;
+}
+
 .search{
 	text-align: right;
-	padding-right: 100px;
+	padding-right: 150px;
 }
 
 .search-btn{
 	padding: .2rem 4rem;
 }
 
+.term{
+	margin: 70px auto 0 auto;
+	width: 75%;
+	text-align: center;
+}
+
+.term-btn{
+	padding: 8px 20px;
+	margin: 40px 10px 0px 0px;
+	color: white!important;
+}
+
 .table{
 	table-layout: fixed;
-	width: 95%;
+	width: 70%;
 	margin: 80px auto;
 }
 

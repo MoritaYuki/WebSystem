@@ -21,22 +21,23 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 30px;
+	letter-spacing: 15px;
 }
 
-.signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
+.signMsg{
+	text-align: center;
+	color: blue;
+	font-size: 25px;
+	padding: 20px 0;
 }
 
-.signup-btn{
-	padding: 7px 15px;
+.subsub-title{
+	font-size: 20px;
+	font-weight: bold;
 }
 
-.txarea{
-	width: 75%;
-	margin: 70px auto;
+.form-group{
+	padding: 10px 0;
 }
 
 .navbar-brand{
@@ -47,32 +48,52 @@ body{
 	margin: 0 10px;
 }
 
-.search{
+.txarea{
+	width: 75%;
+	margin: 70px auto;
+}
+
+.event{
+	margin-left: 25px;
+}
+
+.event-lavel{
+	margin-left: 45px;
+}
+
+
+.table{
+	background-color: #CCCCCC;
+	table-layout: fixed;
+}
+
+.table-box{
+	width: 95%;
+	margin: 100px auto;
+	text-align: center;
+}
+
+.vector-box{
+	font-size: 80px;
+	margin: auto;
+}
+
+.search,.signup{
 	text-align: right;
-	padding-right: 100px;
 }
 
 .search-btn{
 	padding: .2rem 4rem;
 }
 
-.table{
-	table-layout: fixed;
-	width: 95%;
-	margin: 80px auto;
+.list-in{
+	margin-right: 150px;
 }
 
-table a {
-   display: block;       /* リンクをブロックレベル化して表示 */
-   color: black;
+.balance{
+	padding-right: 138px;
 }
 
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
-}
-
-.delete{
-	background-color: red !important;
+.signup{
+	margin-top: 50px;
 }

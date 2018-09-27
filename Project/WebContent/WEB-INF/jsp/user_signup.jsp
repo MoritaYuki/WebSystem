@@ -48,79 +48,93 @@
 				</c:if>
 			</div>
 			<div class="form-group row">
-				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
+				<label for="inputLoginId" class="col-sm-3 col-form-label">ログインID</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId">
+					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId" value="${loginId}">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
+				<label for="inputPassword" class="col-sm-3 col-form-label">パスワード</label>
 				<div class="col-sm-7">
 					<input type="password" class="form-control" name="inputPassword" id="inputPassword">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputPasswordRe" class="col-sm-2 col-form-label">パスワード（確認）</label>
+				<label for="inputPasswordRe" class="col-sm-3 col-form-label">パスワード（確認）</label>
 				<div class="col-sm-7">
 					<input type="password" class="form-control" name="inputPasswordRe" id="inputPasswordRe">
 				</div>
 			</div>
 			<fieldset class="form-group">
 				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
+					<legend class="col-form-label col-sm-3 pt-0">学年</legend>
 					<div class="col-sm-7">
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="grade" id="gridRadios1" value="option1">
-							<label class="form-check-label" for="gridRadios1"> １年生</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="grade" id="gridRadios2" value="option2">
-							<label class="form-check-label" for="gridRadios2"> ２年生 </label>
-						</div>
-						<div class="form-check disabled">
-							<input class="form-check-input" type="radio" name="grade" id="gridRadios3" value="option3">
-							<label class="form-check-label" for="gridRadios3"> ３年生 </label>
-						</div>
+						<c:forEach var="i" begin="1" end="3">
+							<c:if test="${grade != i}" >
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+									<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
+								</div>
+							</c:if>
+							<c:if test="${grade == i}" >
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}" checked>
+									<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 			</fieldset>
 			<div class="form-group row">
-				<label for="inputUserNamePhonetic" class="col-sm-2 col-form-label">読み仮名</label>
+				<label for="inputUserNamePhonetic" class="col-sm-3 col-form-label">読み仮名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputUserNamePhonetic" id="inputUserNamePhonetic">
+					<input type="text" class="form-control" name="inputUserNamePhonetic" id="inputUserNamePhonetic" value="${userNamePhonetic}">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputUserName" class="col-sm-2 col-form-label">生徒氏名</label>
+				<label for="inputUserName" class="col-sm-3 col-form-label">生徒氏名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputUserName" id="inputUserName">
+					<input type="text" class="form-control" name="inputUserName" id="inputUserName" value="${userName}">
 				</div>
 			</div>
 			<fieldset class="form-group">
 				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">性別</legend>
+					<legend class="col-form-label col-sm-3 pt-0">性別</legend>
 					<div class="col-sm-7">
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="inputSex" id="gridRadios1" value="option1">
-							<label class="form-check-label" for="gridRadios1"> 男</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="inputSex" id="gridRadios2" value="option2">
-							<label class="form-check-label" for="gridRadios2"> 女 </label>
-						</div>
+						<c:forEach var="s" items="${sexlist}">
+							<c:if test="${s != sex}" >
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios" value="${s}" >
+									<label class="form-check-label" for="gridRadios">${s}</label>
+								</div>
+							</c:if>
+							<c:if test="${s == sex}" >
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios" value="${s}" checked>
+									<label class="form-check-label" for="gridRadios1">${s}</label>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 			</fieldset>
 			<div class="form-group row">
-				<label for="inputBirthday" class="col-sm-2 col-form-label">生年月日</label>
+				<label for="inputBirthday" class="col-sm-3 col-form-label">生年月日</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputBirthday" id="inputBirthday" value="年 / 月 / 日">
+					<input type="text" class="form-control" name="inputBirthday" id="inputBirthday" placeholder="年 / 月 / 日" value="${birthday}" >
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputAddress" class="col-sm-2 col-form-label">住所</label>
+				<label for="inputContactInfo" class="col-sm-3 col-form-label">連絡先</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputAddress" id="inputAddress">
+					<input type="text" class="form-control" name="inputContactInfo" id="inputContactInfo" value="${contactInfo}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="inputAddress" class="col-sm-3 col-form-label">住所</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="inputAddress" id="inputAddress" value="${address}">
 				</div>
 			</div>
 		</div>
