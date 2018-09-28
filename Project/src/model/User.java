@@ -25,6 +25,7 @@ public class User implements Serializable{
 
 	}
 
+	// ログイン用コンストラクタ
 	public User(int userId, String loginId, String userName) {
 		super();
 		this.userId = userId;

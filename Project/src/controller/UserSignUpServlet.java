@@ -38,6 +38,10 @@ public class UserSignUpServlet extends HttpServlet {
 			return;
 		}
 
+		// 性別ラジオボタンの値
+		String[] sexlist = {"男","女"};
+    	request.setAttribute("sexlist", sexlist);
+
 		// user_signup.jspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/user_signup.jsp").forward(request, response);
 	}
@@ -93,7 +97,7 @@ public class UserSignUpServlet extends HttpServlet {
         		request.setAttribute(lavelList[i], userData[i]);
         	}
 
-        	// 性別ラジオボタンの値保存用
+        	// 性別ラジオボタンの値
         	String[] sexlist = {"男","女"};
         	request.setAttribute("sexlist", sexlist);
 

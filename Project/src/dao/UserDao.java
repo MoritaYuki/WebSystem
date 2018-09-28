@@ -17,7 +17,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import model.User;
 
-public class UserDao {
+public class UserDao extends CommonDao{
 
 	//ログインIDとパスワードでwebpro内のレコードに検索をかける。
 	public User findByLoginInfo(String loginId, String password) {
@@ -287,14 +287,6 @@ public class UserDao {
 	            }
 			}
 		}
-	}
-
-	// String型のstrが空白文字列や、nullでないかを判定
-	public boolean strCheck(String str){
-		if(str == null || str.isEmpty()) {
-			return true;
-		}
-		return false;
 	}
 
 	public boolean formCheck(String[] userData, String passwordRe) {

@@ -41,6 +41,11 @@
 
 	<!-- 検索フォーム -->
 	<h1 class="sub-title"> 講座マスタ一覧 </h1>
+	<div class="signMsg">
+		<c:if test="${signMsg != null}">
+			${signMsg}
+		</c:if>
+	</div>
 	<div class="signup">
 		<a href="CourseMasterSignUpServlet" class="signup-btn btn btn-secondary btn-lg active" role="button" aria-pressed="true">新規登録</a>
 	</div>
@@ -97,13 +102,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="user" items="${userList}">
+			<c:forEach var="course" items="${courseList}">
 				<tr>
-					<th scope="row">中１</th>
-					<td>国語</td>
-					<td>佐藤</td>
-					<td>１学期</td>
-					<td>\ ****</td>
+					<th scope="row">中${course.grade}</th>
+					<td>${course.subject}</td>
+					<td>${course.teacher}</td>
+					<td>${course.term}学期</td>
+					<td>\ ${course.price}</td>
 					<td>
 						<a href="CourseDetailServlet" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
 						<a href="CourseMasterUpdateServlet" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>

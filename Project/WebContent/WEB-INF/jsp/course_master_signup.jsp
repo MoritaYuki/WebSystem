@@ -40,73 +40,89 @@
 	</nav>
 	<!-- 検索フォーム -->
 	<h1 class="sub-title"> 講座マスタ新規登録 </h1>
-	<form class="form bold" method="get" action="../CourseMaster/course_master.html">
+	<form class="form bold" method="post" action="CourseMasterSignUpServlet">
 		<div class="txarea">
-			<div class="form-group row">
-				<label for="inputGrade" class="col-sm-2 col-form-label">学年</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputGrade">
-				</div>
+			<div class="error">
+				<c:if test="${errMsg != null}" >
+					${errMsg}
+				</c:if>
 			</div>
+			<fieldset class="form-group">
+				<div class="row">
+					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
+					<div class="col-sm-7">
+						<c:forEach var="i" begin="1" end="3">
+							<c:if test="${grade != i}" >
+								<div class="form-check">
+									<input class="form-check-input event" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+									<label class="form-check-label event-lavel" for="gridRadios${i}"> ${i}年生</label>
+								</div>
+							</c:if>
+							<c:if test="${grade == i}" >
+								<div class="form-check">
+									<input class="form-check-input event" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}" checked>
+									<label class="form-check-label event-lavel" for="gridRadios${i}"> ${i}年生</label>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+			</fieldset>
 			<div class="form-group row">
 				<label for="inputCourseName" class="col-sm-2 col-form-label">講座名</label>
 				<div class="col-sm-7">
-					<input type="password" class="form-control" id="inputCourseName">
+					<input type="text" class="form-control" id="inputCourseName" value="courseName">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputTeacher" class="col-sm-2 col-form-label">担当教員</label>
 				<div class="col-sm-7">
-					<input type="password" class="form-control" id="inputTeacher">
+					<input type="text" class="form-control" id="inputTeacher" value="teacher">
 				</div>
 			</div>
 			<fieldset class="form-group">
 				<div class="row">
 					<legend class="col-form-label col-sm-2 pt-0">期間</legend>
 					<div class="col-sm-7">
+						<c:forEach var="g" begin="1" end="3">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-							<label class="form-check-label" for="gridRadios1">１年 １学期</label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-							<label class="form-check-label event-lavel" for="gridRadios1"> ２年 １学期</label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-							<label class="form-check-label event-lavel" for="gridRadios1">３年 １学期</label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-							<label class="form-check-label event-lavel" for="gridRadios1"> 春期講習</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label" for="gridRadios2">１年 ２学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> ２年 ２学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> ３年 ２学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> 夏期講習 </label>
-						</div>
-						<div class="form-check disabled">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-							<label class="form-check-label" for="gridRadios3"> １年 ３学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> ２年 ３学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> ３年 ３学期 </label>
-							<input class="form-check-input event" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label event-lavel" for="gridRadios2"> 冬期講習 </label>
-						</div>
+							<c:forEach var="t" begin="1" end="4">
+								<c:if test="${t != 4}" >
+									<c:if test="${term != (10*g)+t}" >
+											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
+											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+									</c:if>
+									<c:if test="${term == (10*g)+t}" >
+											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
+											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+									</c:if>
+								</c:if>
+								<c:if test="${t == 4}" >
+									<c:if test="${term != (10*g)+t}" >
+											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
+											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
+									</c:if>
+									<c:if test="${term == (10*g)+t}" >
+											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
+											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
+									</c:if>
+								</c:if>
+							</c:forEach>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</fieldset>
 			<div class="form-group row">
 				<label for="inputPrice" class="col-sm-2 col-form-label">料金</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputPrice">
+					<input type="text" class="form-control" id="inputPrice" name="inputPrice" value="${price}">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputCourseDetail" class="col-sm-2 col-form-label">講座詳細</label>
 				<div class="col-sm-7">
-					<textarea class="form-control" id="inputCourseDetail"rows="3"></textarea>
+					<textarea class="form-control" id="inputCourseDetail" rows="3" name="inputCourseDetail" value="${courseDetail}"></textarea>
 				</div>
 			</div>
 		<div class="form-group row">

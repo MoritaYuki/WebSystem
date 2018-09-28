@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CourseMaster
@@ -27,6 +28,11 @@ public class CourseMasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 登録完了メッセージを取得、セッションスコープを削除
+		HttpSession session = request.getSession();
+		request.setAttribute("signMsg", session.getAttribute("signMsg"));
+		session.removeAttribute("signMsg");
+
 		//course_master.jspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_master.jsp").forward(request, response);
 	}

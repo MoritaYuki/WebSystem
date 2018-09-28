@@ -24,6 +24,13 @@ body{
 	letter-spacing: 15px;
 }
 
+.signMsg{
+	text-align: center;
+	color: blue;
+	font-size: 25px;
+	padding: 20px 0;
+}
+
 .txarea{
 	width: 50%;
 	margin: 70px auto;
