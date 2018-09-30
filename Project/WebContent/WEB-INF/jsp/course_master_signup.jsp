@@ -43,7 +43,7 @@
 	<form class="form bold" method="post" action="CourseMasterSignUpServlet">
 		<div class="txarea">
 			<div class="error">
-				<c:if test="${errMsg != null}" >
+				<c:if test="${errMsg != null}">
 					${errMsg}
 				</c:if>
 			</div>
@@ -71,13 +71,13 @@
 			<div class="form-group row">
 				<label for="inputCourseName" class="col-sm-2 col-form-label">講座名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputCourseName" value="courseName">
+					<input type="text" class="form-control" id="inputCourseName" name="inputCourseName" value="${courseName}">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputTeacher" class="col-sm-2 col-form-label">担当教員</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputTeacher" value="teacher">
+					<input type="text" class="form-control" id="inputTeacher" name="inputTeacher" value="${teacher}">
 				</div>
 			</div>
 			<fieldset class="form-group">
@@ -85,29 +85,29 @@
 					<legend class="col-form-label col-sm-2 pt-0">期間</legend>
 					<div class="col-sm-7">
 						<c:forEach var="g" begin="1" end="3">
-						<div class="form-check">
-							<c:forEach var="t" begin="1" end="4">
-								<c:if test="${t != 4}" >
-									<c:if test="${term != (10*g)+t}" >
-											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
-											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+							<div class="form-check">
+								<c:forEach var="t" begin="1" end="4">
+									<c:if test="${t != 4}" >
+										<c:if test="${term != (10*g)+t}" >
+												<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
+												<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+										</c:if>
+										<c:if test="${term == (10*g)+t}" >
+												<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
+												<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+										</c:if>
 									</c:if>
-									<c:if test="${term == (10*g)+t}" >
-											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
-											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${g}年生 ${t}学期</label>
+									<c:if test="${t == 4}" >
+										<c:if test="${term != (10*g)+t}" >
+												<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
+												<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
+										</c:if>
+										<c:if test="${term == (10*g)+t}" >
+												<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
+												<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
+										</c:if>
 									</c:if>
-								</c:if>
-								<c:if test="${t == 4}" >
-									<c:if test="${term != (10*g)+t}" >
-											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}">
-											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
-									</c:if>
-									<c:if test="${term == (10*g)+t}" >
-											<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${(10*g)+t}" value="${(10*g)+t}" checked>
-											<label class="form-check-label event-lavel" for="gridRadios${(10*g)+t}"> ${sCourseList[g-1]}講習</label>
-									</c:if>
-								</c:if>
-							</c:forEach>
+								</c:forEach>
 							</div>
 						</c:forEach>
 					</div>
@@ -122,7 +122,7 @@
 			<div class="form-group row">
 				<label for="inputCourseDetail" class="col-sm-2 col-form-label">講座詳細</label>
 				<div class="col-sm-7">
-					<textarea class="form-control" id="inputCourseDetail" rows="3" name="inputCourseDetail" value="${courseDetail}"></textarea>
+					<textarea class="form-control" id="inputCourseDetail" rows="3" name="inputCourseDetail">${courseDetail}</textarea>
 				</div>
 			</div>
 		<div class="form-group row">

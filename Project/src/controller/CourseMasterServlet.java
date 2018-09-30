@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.CourseDao;
+import model.Course;
 
 /**
  * Servlet implementation class CourseMaster
@@ -32,6 +36,9 @@ public class CourseMasterServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setAttribute("signMsg", session.getAttribute("signMsg"));
 		session.removeAttribute("signMsg");
+
+		List<Course> courseList = new CourseDao().findAll();
+		request.setAttribute("courseList", courseList);
 
 		//course_master.jspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_master.jsp").forward(request, response);

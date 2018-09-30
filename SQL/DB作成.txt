@@ -1,8 +1,6 @@
 CREATE DATABASE sm_db DEFAULT CHARACTER SET utf8;
 
-
 USE sm_db;
-
 
 CREATE TABLE user(
 user_id SERIAL,
@@ -31,6 +29,8 @@ english int DEFAULT 0,
 science int DEFAULT 0,
 social int DEFAULT 0,
 comment varchar(100)
+create_date DATETIME NOT NULL,
+update_date TIMESTAMP NOT NULL
 );
 
 
@@ -57,6 +57,8 @@ teacher varchar(30) NOT NULL,
 term int NOT NULL,
 price int NOT NULL,
 course_detail varchar(256)
+create_date DATETIME NOT NULL,
+update_date TIMESTAMP NOT NULL
 );
 
 

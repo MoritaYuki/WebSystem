@@ -105,10 +105,10 @@
 			<c:forEach var="course" items="${courseList}">
 				<tr>
 					<th scope="row">中${course.grade}</th>
-					<td>${course.subject}</td>
+					<td>${course.courseName}</td>
 					<td>${course.teacher}</td>
 					<td>${course.term}学期</td>
-					<td>\ ${course.price}</td>
+					<td>${course.price} 円/月</td>
 					<td>
 						<a href="CourseDetailServlet" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
 						<a href="CourseMasterUpdateServlet" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>

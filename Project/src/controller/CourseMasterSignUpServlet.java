@@ -57,12 +57,12 @@ public class CourseMasterSignUpServlet extends HttpServlet {
 
 		// リクエストパラメータの入力項目を配列に取得
 		String [] courseData = {request.getParameter("inputGrade"),
-							   request.getParameter("inputCourseName"),
-							   request.getParameter("inputTeacher"),
-							   request.getParameter("inputTerm"),
-							   request.getParameter("inputPrice"),
-							   request.getParameter("inputCourseDetail")
-							   };
+								request.getParameter("inputCourseName"),
+								request.getParameter("inputTeacher"),
+								request.getParameter("inputTerm"),
+								request.getParameter("inputPrice"),
+								request.getParameter("inputCourseDetail")
+								};
 
 		String [] lavelList = {"grade",
 							   "courseName",

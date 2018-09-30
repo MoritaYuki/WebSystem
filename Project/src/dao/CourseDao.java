@@ -67,10 +67,10 @@ public class CourseDao extends CommonDao {
 			//DBに接続
 			conn = DBManager.getConnection();
 			//SELECT文準備
-			String column = "(course_id, grade, course_name, teacher, term, price, course_detail, create_date)";
-			String value = "VALUE (?, ?, ?, ?, ?, ?, ?, now())";
+			String column = "(grade, course_name, teacher, term, price, course_detail, create_date)";
+			String value = "VALUE (?, ?, ?, ?, ?, ?, now())";
 
-			String sql = "INSERT INTO user" + column + value;
+			String sql = "INSERT INTO course" + column + value;
 
 			/*
 			 * ・createStatement()は入力した文章をそのままステートメントにするだけだから、最後の
@@ -105,7 +105,6 @@ public class CourseDao extends CommonDao {
 			}
 		}
 	}
-
 
 	public boolean formCheck(String[] courseData) {
 
