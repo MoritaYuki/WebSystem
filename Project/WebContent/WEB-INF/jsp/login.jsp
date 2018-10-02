@@ -15,9 +15,9 @@
 	<div class="container">
 		<div class="login-container">
 		<div class="error">
-		<c:if test="${errMsg != null}">
-				${errMsg}
-		</c:if>
+			<c:if test="${errMsg != null}">
+					${errMsg}
+			</c:if>
 		</div>
 			<div id="output"></div>
 			<div class="avatar"></div>

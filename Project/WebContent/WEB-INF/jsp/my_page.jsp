@@ -44,19 +44,19 @@
 	<div class="contents">
 		<ul>
 			<li>
-				<img class="menu-img" width="210px" height="290px" src="295963ce0d6bdf3.jpg">
+				<img class="menu-img" width="210px" height="290px" src="/StudentManagement/img/295963ce0d6bdf3.jpg">
 				<a class="menu" href="UserDetailServlet">アカウント情報</a>
 			</li>
 			<li>
-				<img class="menu-img" width="210px" height="290px" src="295963ce0d6bdf3.jpg">
+				<img class="menu-img" width="210px" height="290px" src="/StudentManagement/img/295963ce0d6bdf3.jpg">
 				<a class="menu" href="ExamResultServlet">成績</a>
 			</li>
 			<li>
-				<img class="menu-img" width="210px" height="290px" src="295963ce0d6bdf3.jpg">
+				<img class="menu-img" width="210px" height="290px" src="/StudentManagement/img/295963ce0d6bdf3.jpg">
 				<a class="menu" href="CourseListServlet">講座申込</a>
 			</li>
 			<li>
-				<img class="menu-img" width="210px" height="290px" src="295963ce0d6bdf3.jpg">
+				<img class="menu-img" width="210px" height="290px" src="/StudentManagement/img/295963ce0d6bdf3.jpg">
 				<a class="menu" href="PaymentHistoryServlet">申込･入金</a>
 			</li>
 		</ul>

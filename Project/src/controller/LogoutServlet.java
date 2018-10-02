@@ -28,8 +28,14 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// ログイン時に保存したセッションスコープのユーザ情報を削除
+		// セッションスコープの情報を削除
 		request.getSession().removeAttribute("loginInfo");
+		request.getSession().removeAttribute("grade");
+		request.getSession().removeAttribute("courseName");
+		request.getSession().removeAttribute("teacher");
+		request.getSession().removeAttribute("cTermNo");
+		request.getSession().removeAttribute("sCourseList");
+		request.getSession().removeAttribute("cartList");
 
 		// ログアウトメッセージを入れて、ログイン画面にリダイレクト
 		request.setAttribute("errMsg", "ログアウトしました");

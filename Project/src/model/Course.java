@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Course implements Serializable{
 
 	//インスタンスフィールド
-	private int course_id;
+	private int courseId;
 	private int grade;
 	private String courseName;
 	private String teacher;
@@ -15,15 +15,16 @@ public class Course implements Serializable{
 	private String courseDetail;
 	private String createDate;
 	private String updateDate;
+	private String[] sCourseList = {"春期","夏期","冬期"};
 
 	//JavaBeans作成条件（引数を持たないコンストラクタ）
 	public Course(){
 	}
 
-	public Course(int course_id, int grade, String courseName, String teacher, int term, int price, String courseDetail,
+	public Course(int courseId, int grade, String courseName, String teacher, int term, int price, String courseDetail,
 			String createDate, String updateDate) {
 		super();
-		this.course_id = course_id;
+		this.courseId = courseId;
 		this.grade = grade;
 		this.courseName = courseName;
 		this.teacher = teacher;
@@ -34,12 +35,12 @@ public class Course implements Serializable{
 		this.updateDate = updateDate;
 	}
 
-	public int getCourse_id() {
-		return course_id;
+	public int getCourseId() {
+		return courseId;
 	}
 
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	public int getGrade() {
@@ -105,6 +106,10 @@ public class Course implements Serializable{
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public String[] getsCourseList() {
+		return sCourseList;
 	}
 
 }

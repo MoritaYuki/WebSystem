@@ -59,6 +59,134 @@ public class CourseDao extends CommonDao {
 		return courseList;
 	}
 
+	// 入力情報から講座を検索
+	public Course findByCourseId(String sCourseId) {
+
+		// コネクションを取得
+		Connection conn = null;
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "SELECT * FROM course WHERE course_id = ?";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入(フォームが空欄の場合はワイルドカードを代入)
+			stmt.setString(1, sCourseId);
+
+			ResultSet rs = stmt.executeQuery();
+
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			if(!rs.next()) {
+				return null;
+			}
+
+			int courseId = rs.getInt("course_id");
+			int grade = rs.getInt("grade");
+			String courseName = rs.getString("course_name");
+			String teacher = rs.getString("teacher");
+			int term = rs.getInt("term");
+			int price = rs.getInt("price");
+			String courseDetail = rs.getString("course_detail");
+			String createDate = rs.getString("create_date");
+			String updateDate = rs.getString("update_date");
+			Course course = new Course(courseId, grade, courseName, teacher, term, price, courseDetail,
+										createDate, updateDate);
+			return course;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+	}
+
+	// 入力情報から講座一覧を検索
+	public List<Course> search(String sGrade, String sCourseName, String sTeacher) {
+
+		// コネクションを取得
+		Connection conn = null;
+
+		//講座情報保管用のリストを準備
+		List<Course> courseList = new ArrayList<Course>();
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String where = "WHERE (grade LIKE ?)"
+					+ "AND (course_name LIKE BINARY ?)"
+					+ "AND (teacher LIKE BINARY ?)";
+
+			String sql = "SELECT * FROM course " + where;
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入(フォームが空欄の場合はワイルドカードを代入)
+
+			if (strCheck(sGrade)) {
+				stmt.setString(1, "%");
+			} else {
+				stmt.setString(1, sGrade);
+			}
+
+			if (strCheck(sCourseName)) {
+				stmt.setString(2, "%");
+			} else {
+				stmt.setString(2, "%" + sCourseName + "%");
+			}
+
+			if (strCheck(sTeacher)) {
+				stmt.setString(3, "%");
+			} else {
+				stmt.setString(3, "%" + sTeacher + "%");
+			}
+
+			ResultSet rs = stmt.executeQuery();
+
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+				int courseId = rs.getInt("course_id");
+				int grade = rs.getInt("grade");
+				String courseName = rs.getString("course_name");
+				String teacher = rs.getString("teacher");
+				int term = rs.getInt("term");
+				int price = rs.getInt("price");
+				String courseDetail = rs.getString("course_detail");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				Course course = new Course(courseId, grade, courseName, teacher, term, price, courseDetail,
+											createDate, updateDate);
+				courseList.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return courseList;
+	}
+
 	public int signup(String[] courseData) {
 		//コネクション取得
 		Connection conn = null;

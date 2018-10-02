@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CourseDao;
+import model.Course;
 import model.User;
 
 /**
@@ -39,8 +40,7 @@ public class CourseMasterSignUpServlet extends HttpServlet {
 		}
 
 		// 講習ラジオボタンの値
-		String[] sCourseList = {"春期","夏期","冬期"};
-		request.setAttribute("sCourseList", sCourseList);
+		request.setAttribute("sCourseList", new Course().getsCourseList());
 
 		//course_master_signup.jspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_master_signup.jsp").forward(request, response);
@@ -87,8 +87,7 @@ public class CourseMasterSignUpServlet extends HttpServlet {
         	}
 
         	// 講習ラジオボタンの値
-    		String[] sCourseList = {"春期","夏期","冬期"};
-    		request.setAttribute("sCourseList", sCourseList);
+    		request.setAttribute("sCourseList", new Course().getsCourseList());
 
         	//signUp.jspにフォワード
         	request.getRequestDispatcher("/WEB-INF/jsp/course_master_signup.jsp").forward(request, response);

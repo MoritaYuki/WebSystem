@@ -21,19 +21,7 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 15px;
-}
-
-.signMsg{
-	text-align: center;
-	color: blue;
-	font-size: 25px;
-	padding: 20px 0;
-}
-
-.txarea{
-	width: 50%;
-	margin: 70px auto;
+	letter-spacing: 30px;
 }
 
 .navbar-brand{
@@ -44,15 +32,30 @@ body{
 	margin: 0 10px;
 }
 
-.signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
+.txarea{
+	width: 75%;
+	margin: 70px auto;
+}
+
+.event{
+	margin-left: 25px;
+}
+
+.event-lavel{
+	margin-left: 45px;
+}
+
+.navbar-brand{
+	margin: 0 100px 0 40px;
+}
+
+.nav-link{
+	margin: 0 10px;
 }
 
 .search{
 	text-align: right;
-	padding-right: 150px;
+	padding-right: 100px;
 }
 
 .search-btn{
@@ -78,23 +81,10 @@ body{
 	margin: 40px auto;
 }
 
-.table{
-	table-layout: fixed;
-	width: 80%;
-	margin: 0 auto 70px auto;
+.container{
+	margin-top: 100px;
 }
 
-table a {
-   display: block;       /* リンクをブロックレベル化して表示 */
-   color: black;
-}
-
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
-}
-
-.delete{
-	background-color: red !important;
+.justify-content-center{
+	margin-top: 50px;
 }
