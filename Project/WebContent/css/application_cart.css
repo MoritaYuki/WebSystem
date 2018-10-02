@@ -54,9 +54,8 @@ body{
 	table-layout: fixed;
 }
 
-.signup{
-	margin-top: 20px;
-	text-align: right;
+.btn-box{
+	margin-top: 40px;
 }
 
 .search-btn{

@@ -37,10 +37,10 @@ update_date TIMESTAMP NOT NULL
 CREATE TABLE application(
 application_no SERIAL,
 user_id int NOT NULL,
-app_date TIMESTAMP NOT NULL,
+app_date DATETIME NOT NULL,
 app_amount int NOT NULL DEFAULT 0,
 pay_amount int NOT NULL DEFAULT 0,
-pay_fg int DEFAULT 0
+pay_fg boolean NOT NULL DEFAULT false
 );
 
 

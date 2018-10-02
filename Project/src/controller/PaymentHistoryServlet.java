@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ApplicationDao;
+import model.Application;
 import model.User;
 
 /**
@@ -37,6 +40,18 @@ public class PaymentHistoryServlet extends HttpServlet {
 			response.sendRedirect("LoginServlet");
 			return;
 		}
+
+		// リクエストスコープに申込・入金一覧情報をセット
+		int totalDef = 0;
+		List<Application> applicationList = new ApplicationDao().findApplicationByUserId(user.getUserId());
+		request.setAttribute("applicationList", applicationList);
+
+		// 過不足金の計算
+		for(Application app: applicationList) {
+			totalDef += app.getPayAmount();
+			totalDef -= app.getAppAmount();
+		}
+		request.setAttribute("totalDef", totalDef);
 
 		// 入金履歴のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/payment_history.jsp").forward(request, response);

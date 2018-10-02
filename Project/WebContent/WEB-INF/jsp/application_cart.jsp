@@ -99,16 +99,18 @@
 					<td></td>
 					<td></td>
 					<td>合計金額</td>
-					<td>${totalprice} 円/月</td>
+					<td>${totalPrice} 円/月</td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="text-center">
-			<div class="form-group row">
-				<div class="col-sm-12 signup">
-					<a class="list-in search-btn btn btn-primary" href="CourseListServlet">仮申込講座を追加</a>
-					<a class="search-btn btn btn-primary" href="PaymentHistoryServlet">仮申込内容で正式に申込</a>
-				</div>
+		<div class="btn-box row justify-content-end">
+			<div class="col-4">
+				<a class="list-in search-btn btn btn-primary" href="CourseListServlet">仮申込講座を追加</a>
+			</div>
+			<div class="col-4">
+				<form method="post" action="ApplicationCartServlet">
+					<button class="search-btn btn btn-primary">仮申込内容で正式に申込</button>
+				</form>
 			</div>
 		</div>
 	</div>

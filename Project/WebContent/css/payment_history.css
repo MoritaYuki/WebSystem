@@ -33,7 +33,7 @@ body{
 }
 
 .table-box{
-	width: 70%;
+	width: 88%;
 	margin: 80px auto;
 }
 
@@ -45,6 +45,7 @@ body{
 
 .table{
 	table-layout: fixed;
+	text-align: center;
 }
 
 .check{

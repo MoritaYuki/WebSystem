@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ApplicationDao;
+import dao.ApplicationDetailDao;
 import dao.CourseDao;
+import model.Application;
+import model.ApplicationDetail;
 import model.Course;
 import model.User;
 
@@ -52,12 +56,12 @@ public class ApplicationCartServlet extends HttpServlet {
 		}
 
 		Course course = new CourseDao().findByCourseId(request.getParameter("courseId"));
-		int totalprice = 0;
+		int totalPrice = 0;
 		String errMsg = null;
 
 		// 同じ講座が仮申込された場合はエラーメッセージを保存する。
 		for(Course c: cartList) {
-			totalprice += c.getPrice();
+			totalPrice += c.getPrice();
 			if(course.getCourseId() == c.getCourseId()) {
 				errMsg = "この講座は既に仮申込済みです。";
 				request.setAttribute("errMsg", errMsg);
@@ -67,14 +71,47 @@ public class ApplicationCartServlet extends HttpServlet {
 		// 同じ講座が申し込まれていない場合は、一覧に追加する。
 		if(errMsg == null) {
 			cartList.add(course);
-			totalprice += course.getPrice();
+			totalPrice += course.getPrice();
 			session.setAttribute("cartList", cartList);
 		}
 
 		// 合計金額をリクエストに保存
-		request.setAttribute("totalprice", totalprice);
+		session.setAttribute("totalPrice", totalPrice);
 
 		// 講座詳細のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/application_cart.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 全体で使用するインスタンスの生成
+		HttpSession session = request.getSession();
+		ApplicationDao applicationDao = new ApplicationDao();
+
+		// 申込情報の取得と削除
+		@SuppressWarnings("unchecked")
+		List<Course> cartList = (List<Course>)session.getAttribute("cartList");
+		int totalPrice = (int)session.getAttribute("totalPrice");
+		User loginInfo = (User)session.getAttribute("loginInfo");
+		request.getSession().removeAttribute("cartList");
+		request.getSession().removeAttribute("totalPrice");
+
+		// リクエストパラメータの文字コードを指定
+		request.setCharacterEncoding("UTF-8");
+
+		// 申込情報を挿入する
+		Application application = new Application(loginInfo.getUserId(), totalPrice);
+		int applicationNo = applicationDao.applicationInsert(application);
+
+		// 取得した申込番号に紐づいた申込詳細情報を挿入
+		for(Course cart: cartList) {
+			ApplicationDetail applicationDetail = new ApplicationDetail(applicationNo, cart.getCourseId());
+			new ApplicationDetailDao().applicationDetailInsert(applicationDetail);
+		}
+
+		// 申込・入金履歴のjspにフォワード
+        response.sendRedirect("PaymentHistoryServlet");
 	}
 }

@@ -4,14 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>申込・入金履歴</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="/StudentManagement/css/payment_history.css">
 </head>
 <body>
 	<!-- ヘッダー -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand title bold" href="../MyPage/my_page.html">学習管理システム</a>
+		<c:if test="${loginInfo.userId == 1}">
+			<a class="navbar-brand title bold" href="ManagementMenuServlet">学習管理システム</a>
+		</c:if>
+		<c:if test="${loginInfo.userId != 1}">
+			<a class="navbar-brand title bold" href="MyPageServlet">学習管理システム</a>
+		</c:if>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -21,19 +26,35 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="../UserDetail/user_detail.html">プロフィール<span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="../ExamResult/exam_result.html">成績</a>
-				</li>
-
-				<li class="nav-item">
-					<a class="nav-link" href="../CourseList/course_list.html" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
-				</li>
+				<!-- アカウントが管理者と一般でヘッダーの表示を変更 -->
+				<c:if test="${loginInfo.userId == 1}">
+					<li class="nav-item active">
+						<a class="nav-link" href="UserListServlet">生徒一覧<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="ApplicationListServlet">申込管理</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
+					</li>
+				</c:if>
+				<c:if test="${loginInfo.userId != 1}">
+					<li class="nav-item active">
+						<a class="nav-link" href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="ExamResultServlet">成績</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="CourseListServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
+					</li>
+				</c:if>
 			</ul>
 		</div>
-		<a class="nav-link header-right" href="../Login/login.html">ログアウト<span class="sr-only">(current)</span></a>
+		<a class="nav-link header-right" href="LogoutServlet">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
 	<h1 class="sub-title"> 申込･入金履歴 </h1>
@@ -51,30 +72,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">****年 **月 **日</th>
-					<td><span class="check">済</span>（****年 **月 **日）</td>
-					<td>\ *****</td>
-					<td>\ *****</td>
-					<td>\ *****</td>
-					<td><a href="../PaymentHistoryDetail/payment_history_detail.html" class="btn btn-primary">詳細</a></td>
-				</tr>
-				<tr>
-					<th scope="row">****年 **月 **日</th>
-					<td><span class="check2">未</span></td>
-					<td>\ *****</td>
-					<td>\ *****</td>
-					<td>\ *****</td>
-					<td><a href="../PaymentHistoryDetail/payment_history_detail.html" class="btn btn-primary">詳細</a></td>
+				<c:forEach var="application" items="${applicationList}">
+					<tr>
+					<th scope="row">${application.appDate}</th>
+					<c:if test="${application.payFg == true}">
+						<td><span class="check2"> ${application.payFgList[1]} </span></td>
+					</c:if>
+					<c:if test="${application.payFg == false}">
+						<td><span class="check2"> ${application.payFgList[0]} </span></td>
+					</c:if>
+					<td>${application.appAmount} 円</td>
+					<td>${application.payAmount} 円</td>
+					<td>${application.payAmount-application.appAmount} 円</td>
+					<td><a href="PaymentHistoryDetailServlet" class="btn btn-primary">詳細</a></td>
+					<!-- 詳細画面作ろう！！！！！ -->
 				</tr>
 				<tr>
 					<th scope="row"></th>
 					<td></td>
 					<td></td>
 					<td>過不足合計</td>
-					<td>\ *****</td>
+					<td>${totalDef} 円</td>
 					<td></td>
-				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
