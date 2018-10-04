@@ -59,6 +59,15 @@ public class ApplicationCartServlet extends HttpServlet {
 		int totalPrice = 0;
 		String errMsg = null;
 
+		// 同じ講座が申込済の場合はエラーメッセージを保存する。
+		ArrayList<Integer> courseIdList = new CourseDao().findCourseByUserId(user.getUserId());
+		for(int c: courseIdList) {
+			if(course.getCourseId() == c) {
+				errMsg = "この講座は既に正式に申込済みです。";
+				request.setAttribute("errMsg", errMsg);
+			}
+		}
+
 		// 同じ講座が仮申込された場合はエラーメッセージを保存する。
 		for(Course c: cartList) {
 			totalPrice += c.getPrice();
@@ -111,7 +120,7 @@ public class ApplicationCartServlet extends HttpServlet {
 			new ApplicationDetailDao().applicationDetailInsert(applicationDetail);
 		}
 
-		// 申込・入金履歴のjspにフォワード
-        response.sendRedirect("PaymentHistoryServlet");
+		// 申込・入金履歴のページへ遷移
+        response.sendRedirect("ApplicationHistoryServlet");
 	}
 }

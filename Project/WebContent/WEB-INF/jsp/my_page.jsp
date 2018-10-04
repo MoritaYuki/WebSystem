@@ -57,7 +57,7 @@
 			</li>
 			<li>
 				<img class="menu-img" width="210px" height="290px" src="/StudentManagement/img/295963ce0d6bdf3.jpg">
-				<a class="menu" href="PaymentHistoryServlet">申込･入金</a>
+				<a class="menu" href="ApplicationHistoryServlet">申込･入金</a>
 			</li>
 		</ul>
 	</div>

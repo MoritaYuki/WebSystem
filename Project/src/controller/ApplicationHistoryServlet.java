@@ -17,14 +17,14 @@ import model.User;
 /**
  * Servlet implementation class PaymentHistoryServlet
  */
-@WebServlet("/PaymentHistoryServlet")
-public class PaymentHistoryServlet extends HttpServlet {
+@WebServlet("/ApplicationHistoryServlet")
+public class ApplicationHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentHistoryServlet() {
+    public ApplicationHistoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,7 +54,7 @@ public class PaymentHistoryServlet extends HttpServlet {
 		request.setAttribute("totalDef", totalDef);
 
 		// 入金履歴のjspにフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/payment_history.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/application_history.jsp").forward(request, response);
 	}
 
 	/**

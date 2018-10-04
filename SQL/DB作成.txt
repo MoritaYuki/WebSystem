@@ -39,6 +39,7 @@ application_no SERIAL,
 user_id int NOT NULL,
 app_date DATETIME NOT NULL,
 app_amount int NOT NULL DEFAULT 0,
+pay_date DATETIME DEFAULT null,
 pay_amount int NOT NULL DEFAULT 0,
 pay_fg boolean NOT NULL DEFAULT false
 );

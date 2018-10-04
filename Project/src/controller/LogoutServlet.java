@@ -36,6 +36,9 @@ public class LogoutServlet extends HttpServlet {
 		request.getSession().removeAttribute("cTermNo");
 		request.getSession().removeAttribute("sCourseList");
 		request.getSession().removeAttribute("cartList");
+		request.getSession().removeAttribute("application");
+		request.getSession().removeAttribute("applicationDetailList");
+		request.getSession().removeAttribute("totalPrice");
 
 		// ログアウトメッセージを入れて、ログイン画面にリダイレクト
 		request.setAttribute("errMsg", "ログアウトしました");

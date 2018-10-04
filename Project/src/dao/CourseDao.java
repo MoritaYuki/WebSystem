@@ -234,6 +234,88 @@ public class CourseDao extends CommonDao {
 		}
 	}
 
+	// 申込番号から申込講座の一覧を取得
+	public List<Course> findCourseByApplicationNo(String applicationNo) {
+		Connection con = null;
+		//講座情報保管用のリストを準備
+		List<Course> applicationDetailList = new ArrayList<Course>();
+		try {
+			con = DBManager.getConnection();
+			String where = "WHERE ad.application_no = ?";
+			String join = "INNER JOIN course AS c "
+						+ "ON ad.course_id = c.course_id ";
+			String sql = "SELECT * FROM application_detail AS ad " + join + where;
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, applicationNo);
+			ResultSet rs = stmt.executeQuery();
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+				int courseId = rs.getInt("course_id");
+				int grade = rs.getInt("grade");
+				String courseName = rs.getString("course_name");
+				String teacher = rs.getString("teacher");
+				int term = rs.getInt("term");
+				int price = rs.getInt("price");
+				String courseDetail = rs.getString("course_detail");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				Course course = new Course(courseId, grade, courseName, teacher, term, price, courseDetail,
+											createDate, updateDate);
+				applicationDetailList.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return applicationDetailList;
+	}
+
+	// ユーザIDから申込講座の一覧を取得
+	public ArrayList<Integer> findCourseByUserId(int UserId) {
+		Connection con = null;
+		//講座情報保管用のリストを準備
+		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
+		try {
+			con = DBManager.getConnection();
+			String where = "WHERE a.user_id = ?";
+			String join = "INNER JOIN application_detail AS ad "
+						+ "ON a.application_no = ad.application_no ";
+			String sql = "SELECT (course_id) FROM application AS a " + join + where;
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, UserId);
+			ResultSet rs = stmt.executeQuery();
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+				courseIdList.add(rs.getInt("course_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return courseIdList;
+	}
+
 	public boolean formCheck(String[] courseData) {
 
 		// 同じ講座名(courseData[1]に配置)がないか判定
