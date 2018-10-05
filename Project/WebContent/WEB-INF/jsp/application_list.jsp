@@ -38,52 +38,53 @@
 	</nav>
 
 	<h1 class="sub-title"> 申込一覧 </h1>
-	<form class="form bold" method="post" action="">
+
+	<div class="signMsg">
+		<c:if test="${signMsg != null}">
+			${signMsg}
+		</c:if>
+	</div>
+
+	<form class="form bold" method="post" action="ApplicationListServlet">
 		<div class="txarea">
 			<div class="form-group row">
-				<label for="inputLoginId" class="col-sm-2 col-form-label">申込番号</label>
+				<label for="inputApplicationNo" class="col-sm-2 col-form-label">申込番号</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputLoginId">
+					<input type="text" class="form-control" name="inputApplicationNo" id="inputApplicationNo">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputBetween" class="col-sm-2 col-form-label">申込日</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="inputBetween">
+					<input type="text" class="form-control" name="inputStart" id="inputBetween">
 				</div>
 				<div class="between col-sm-1">～</div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="inputBetween">
+					<input type="text" class="form-control" name="inputEnd" id="inputBetween">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputLoginId">
+					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputUserName" class="col-sm-2 col-form-label">ユーザ名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" id="inputUserName">
+					<input type="text" class="form-control" name="inputUserName" id="inputUserName">
 				</div>
 			</div>
 			<fieldset class="form-group">
 				<div class="row">
 					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
 					<div class="col-sm-7">
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-							<label class="form-check-label" for="gridRadios1"> １年生</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-							<label class="form-check-label" for="gridRadios2"> ２年生 </label>
-						</div>
-						<div class="form-check disabled">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-							<label class="form-check-label" for="gridRadios3"> ３年生 </label>
-						</div>
+						<c:forEach var="i" begin="1" end="3">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+								<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</fieldset>
@@ -94,6 +95,11 @@
 			</div>
 		</div>
 	</form>
+
+	<div class="search-style">
+		${grade}学年　　申込番号：　　申込日：<br>
+		【検索ワード】ログインID：　　生徒氏名：
+	</div>
 
 	<!-- ユーザ一覧表 -->
 	<table class="table">

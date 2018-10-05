@@ -54,7 +54,7 @@ public class CourseListServlet extends HttpServlet {
 			session.setAttribute("courseList", new CourseDao().findAll());
 		}
 
-		// セッションに学年がなければ、全学年のリストを取得
+		// セッションに学年がなければ、全学年を取得
 		if(session.getAttribute("grade") == null) {
 			session.setAttribute("grade", "全");
 		}
@@ -70,6 +70,8 @@ public class CourseListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
 		// リクエストパラメータの文字コードを指定
 		request.setCharacterEncoding("UTF-8");
 
@@ -79,16 +81,16 @@ public class CourseListServlet extends HttpServlet {
 		String teacher = request.getParameter("inputTeacher");
 
 		// セッションに検索講座一覧情報をセット
-		request.getSession().setAttribute("courseList", new CourseDao().search(grade, courseName, teacher));
+		session.setAttribute("courseList", new CourseDao().search(grade, courseName, teacher));
 
 		// 各変数の値保持
 		if (grade == null) {
-			request.getSession().setAttribute("grade", "全");
+			session.setAttribute("grade", "全");
 		} else {
-			request.getSession().setAttribute("grade", grade);
+			session.setAttribute("grade", grade);
 		}
-		request.getSession().setAttribute("courseName", courseName);
-		request.getSession().setAttribute("teacher", teacher);
+		session.setAttribute("courseName", courseName);
+		session.setAttribute("teacher", teacher);
 
 		// 講座一覧のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_list.jsp").forward(request, response);

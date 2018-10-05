@@ -11,7 +11,7 @@ import java.util.List;
 
 import model.Application;
 
-public class ApplicationDao {
+public class ApplicationDao extends CommonDao{
 
 	// 全申込情報の一覧を取得する
 	public List<Application> findAllApplication() {
@@ -195,5 +195,116 @@ public class ApplicationDao {
 				}
 			}
 		}
+	}
+
+	// 入力情報から申込一覧を検索
+	public List<Application> search(String sGrade, String sUserName, String sLoginId, String sStart, String sEnd,
+								String sApplicationNo) {
+		// コネクションを取得
+		Connection conn = null;
+
+		//申込情報保管用のリストを準備
+		List<Application> applicationList = new ArrayList<Application>();
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備(ログインIDと申込番号は空欄でない場合のみ挿入する)
+			String logId = "";
+			String appNo = "";
+
+			if(!strCheck(sLoginId)) {
+				logId = "AND login_id = ? ";
+			}
+			if(!strCheck(sApplicationNo)) {
+				appNo = "AND applicationNo = ?";
+			}
+
+			String where = "WHERE (u.grade LIKE ?) "
+						+ "AND (u.user_name LIKE BINARY ?) "
+						+ "AND (a.app_date BETWEEN ? AND ?) "
+						+ logId
+						+ appNo;
+			String tables = "application AS a "
+						+ "INNER JOIN user AS u "
+						+ "ON a.user_id = u.user_id ";
+			String sql = "SELECT * FROM " + tables + where;
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入(フォームが空欄の場合はワイルドカードを代入)
+
+			if (strCheck(sGrade)) {
+				stmt.setString(1, "%");
+			} else {
+				stmt.setString(1, sGrade);
+			}
+
+			if (strCheck(sUserName)) {
+				stmt.setString(2, "%");
+			} else {
+				stmt.setString(2, "%" + sUserName + "%");
+			}
+
+			if (strCheck(sStart)) {
+				stmt.setString(3, "0000-00-00");
+			} else {
+				stmt.setString(3, sStart);
+			}
+
+			if (strCheck(sEnd)) {
+				stmt.setString(4, "9999-12-31");
+			} else {
+				stmt.setString(4, sEnd);
+			}
+
+			if(!strCheck(sLoginId)) {
+				stmt.setString(5, sLoginId);
+			}
+
+			if(!strCheck(sApplicationNo)) {
+				if(!strCheck(sLoginId)) {
+					stmt.setString(6, sApplicationNo);
+				}else {
+					stmt.setString(5, sApplicationNo);
+				}
+			}
+			ResultSet rs = stmt.executeQuery();
+
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+				int applicationNo = rs.getInt("application_no");
+				int userId = rs.getInt("user_id");
+				String loginId = rs.getString("login_id");
+				int grade = rs.getInt("grade");
+				String userName = rs.getString("user_name");
+				Date appDate = rs.getDate("app_date");
+                int appAmount = rs.getInt("app_amount");
+                Date payDate = rs.getDate("pay_date");
+                int payAmount = rs.getInt("app_amount");
+                boolean payFg = rs.getBoolean("pay_fg");
+                Application application = new Application(applicationNo, userId, loginId, grade, userName, appDate, appAmount,
+                											payDate, payAmount, payFg);
+                applicationList.add(application);
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return applicationList;
+	}
+
+	public void updatePayment(int applicationNo, int calPayment) {
+
 	}
 }

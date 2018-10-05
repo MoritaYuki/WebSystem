@@ -21,24 +21,7 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 15px;
-}
-
-.signMsg{
-	text-align: center;
-	color: blue;
-	font-size: 25px;
-	padding: 20px 0;
-}
-
-.txarea{
-	width: 65%;
-	margin: 70px auto;
-}
-
-.between{
-	text-align: center;
-	font-size: 20px;
+	letter-spacing: 20px;
 }
 
 .navbar-brand{
@@ -49,43 +32,22 @@ body{
 	margin: 0 10px;
 }
 
+.msg{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 60px;
+}
+
+.price-color{
+	color: red;
+}
+
 .search{
 	text-align: right;
+	margin-top: 50px;
 }
 
 .search-btn{
-	padding: .2rem 4rem;
-}
-
-.search-style{
-	width: 79%;
-	font-size: 18px;
-	font-weight: bold;
-	margin: 40px auto;
-}
-
-.table{
-	width: 80%;
-	margin: 0 auto;
-}
-
-table a {
-   display: block;       /* リンクをブロックレベル化して表示 */
-   color: black;
-}
-
-.check{
-	color: blue;
-	font-weight: bold;
-}
-
-.check2{
-	color: red;
-	font-weight: bold;
-}
-
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
+	padding-left: 50px;
+	padding-right: 50px;
 }

@@ -68,25 +68,54 @@ public class PaymentCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Application application = (Application)session.getAttribute("application");
+		int totalPrice = (int)session.getAttribute("totalPrice");
+		String payment = request.getParameter("payment");
 
 		// 過不足計算と本登録で処理を分岐
 		if(request.getParameter("cal") != null) {
-			HttpSession session = request.getSession();
-			Application application = (Application)session.getAttribute("application");
-			int totalPrice = (int)session.getAttribute("totalPrice");
-
-			String payment = request.getParameter("payment");
 			request.setAttribute("payment", request.getParameter("payment"));
 
+			// 入金金額が空欄でなければ処理を実行
 			if(!new CommonDao().strCheck(payment)) {
 				int calPayment = Integer.parseInt(payment);
 				int totalDef = (application.getPayAmount()+calPayment)-totalPrice;
 				request.setAttribute("totalDef", totalDef);
+			}else {
+				request.setAttribute("totalDef", application.getPayAmount()-totalPrice);
 			}
 
 			request.getRequestDispatcher("/WEB-INF/jsp/payment_check.jsp").forward(request, response);
+			return;
 		}else if(request.getParameter("sign") != null) {
-				// 本登録の処理を実装しようね！！！！！！
+			// 入金金額が空欄でなければ処理を実行
+			if(!new CommonDao().strCheck(payment)) {
+				int calPayment = Integer.parseInt(payment);
+
+				// 過不足金が生じた場合は確認画面に遷移
+				// defFgは確認画面移行後、再度戻ってきた際に通過するための変数
+				String defFg = request.getParameter("defFg");
+				int totalDef = (application.getPayAmount()+calPayment)-totalPrice;
+				if(totalDef != 0 && defFg == null) {
+					request.setAttribute("totalDef", totalDef);
+					request.setAttribute("calPayment", calPayment);
+					request.getRequestDispatcher("/WEB-INF/jsp/payment_check_err.jsp").forward(request, response);
+					return;
+
+				}
+				// 入金金額を取得してデータベースを更新、セッション情報の削除
+				new ApplicationDao().updatePayment(application.getApplicationNo(), calPayment);
+				session.removeAttribute("application");
+				session.removeAttribute("applicationDetailList");
+				session.removeAttribute("totalPrice");
+
+				// 申込一覧画面に遷移(smは表示メッセージの指定)
+				response.sendRedirect("ApplicationListServlet?sm=0");
+			}else {
+				// 入金金額が空欄なら、何も更新せずに申込一覧へ遷移(smは表示メッセージの指定)
+				response.sendRedirect("ApplicationListServlet?sm=1");
+			}
 		}
 	}
 
