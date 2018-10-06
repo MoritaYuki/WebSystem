@@ -52,8 +52,8 @@ public class CourseMasterServlet extends HttpServlet {
 		}
 
 		// セッションに学年がなければ、全学年のリストを取得
-		if(session.getAttribute("grade") == null) {
-			session.setAttribute("grade", "全");
+		if(session.getAttribute("cGradeNo") == null) {
+			session.setAttribute("cGradeNo", "全");
 		}
 
 		// 講習情報を取得
@@ -72,22 +72,22 @@ public class CourseMasterServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String grade = request.getParameter("inputGrade");
+		String cGradeNo = request.getParameter("inputCGradeNo");
 		String courseName = request.getParameter("inputCourseName");
 		String teacher = request.getParameter("inputTeacher");
 
 		// セッションに検索講座一覧情報をセット
-		request.getSession().setAttribute("courseList", new CourseDao().search(grade, courseName, teacher));
-		if(grade == null) {
-			request.getSession().setAttribute("grade", "全");
+		request.getSession().setAttribute("courseList", new CourseDao().search(cGradeNo, courseName, teacher));
+		if(cGradeNo == null) {
+			request.getSession().setAttribute("cGradeNo", "全");
 		}else {
-			request.getSession().setAttribute("grade", grade);
+			request.getSession().setAttribute("cGradeNo", cGradeNo);
 		}
 		request.getSession().setAttribute("courseName", courseName);
 		request.getSession().setAttribute("teacher", teacher);
 
 
-		// ユーザ一覧のjspにフォワード
+		// 講座一覧のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_master.jsp").forward(request, response);
 	}
 

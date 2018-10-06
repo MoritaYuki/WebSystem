@@ -105,7 +105,7 @@ public class PaymentCheckServlet extends HttpServlet {
 
 				}
 				// 入金金額を取得してデータベースを更新、セッション情報の削除
-				new ApplicationDao().updatePayment(application.getApplicationNo(), calPayment);
+				new ApplicationDao().updatePayment(application, calPayment);
 				session.removeAttribute("application");
 				session.removeAttribute("applicationDetailList");
 				session.removeAttribute("totalPrice");

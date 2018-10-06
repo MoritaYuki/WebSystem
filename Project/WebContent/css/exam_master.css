@@ -24,21 +24,9 @@ body{
 	letter-spacing: 15px;
 }
 
-.signMsg{
-	text-align: center;
-	color: blue;
-	font-size: 25px;
-	padding: 20px 0;
-}
-
 .txarea{
-	width: 65%;
+	width: 75%;
 	margin: 70px auto;
-}
-
-.between{
-	text-align: center;
-	font-size: 20px;
 }
 
 .navbar-brand{
@@ -49,23 +37,51 @@ body{
 	margin: 0 10px;
 }
 
+.signup{
+	width: 70%;
+	margin: 30px auto;
+	text-align: right;
+}
+
 .search{
 	text-align: right;
+	padding-right: 100px;
 }
 
 .search-btn{
 	padding: .2rem 4rem;
 }
 
-.search-style{
-	width: 79%;
-	font-size: 18px;
-	font-weight: bold;
-	margin: 40px auto;
+.term{
+	margin: 70px auto 0 auto;
+	width: 75%;
+	text-align: center;
 }
 
-.table{
-	width: 80%;
+.term{
+	margin: 70px auto 0 auto;
+	width: 75%;
+	text-align: center;
+}
+
+.term-btn{
+	padding: 8px 20px;
+	margin: 40px 10px 0px 0px;
+	color: white!important;
+}
+
+.table-title{
+	font-weight: bold;
+	font-size: 25px;
+	background-color: #DDDDDD;
+	width: 55%;
+	text-align: center;
+	padding: 8px 10px;
+	margin-top: 30px;
+}
+
+.table-box{
+	width: 75%;
 	margin: 0 auto;
 }
 
@@ -74,18 +90,12 @@ table a {
    color: black;
 }
 
-.check1{
-	color: blue;
-	font-weight: bold;
-}
-
-.check2{
-	color: red;
-	font-weight: bold;
-}
-
 .button{
 	font-size: 15px;
 	padding: 5px 5px;
 	border-color: transparent!important;
+}
+
+.delete{
+	background-color: red !important;
 }

@@ -61,7 +61,7 @@
 					<div class="col-sm-7">
 						<c:forEach var="i" begin="1" end="3">
 							<div class="form-check">
-								<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+								<input class="form-check-input" type="radio" name="inputCGradeNo" id="gridRadios${i}" value="${i}">
 								<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
 							</div>
 						</c:forEach>
@@ -110,7 +110,7 @@
 
 	<!-- 講座一覧表 -->
 	<div class="search-style">
-		${grade}学年　　
+		${cGradeNo}学年　　
 		<c:if test="${cTermNo <= 3}">
 			${cTermNo}学期　　
 		</c:if>

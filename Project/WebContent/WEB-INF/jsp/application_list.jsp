@@ -97,8 +97,8 @@
 	</form>
 
 	<div class="search-style">
-		${grade}学年　　申込番号：　　申込日：<br>
-		【検索ワード】ログインID：　　生徒氏名：
+		${grade}学年　　申込番号："${applicationNo}"　　申込日："${start}～${end}"<br>
+		【検索ワード】ログインID："${loginId}"　　生徒氏名："${userName}"
 	</div>
 
 	<!-- ユーザ一覧表 -->
@@ -125,7 +125,7 @@
 					<td>${application.userName}</td>
 					<td>${application.appAmount} 円</td>
 					<c:if test="${application.payFg == true}">
-						<td><span class="check1"> ${payFgList[1]}(${payDate}) </span></td>
+						<td><span class="check1"> ${payFgList[1]} </span>(${application.payDate})</td>
 					</c:if>
 					<c:if test="${application.payFg == false}">
 						<td><span class="check2"> ${payFgList[0]} </span></td>

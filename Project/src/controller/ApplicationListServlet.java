@@ -89,7 +89,7 @@ public class ApplicationListServlet extends HttpServlet {
 		session.setAttribute("payFgList", new Application().getPayFgList());
 
 		// セッションに検索講座一覧情報をセット
-		session.setAttribute("courseList", new ApplicationDao().search(grade, userName, loginId, start, end, applicationNo));
+		session.setAttribute("applicationList", new ApplicationDao().search(grade, userName, loginId, start, end, applicationNo));
 
 		// 各変数の値保持
 		request.setAttribute("grade", grade);

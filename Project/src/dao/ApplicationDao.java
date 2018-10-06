@@ -304,7 +304,53 @@ public class ApplicationDao extends CommonDao{
 		return applicationList;
 	}
 
-	public void updatePayment(int applicationNo, int calPayment) {
+	public void updatePayment(Application application, int calPayment) {
+		// コネクション取得
+		Connection conn = null;
 
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "UPDATE application SET pay_date = NOW(), pay_amount = ?, pay_fg = ? WHERE application_no = ?";
+
+			/*
+			 * ・createStatement()は入力した文章をそのままステートメントにするだけだから、最後の
+			 * executeQuery()の引数にsql分を指定する。
+			 * ・preparedStatement()を用いる場合は、最初に？で代入部分を置き換えてから、再度setメソッド
+			 * にて代入する。代入した際にインスタンスstmtには既に代入後のsql分が保存されているため、最後
+			 * のexecuteQuery()で引数を指定する必要はなし
+			 */
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			//それぞれの入力項目を代入
+			int totalPayament = application.getPayAmount()+calPayment;
+			stmt.setInt(1, totalPayament);
+			if(totalPayament < application.getAppAmount()) {
+				stmt.setBoolean(2, false);
+			}else {
+				stmt.setBoolean(2, true);
+			}
+			stmt.setInt(3, application.getApplicationNo());
+
+
+			// 更新したレコードの数を返す
+			System.out.println("入金登録数：" + stmt.executeUpdate() + "件");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return ;
+				}
+			}
+		}
 	}
 }
