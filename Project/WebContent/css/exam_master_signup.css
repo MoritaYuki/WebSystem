@@ -21,22 +21,16 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 30px;
-}
-
-.signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
-}
-
-.signup-btn{
-	padding: 7px 15px;
+	letter-spacing: 15px;
 }
 
 .txarea{
-	width: 75%;
-	margin: 70px auto;
+	width: 70%;
+	margin: 10px auto 20px auto;
+}
+
+.form-group{
+	padding: 10px 0;
 }
 
 .navbar-brand{
@@ -47,27 +41,30 @@ body{
 	margin: 0 10px;
 }
 
+.container{
+	font-size: 18px;
+	padding: 20px 0px;
+}
+
+.info-box{
+	margin: 22px 0;
+}
+
+.col{
+	font-weight: bold;
+}
+
+.form-row .padd{
+	margin-left: 30px;
+}
+
 .search{
 	text-align: right;
 	padding-right: 100px;
+	margin-top: 15px;
 }
 
 .search-btn{
 	padding: .2rem 4rem;
 }
 
-.table{
-	table-layout: fixed;
-	width: 95%;
-	margin: 80px auto;
-}
-
-.button{
-	font-size: 15px;
-	padding: 5px 5px;
-	border-color: transparent!important;
-}
-
-.delete{
-	background-color: red !important;
-}

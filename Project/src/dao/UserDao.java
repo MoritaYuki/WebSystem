@@ -19,7 +19,7 @@ import model.User;
 
 public class UserDao extends CommonDao{
 
-	//ログインIDとパスワードでwebpro内のレコードに検索をかける。
+	//ログインIDとパスワードで検索をかける。
 	public User findByLoginInfo(String loginId, String password) {
 		//コネクション取得
 		Connection conn = null;
@@ -86,6 +86,7 @@ public class UserDao extends CommonDao{
 
 	// 全ユーザの情報を取得する
 	public List<User> findAll() {
+
 		Connection con = null;
 		//ユーザ情報保管用のリストを準備
 		List<User> userList = new ArrayList<User>();
@@ -133,6 +134,63 @@ public class UserDao extends CommonDao{
 		}
 		return userList;
 	}
+
+	// 入力情報からアカウントを検索
+	public User searchByUserId(String sUserId){
+
+			// コネクションを取得
+			Connection conn = null;
+
+			try {
+				//DBに接続
+				conn = DBManager.getConnection();
+				//SELECT文準備
+				String where = "WHERE user_id = ?";
+
+				String sql = "SELECT * FROM user " + where;
+
+				//ステートメントの準備
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				//それぞれの入力項目を代入(フォームが空欄の場合はワイルドカードを代入)
+				stmt.setString(1, sUserId);
+		        ResultSet rs = stmt.executeQuery();
+
+		      //取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+				if (!rs.next()) {
+					return null;
+				}
+
+				int userId = rs.getInt("user_id");
+				String loginId = rs.getString("login_id");
+				String password = rs.getString("password");
+				int grade = rs.getInt("grade");
+				String userName = rs.getString("user_name");
+				String userNamePhonetic = rs.getString("user_name_phonetic");
+				String sex = rs.getString("sex");
+				Date birthday = rs.getDate("birthday");
+				String contactInfo = rs.getString("contact_info");
+				String address = rs.getString("address");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				User user = new User(userId, loginId, password, grade, userNamePhonetic, userName, sex, birthday,
+									contactInfo, address, createDate, updateDate);
+				return user;
+
+			}catch(SQLException e){
+				e.printStackTrace();
+				return null;
+			}finally {
+				// データベース切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+		                return null;
+		            }
+				}
+			}
+		}
 
 	// 入力情報からアカウントを検索
 	public List<User> search(String sLoginId, String sUserName, String sGrade, String sAddress){
@@ -289,6 +347,50 @@ public class UserDao extends CommonDao{
 		}
 	}
 
+	// ユーザIDの最大値を取得
+	public int getMaxUserId() {
+		//コネクション取得
+		Connection conn = null;
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "SELECT MAX(user_id) FROM user";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//ステートメントの中身をResultSet型の変数に代入
+			ResultSet rs = stmt.executeQuery();
+
+			//検索したレコードは1件だけだから繰り返し文は不要
+			if (!rs.next()) {
+				return 0;
+			}
+
+			//取得したIDとパスワードを返す
+			int maxUserId = rs.getInt("max(user_id)");
+
+			return maxUserId;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					//例外時は値を取得しない
+					return 0;
+				}
+			}
+		}
+	}
+
+	// 入力フォームの不備をチェック
 	public boolean formCheck(String[] userData, String passwordRe) {
 
 		// 同じログインID(userData[0]に配置)がないか判定

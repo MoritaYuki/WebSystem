@@ -21,22 +21,25 @@ body{
 .sub-title{
 	text-align: center;
 	margin-top: 50px;
-	letter-spacing: 30px;
-}
-
-.signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
-}
-
-.signup-btn{
-	padding: 7px 15px;
+	letter-spacing: 15px;
 }
 
 .txarea{
-	width: 75%;
-	margin: 70px auto;
+	width: 65%;
+	margin: 0 auto;
+}
+
+.signup-explain{
+	font-size: 20px;
+	margin: 50px 0 20px 0;
+}
+
+.form-group{
+	padding: 10px 0;
+}
+
+.padd{
+	margin-right: 60px;
 }
 
 .navbar-brand{
@@ -58,16 +61,13 @@ body{
 
 .table{
 	table-layout: fixed;
-	width: 95%;
-	margin: 80px auto;
+	width: 80%;
+	margin: 30px auto;
 }
 
 .button{
 	font-size: 15px;
-	padding: 5px 5px;
+	padding: 2px 5px;
 	border-color: transparent!important;
 }
 
-.delete{
-	background-color: red !important;
-}

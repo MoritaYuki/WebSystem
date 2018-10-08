@@ -37,10 +37,21 @@ body{
 	margin: 0 10px;
 }
 
+.error{
+	font-size: 20px;
+	color: red;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
 .signup{
-	width: 70%;
-	margin: 30px auto;
-	text-align: right;
+	width: 85%;
+	margin: 30px 0;
+}
+
+.signup-btn{
+	font-size: 15px;
+	margin-left: 10px;
 }
 
 .search{
@@ -50,12 +61,6 @@ body{
 
 .search-btn{
 	padding: .2rem 4rem;
-}
-
-.term{
-	margin: 70px auto 0 auto;
-	width: 75%;
-	text-align: center;
 }
 
 .term{
@@ -75,14 +80,17 @@ body{
 	font-size: 25px;
 	background-color: #DDDDDD;
 	width: 55%;
-	text-align: center;
-	padding: 8px 10px;
-	margin-top: 30px;
+	padding: 10px 10px;
+	margin-right: 80px;
 }
 
 .table-box{
-	width: 75%;
+	width: 85%;
 	margin: 0 auto;
+}
+
+table{
+	table-layout: fixed;
 }
 
 table a {

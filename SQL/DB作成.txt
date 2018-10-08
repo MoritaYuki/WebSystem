@@ -28,7 +28,7 @@ math int DEFAULT 0,
 english int DEFAULT 0,
 science int DEFAULT 0,
 social int DEFAULT 0,
-comment varchar(100)
+comment varchar(100),
 create_date DATETIME NOT NULL,
 update_date TIMESTAMP NOT NULL
 );

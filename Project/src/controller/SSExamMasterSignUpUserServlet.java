@@ -13,16 +13,16 @@ import dao.UserDao;
 import model.User;
 
 /**
- * Servlet implementation class UserListServlet
+ * Servlet implementation class ExamMasterServlet
  */
-@WebServlet("/UserListServlet")
-public class UserListServlet extends HttpServlet {
+@WebServlet("/ExamMasterSignUpUserServlet")
+public class SSExamMasterSignUpUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserListServlet() {
+    public SSExamMasterSignUpUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +31,10 @@ public class UserListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
-		User user = (User)request.getSession().getAttribute("loginInfo");
-		if(user == null) {
+		User user = (User) request.getSession().getAttribute("loginInfo");
+		if (user == null) {
 			response.sendRedirect("LoginServlet");
 			return;
 		}
@@ -41,8 +42,8 @@ public class UserListServlet extends HttpServlet {
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", new UserDao().findAll());
 
-		// ユーザ一覧のjspにフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/user_list.jsp").forward(request, response);
+		//exam_master_signup.jspにフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/exam_master_signup_user.jsp").forward(request, response);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class UserListServlet extends HttpServlet {
 		String loginId = request.getParameter("inputLoginId");
 		String userName = request.getParameter("inputUserName");
 		String grade = request.getParameter("inputGrade");
-		String address = request.getParameter("inputAddress");
+		String address = null;
 
 		// 入力情報を元に該当ユーザを検索
 		List<User> userList = new UserDao().search(loginId, userName, grade, address);
@@ -65,7 +66,7 @@ public class UserListServlet extends HttpServlet {
 		request.setAttribute("userList", userList);
 
 		// ユーザ一覧のjspにフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/user_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/exam_master_signup_user.jsp").forward(request, response);
 	}
 
 }

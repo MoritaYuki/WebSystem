@@ -42,9 +42,11 @@
 	</nav>
 	<!-- 検索フォーム -->
 	<h1 class="sub-title"> テスト結果マスタ一覧 </h1>
-	<div class="signup">
-		<a href="ExamMasterSignUpServlet" class="signup-btn btn btn-secondary btn-lg active" role="button" aria-pressed="true">新規登録</a>
-	</div>
+		<div class="error">
+			<c:if test="${errMsg != null}">
+				${errMsg}
+			</c:if>
+		</div>
 	<form class="form bold" method="post" action="ExamMasterServlet">
 		<div class="txarea">
 			<div class="form-group row">
@@ -53,23 +55,10 @@
 					<input type="text" class="form-control" name="inputYear" id="inputYear">
 				</div>
 			</div>
-			<fieldset class="form-group">
-				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">テスト名</legend>
-					<div class="col-sm-7">
-						<c:forEach var="i" begin="1" end="3">
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="inputETermNo" id="gridRadios${i}" value="${i}">
-								<label class="form-check-label" for="gridRadios${i}"> ${i}学期末</label>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-			</fieldset>
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-10 search">
-				<button type="submit" class="btn btn-primary search-btn">検索</button>
+				<button type="submit" name="search" class="btn btn-primary search-btn" value="search">検索</button>
 			</div>
 		</div>
 	</form>
@@ -77,60 +66,121 @@
 	<div class="text-center">
 		<c:forEach var="i" begin="1" end="3">
 			<c:if test="${eGradeNo == i}">
-				<a class="term-btn btn btn-secondary btn-lg disabled" href="ExamMasterServlet?eGradeNo=${i}">${i}年生</a>
+				<a class="term-btn btn btn-secondary btn-lg disabled" href="ExamMasterServlet?eTermNo=${eTermNo}&eGradeNo=${i}&jspFg=${jspFg}">${i}年生</a>
 			</c:if>
 			<c:if test="${eGradeNo != i}">
-				<a class="term-btn btn btn-secondary btn-lg " href="ExamMasterServlet?eGradeNo=${i}">${i}年生</a>
+				<a class="term-btn btn btn-secondary btn-lg " href="ExamMasterServlet?eTermNo=${eTermNo}&eGradeNo=${i}&jspFg=${jspFg}">${i}年生</a>
+			</c:if>
+		</c:forEach>
+	</div>
+	<div class="text-center">
+		<c:forEach var="i" begin="1" end="3">
+			<c:if test="${eTermNo == i}">
+				<a class="term-btn btn btn-secondary btn-lg disabled" href="ExamMasterServlet?eGradeNo=${eGradeNo}&eTermNo=${i}&jspFg=${jspFg}">${i}学期末</a>
+			</c:if>
+			<c:if test="${eTermNo != i}">
+				<a class="term-btn btn btn-secondary btn-lg " href="ExamMasterServlet?eGradeNo=${eGradeNo}&eTermNo=${i}&jspFg=${jspFg}">${i}学期末</a>
 			</c:if>
 		</c:forEach>
 	</div>
 
 	<!-- ユーザ一覧表 -->
-	<div class="table-box">
-		<p class="table-title"> ２０１８年度　${eGradeNo}学年　${eTermNo}学期末テスト </p>
-		<table class="table">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">ログインID</th>
-					<th scope="col">読み仮名</th>
-					<th scope="col">名前</th>
-					<th scope="col">性別</th>
-					<th scope="col">国語</th>
-					<th scope="col">数学</th>
-					<th scope="col">英語</th>
-					<th scope="col">理科</th>
-					<th scope="col">社会</th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="exam" items="${examList}">
+	<form method="post" action="ExamMasterServlet">
+		<div class="table-box">
+			<div class="signup">
+				<a class="table-title"> ２０１８年度　${eGradeNo}学年　${eTermNo}学期末テスト </a>
+				<c:if test="${jspFg == 0}">
+					<a href="ExamMasterServlet?jspFg=0&eGradeNo=${eGradeNo}&eTermNo=${eTermNo}" class="signup-btn btn btn-secondary btn-lg active disabled" role="button" aria-pressed="true">閲覧画面</a>
+				</c:if>
+				<c:if test="${jspFg != 0}">
+					<a href="ExamMasterServlet?jspFg=0&eGradeNo=${eGradeNo}&eTermNo=${eTermNo}" class="signup-btn btn btn-secondary btn-lg active" role="button" aria-pressed="true">閲覧画面</a>
+				</c:if>
+				<c:if test="${jspFg == 1}">
+					<a href="ExamMasterServlet?jspFg=1&eGradeNo=${eGradeNo}&eTermNo=${eTermNo}" class="signup-btn btn btn-secondary btn-lg active disabled" role="button" aria-pressed="true">更新画面</a>
+				</c:if>
+				<c:if test="${jspFg != 1}">
+					<a href="ExamMasterServlet?jspFg=1&eGradeNo=${eGradeNo}&eTermNo=${eTermNo}" class="signup-btn btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新画面</a>
+				</c:if>
+			</div>
+			<table class="table">
+				<thead class="thead-light">
 					<tr>
-						<c:if test="${eTermNo == exam.term}">
-							<th scope="row">${exam.loginId}</th>
-							<td>${exam.userNamePhonetic}</td>
-							<td>${exam.userName}</td>
-							<td>${exam.sex}</td>
-							<td>${exam.japanese}</td>
-							<td>${exam.math}</td>
-							<td>${exam.english}</td>
-							<td>${exam.science}</td>
-							<td>${exam.social}</td>
-							<td><a href="ExamResultServlet"
-								class="detail button btn btn-secondary btn-lg active"
-								role="button" aria-pressed="true">詳細</a> <a
-								href="ExamMasterUpdateServlet"
-								class="update button btn btn-secondary btn-lg active"
-								role="button" aria-pressed="true">更新</a> <a
-								href="ExamMasterDeleteServlet"
-								class="delete button btn btn-secondary btn-lg active"
-								role="button" aria-pressed="true">削除</a></td>
-						</c:if>
+						<th scope="col">ログインID</th>
+						<th scope="col">読み仮名</th>
+						<th scope="col">名前</th>
+						<th scope="col">性別</th>
+						<th scope="col">国語</th>
+						<th scope="col">数学</th>
+						<th scope="col">英語</th>
+						<th scope="col">理科</th>
+						<th scope="col">社会</th>
+						<th scope="col"></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+				</thead>
+				<tbody>
+					<c:forEach var="exam" items="${examList}">
+						<tr>
+							<c:if test="${eGradeNo == exam.grade && eTermNo == exam.term}">
+								<input type="hidden" name="userId${exam.userId}" value="${exam.userId}">
+								<th scope="row">${exam.loginId}</th>
+								<td>${exam.userNamePhonetic}</td>
+								<td>${exam.userName}</td>
+								<td>${exam.sex}</td>
+								<c:if test="${jspFg == 0}">
+									<td>${exam.japanese}</td>
+								</c:if>
+								<c:if test="${jspFg == 1}">
+									<td>
+										<input type="text" class="form-control" name="japanese${exam.userId}" value="${exam.japanese}">
+									</td>
+								</c:if>
+								<c:if test="${jspFg == 0}">
+									<td>${exam.math}</td>
+								</c:if>
+								<c:if test="${jspFg == 1}">
+									<td>
+										<input type="text" class="form-control" name="math${exam.userId}" value="${exam.math}">
+									</td>
+								</c:if>
+								<c:if test="${jspFg == 0}">
+									<td>${exam.english}</td>
+								</c:if>
+								<c:if test="${jspFg == 1}">
+									<td>
+										<input type="text" class="form-control" name="english${exam.userId}" value="${exam.english}">
+									</td>
+								</c:if>
+								<c:if test="${jspFg == 0}">
+									<td>${exam.science}</td>
+								</c:if>
+								<c:if test="${jspFg == 1}">
+									<td>
+										<input type="text" class="form-control" name="science${exam.userId}" value="${exam.science}">
+									</td>
+								</c:if>
+								<c:if test="${jspFg == 0}">
+									<td>${exam.social}</td>
+								</c:if>
+								<c:if test="${jspFg == 1}">
+									<td>
+										<input type="text" class="form-control" name="social${exam.userId}" value="${exam.social}">
+									</td>
+								</c:if>
+								<td><a href="ExamResultServlet" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<c:if test="${jspFg == 1}">
+			<div class="form-group row">
+				<div class="col-sm-10 search">
+					<button type="submit" name="update" class="btn btn-primary search-btn" value="update">更新</button>
+				</div>
+			</div>
+		</c:if>
+	</form>
 
 	<div class="text-center">
 		<nav aria-label="Page navigation example">

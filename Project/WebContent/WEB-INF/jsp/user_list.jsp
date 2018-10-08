@@ -121,6 +121,7 @@
 				<th scope="col">名前</th>
 				<th scope="col">性別</th>
 				<th scope="col">連絡先</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>

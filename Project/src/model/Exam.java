@@ -29,6 +29,7 @@ public class Exam implements Serializable{
 	public Exam(){
 	}
 
+
 	public Exam(int userId, String loginId, String userNamePhonetic, String userName, String sex, int year, int grade,
 			int term, int japanese, int math, int english, int science, int social, String comment, Date createDate,
 			Date updateDate) {
@@ -49,6 +50,35 @@ public class Exam implements Serializable{
 		this.comment = comment;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+	}
+
+	// テスト結果登録用コンストラクタ
+	public Exam(int userId, int year, int grade, int term, int japanese, int math, int english, int science, int social,
+			String comment) {
+		super();
+		this.userId = userId;
+		this.year = year;
+		this.grade = grade;
+		this.term = term;
+		this.japanese = japanese;
+		this.math = math;
+		this.english = english;
+		this.science = science;
+		this.social = social;
+		this.comment = comment;
+	}
+
+	// テスト結果更新時のコンストラクタ
+	public Exam(int userId, int year, int term, int japanese, int math, int english, int science, int social) {
+		super();
+		this.userId = userId;
+		this.year = year;
+		this.term = term;
+		this.japanese = japanese;
+		this.math = math;
+		this.english = english;
+		this.science = science;
+		this.social = social;
 	}
 
 	public int getUserId() {
@@ -180,11 +210,12 @@ public class Exam implements Serializable{
 	}
 
 	public int getYearNow() {
-
-		// 年度をてにいれよーーーーーーぜ！！！！
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
-
+		int month = calendar.get(Calendar.MONTH);
+		if(month >= 1 && month <= 3) {
+			year -= 1;
+		}
 		return year;
 	}
 
