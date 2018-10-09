@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ExamDao;
 import dao.UserDao;
 import model.Exam;
 import model.User;
@@ -68,7 +67,7 @@ public class SSExamMasterSignUpServlet extends HttpServlet {
 
 		// scoreテーブルに入力情報を挿入
 		Exam exam = new Exam(userId, year, grade, term, japanese, math, english, science, social, comment);
-		new ExamDao().insertScore(exam);
+		//new ExamDao().insertScore(exam);
 
 		// リクエストスコープにユーザ一覧情報をセット
 		request.getSession().setAttribute("signMsg", "登録が完了しました。");

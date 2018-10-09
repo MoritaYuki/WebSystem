@@ -146,13 +146,13 @@
 							</c:if>
 						</td>
 						<td>${course.price}円/月</td>
-						<td><a href="CourseDetailServlet"
+						<td><a href="CourseDetailServlet?courseId=${course.courseId}"
 							class="detail button btn btn-secondary btn-lg active"
 							role="button" aria-pressed="true">詳細</a> <a
-							href="CourseMasterUpdateServlet"
+							href="CourseMasterUpdateServlet?courseId=${course.courseId}"
 							class="update button btn btn-secondary btn-lg active"
 							role="button" aria-pressed="true">更新</a> <a
-							href="CourseMasterDeleteServlet"
+							href="CourseMasterDeleteServlet?courseId=${course.courseId}"
 							class="delete button btn btn-secondary btn-lg active"
 							role="button" aria-pressed="true">削除</a></td>
 					</c:if>

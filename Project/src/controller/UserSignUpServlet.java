@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CommonDao;
 import dao.UserDao;
 import model.User;
 
@@ -90,7 +91,7 @@ public class UserSignUpServlet extends HttpServlet {
         	request.setAttribute("passwordRe", passwordRe);
 
         	for(int i=0; i<lavelList.length; i++) {
-        		if(lavelList[i].equals("grade")) {
+        		if(lavelList[i].equals("grade") && !new CommonDao().strCheck(userData[i])) {
         			request.setAttribute(lavelList[i], Integer.parseInt(userData[i]));
         			continue;
         		}

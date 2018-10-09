@@ -97,19 +97,18 @@ public class ExamMasterServlet extends HttpServlet {
 		// リクエストパラメータの入力項目を取得
 		String year = request.getParameter("inputYear");
 		String eTermNo = request.getParameter("eTermNo");
-		String eGradeNo = request.getParameter("eGradeNo");
 
 		// 各フォームにて空欄で検索された際に値を保持する
 		if (!commonDao.strCheck(eTermNo)) {
 			session.setAttribute("eTermNo", eTermNo);
 		}
 		if (!commonDao.strCheck(year)) {
-			session.setAttribute("year", year);
+			session.setAttribute("year", Integer.parseInt(year));
 		}
 
 		if(request.getParameter("search") != null) {
-			// セッションに検索テスト一覧情報をセット(未実装)
-			session.setAttribute("examList", new ExamDao().search(year, eTermNo, eGradeNo));
+			// セッションに検索したテスト一覧情報をセット(未実装)
+			session.setAttribute("examList", new ExamDao().search(year));
 		}else if(request.getParameter("update") != null) {
 			// 国数英理社の5科目の得点を取得し、userIdと紐づけてデータベースを更新する。
 			// userIdの最大値を取得し、最大値まで上記の作業を回す。
@@ -149,7 +148,7 @@ public class ExamMasterServlet extends HttpServlet {
 			}
 			// 取得したexamListをセッションに保存し、不備がなければ更新する。
 			examDao.updateScore(examList);
-			session.setAttribute("examList", new ExamDao().findAll());
+			session.setAttribute("examList", new ExamDao().search(year));
 		}
 		// テスト結果一覧のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/exam_master.jsp").forward(request, response);

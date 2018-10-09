@@ -44,6 +44,9 @@ public class CourseDetailServlet extends HttpServlet {
 		Course course = new CourseDao().findByCourseId(request.getParameter("courseId"));
 		request.setAttribute("course", course);
 
+		// 講習情報を取得
+		session.setAttribute("sCourseList", new Course().getsCourseList());
+
 		// 講座詳細のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_detail.jsp").forward(request, response);
 	}

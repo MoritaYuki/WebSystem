@@ -33,12 +33,17 @@ public class LogoutServlet extends HttpServlet {
 		request.getSession().removeAttribute("grade");
 		request.getSession().removeAttribute("courseName");
 		request.getSession().removeAttribute("teacher");
+
 		request.getSession().removeAttribute("cTermNo");
+		request.getSession().removeAttribute("cGradeNo");
+		request.getSession().removeAttribute("courseList");
 		request.getSession().removeAttribute("sCourseList");
+
 		request.getSession().removeAttribute("cartList");
 		request.getSession().removeAttribute("application");
 		request.getSession().removeAttribute("applicationDetailList");
 		request.getSession().removeAttribute("totalPrice");
+
 		request.getSession().removeAttribute("eGradeNo");
 		request.getSession().removeAttribute("examList");
 		request.getSession().removeAttribute("eTermNo");

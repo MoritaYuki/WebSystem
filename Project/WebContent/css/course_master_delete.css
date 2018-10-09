@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+body{
+	background: #eee url(http://subtlepatterns.com/patterns/sativa.png);
+	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック','Yu Gothic UI', YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'
+}
+
+.bold{ font-weight: bold;}
+
+.bg-light{
+	background-color: #D3D3D3!important;
+}
+
+.header-right {
+	float: right;
+	display: block; /* リンクをブロックレベル化して表示 */
+	color: black;
+	padding-right: 60px;
+}
+
+.sub-title{
+	text-align: center;
+	margin-top: 50px;
+	letter-spacing: 15px;
+}
+
+.navbar-brand{
+	margin: 0 100px 0 40px;
+}
+
+.nav-link{
+	margin: 0 10px;
+}
+
+.txarea{
+	width: 65%;
+	margin: 70px auto;
+}
+
+.form-group{
+	padding: 10px 0;
+}
+
+.navbar-brand{
+	margin: 0 100px 0 40px;
+}
+
+.nav-link{
+	margin: 0 10px;
+}
+
+.delete-msg{
+	width: 40%;
+	margin: 100px auto;
+	font-size: 20px;
+}
+
+.info-msg{
+	font-weight: bold;
+}
+
+.tale-msg{
+	padding-top: 30px;
+}
+
+.btn-box{
+	width: 45%;
+	margin: 0 auto;
+	text-align: right;
+}
+
+.no{
+	padding: 6px 25px;
+}
+
+.yes{
+	margin-left: 160px;
+	padding: 6px 40px;
+}

@@ -50,14 +50,14 @@
 	<form class="form bold" method="post" action="ExamMasterServlet">
 		<div class="txarea">
 			<div class="form-group row">
-				<label for="inputYear" class="col-sm-2 col-form-label">年度</label>
+				<label for="inputYear" class="col-sm-1 col-form-label">年度</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" name="inputYear" id="inputYear">
 				</div>
 			</div>
 		</div>
 		<div class="form-group row">
-			<div class="col-sm-10 search">
+			<div class="col-sm-8 search">
 				<button type="submit" name="search" class="btn btn-primary search-btn" value="search">検索</button>
 			</div>
 		</div>

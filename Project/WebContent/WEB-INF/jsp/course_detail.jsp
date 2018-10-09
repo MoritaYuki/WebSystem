@@ -67,6 +67,19 @@
 	</div>
 	<div class="container">
 		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 期間 </div>
+			<div class="col col-lg-5">
+				<c:if test="${course.term <= 3}">
+					${course.term}学期
+				</c:if>
+				<c:if test="${course.term > 3}">
+					${sCourseList[course.term-4]}
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
 			<div class="col col-lg-4"> 講座名 </div>
 			<div class="col col-lg-5"> ${course.courseName} </div>
 		</div>
@@ -79,8 +92,26 @@
 	</div>
 	<div class="container">
 		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 料金 </div>
+			<div class="col col-lg-5"> ${course.price} 円</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
 			<div class="col col-lg-4"> 講座詳細 </div>
 			<div class="col col-lg-5"> ${course.courseDetail} </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 講座詳細 </div>
+			<div class="col col-lg-5"> ${course.createDate} </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4"> 講座詳細 </div>
+			<div class="col col-lg-5"> ${course.updateDate} </div>
 		</div>
 	</div>
 </body>

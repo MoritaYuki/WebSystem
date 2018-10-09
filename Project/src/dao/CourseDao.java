@@ -234,6 +234,39 @@ public class CourseDao extends CommonDao {
 		}
 	}
 
+	public void courseDelete(String courseId) {
+		// コネクション取得
+		Connection conn = null;
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "DELETE FROM course WHERE course_id = ?";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			stmt.setString(1, courseId);
+			System.out.println("講座マスタ削除件数：" + stmt.executeUpdate() + "件");
+
+			return ;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return ;
+				}
+			}
+		}
+	}
+
 	// 申込番号から申込講座の一覧を取得
 	public List<Course> findCourseByApplicationNo(String applicationNo) {
 		Connection con = null;
