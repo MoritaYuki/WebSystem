@@ -45,7 +45,9 @@ public class CourseMasterUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// 取得した講座IDと一致する講座情報をリクエストスコープに保存
-		request.setAttribute("course", new CourseDao().findByCourseId(request.getParameter("courseId")));
+		Course course = new CourseDao().findByCourseId(request.getParameter("courseId"));
+		request.setAttribute("course", course);
+		session.setAttribute("rootCourseName", course.getCourseName());
 
 		// 講習ラジオボタンの値
 		request.setAttribute("sCourseList", new Course().getsCourseList());
@@ -59,11 +61,8 @@ public class CourseMasterUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		CourseDao courseDao = new CourseDao();
-
-
-//		post部分の作成をしましょう！！！！
-
 
 		// リクエストパラメータの文字コードを指定
         request.setCharacterEncoding("UTF-8");
@@ -74,46 +73,36 @@ public class CourseMasterUpdateServlet extends HttpServlet {
 								request.getParameter("inputTeacher"),
 								request.getParameter("inputTerm"),
 								request.getParameter("inputPrice"),
-								request.getParameter("inputCourseDetail")
+								request.getParameter("inputCourseDetail"),
+								request.getParameter("inputCourseId")
 								};
-
-		String [] lavelList = {"grade",
-							   "courseName",
-							   "teacher",
-							   "term",
-							   "price",
-							   "courseDetail"
-							   };
+		String rootCourseName = (String)request.getSession().getAttribute("rootCourseName");
 
 		// 入力フォームに不備がある場合は再度入力フォームに戻る
-		if(courseDao.formCheck(courseData)) {
+		if(courseDao.formCheck(courseData, rootCourseName)) {
 
 			//エラーメッセージをリクエストスコープに保管
         	request.setAttribute("errMsg", "入力内容が正しくありません");
 
-        	for(int i=0; i<lavelList.length; i++) {
-        		if(lavelList[i].equals("grade") && courseData[i] != null) {
-        			request.setAttribute(lavelList[i], Integer.parseInt(courseData[i]));
-        			continue;
-        		}
-        		request.setAttribute(lavelList[i], courseData[i]);
-        	}
+			Course course = new Course(Integer.parseInt(courseData[6]), Integer.parseInt(courseData[0]),
+										courseData[1], courseData[2], Integer.parseInt(courseData[3]),
+										Integer.parseInt(courseData[4]), courseData[5]);
+			request.setAttribute("course", course);
 
         	// 講習ラジオボタンの値
     		request.setAttribute("sCourseList", new Course().getsCourseList());
 
         	//signUp.jspにフォワード
-        	request.getRequestDispatcher("/WEB-INF/jsp/course_master_signup.jsp").forward(request, response);
+        	request.getRequestDispatcher("/WEB-INF/jsp/course_master_update.jsp").forward(request, response);
             return;
 		}
 
-        // signupメソッドを使って、DB上に入力された情報を登録
-        int insertNum = courseDao.signup(courseData);
-        // 確認用
-        System.out.println(insertNum);
+        // courseUpdateメソッドを使って、DB上に入力された情報を登録
+        courseDao.courseUpdate(courseData);
 
         // 登録が成功した場合は講座マスタ一覧へリダイレクト
-        request.getSession().setAttribute("signMsg", "講座マスタ情報を登録しました");
+        request.getSession().setAttribute("signMsg", "講座マスタ情報を更新しました");
+        session.setAttribute("courseList", new CourseDao().findAll());
         response.sendRedirect("CourseMasterServlet");
 	}
 

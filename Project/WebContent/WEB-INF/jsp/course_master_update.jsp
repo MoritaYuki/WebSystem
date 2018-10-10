@@ -39,8 +39,13 @@
 		<a class="nav-link header-right" href="LogoutServlet">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 	<h1 class="sub-title"> 講座マスタ更新 </h1>
-	<form class="form bold" method="get" action="../CourseMaster/course_master.html">
+	<form class="form bold" method="post" action="CourseMasterUpdateServlet">
 		<div class="txarea">
+			<div class="error">
+				<c:if test="${errMsg != null}">
+					${errMsg}
+				</c:if>
+			</div>
 			<fieldset class="form-group">
 				<div class="row">
 					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
@@ -102,12 +107,19 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<label for="inputPrice" class="col-sm-2 col-form-label">料金</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="inputPrice" id="inputPrice" value="${course.price}">
+				</div>
+			</div>
+			<div class="form-group row">
 				<label for="inputCourseDetail" class="col-sm-2 col-form-label">講座詳細</label>
 				<div class="col-sm-7">
 					<textarea class="form-control" name="inputCourseDetail" id="inputCourseDetail"rows="3">${course.courseDetail}</textarea>
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="inputCourseId" value="${course.courseId}">
 		<div class="form-group row">
 			<div class="col-sm-10 search">
 				<button type="submit" class="btn btn-primary search-btn">更新</button>

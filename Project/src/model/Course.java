@@ -35,6 +35,18 @@ public class Course implements Serializable{
 		this.updateDate = updateDate;
 	}
 
+	// 講座情報更新時のコンストラクタ
+	public Course(int courseId, int grade, String courseName, String teacher, int term, int price, String courseDetail) {
+		super();
+		this.courseId = courseId;
+		this.grade = grade;
+		this.courseName = courseName;
+		this.teacher = teacher;
+		this.term = term;
+		this.price = price;
+		this.courseDetail = courseDetail;
+	}
+
 	public int getCourseId() {
 		return courseId;
 	}

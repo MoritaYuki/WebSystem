@@ -234,6 +234,47 @@ public class CourseDao extends CommonDao {
 		}
 	}
 
+	public void courseUpdate(String[] courseData) {
+		//コネクション取得
+		Connection conn = null;
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String set = "SET grade = ?,"
+					+ " course_name = ?,"
+					+ " teacher = ?,"
+					+ " term = ?,"
+					+ " price = ?,"
+					+ " course_detail = ? ";
+			String where = "WHERE course_id = ?";
+
+			String sql = "UPDATE course " + set + where;
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			for(int i=0; i<courseData.length; i++) {
+		        stmt.setString(i+1, courseData[i]);
+			}
+			// 追加したレコードの数を返す
+			stmt.executeUpdate();
+			System.out.println("講座ID：" + courseData[6] + "の情報を更新");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public void courseDelete(String courseId) {
 		// コネクション取得
 		Connection conn = null;
@@ -349,12 +390,13 @@ public class CourseDao extends CommonDao {
 		return courseIdList;
 	}
 
-	public boolean formCheck(String[] courseData) {
+	public boolean formCheck(String[] courseData, String rootCourseName) {
 
 		// 同じ講座名(courseData[1]に配置)がないか判定
 		List<Course> courseList = findAll();
 		for (Course course : courseList) {
-			if (!strCheck(courseData[1]) && course.getCourseName().equals(courseData[1])) {
+			String cName = course.getCourseName();
+			if (!strCheck(courseData[1]) && cName.equals(courseData[1]) && !(cName.equals(rootCourseName))) {
 				return true;
 			}
 		}

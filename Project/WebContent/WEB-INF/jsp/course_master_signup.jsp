@@ -119,9 +119,10 @@
 					<textarea class="form-control" id="inputCourseDetail" rows="3" name="inputCourseDetail">${courseDetail}</textarea>
 				</div>
 			</div>
-		<div class="form-group row">
-			<div class="col-sm-10 search">
-				<button type="submit" class="btn btn-primary search-btn">登録</button>
+			<div class="form-group row">
+				<div class="col-sm-10 search">
+					<button type="submit" class="btn btn-primary search-btn">登録</button>
+				</div>
 			</div>
 		</div>
 	</form>

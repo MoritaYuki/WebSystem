@@ -37,6 +37,13 @@ body{
 	margin: 70px auto;
 }
 
+.error{
+	font-size: 20px;
+	color: red;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
 .form-group{
 	padding: 10px 0;
 }

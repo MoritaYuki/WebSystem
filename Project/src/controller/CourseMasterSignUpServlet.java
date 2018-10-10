@@ -72,8 +72,10 @@ public class CourseMasterSignUpServlet extends HttpServlet {
 							   "courseDetail"
 							   };
 
+		String rootCourseName = "エラー回避用";
+
 		// 入力フォームに不備がある場合は再度入力フォームに戻る
-		if(courseDao.formCheck(courseData)) {
+		if(courseDao.formCheck(courseData, rootCourseName)) {
 
 			//エラーメッセージをリクエストスコープに保管
         	request.setAttribute("errMsg", "入力内容が正しくありません");
