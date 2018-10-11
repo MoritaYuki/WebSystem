@@ -135,7 +135,7 @@ public class UserDao extends CommonDao{
 		return userList;
 	}
 
-	// 入力情報からアカウントを検索
+	// ユーザIDからアカウントを検索
 	public User searchByUserId(String sUserId){
 
 			// コネクションを取得
@@ -322,15 +322,22 @@ public class UserDao extends CommonDao{
 			 */
 
 			//ステートメントの準備
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			//それぞれの入力項目を代入
 			for(int i=0; i<userData.length; i++) {
 		        stmt.setString(i+1, userData[i]);
 			}
 
-	        // 追加したレコードの数を返す
-	        return stmt.executeUpdate();
+	        // 追加したレコードの数を表示
+	        System.out.println(stmt.executeUpdate() + "件の新規アカウントを登録");
 
+	     // 自動採番したユーザIDを取得し、戻り値として返す
+			ResultSet rs = stmt.getGeneratedKeys();
+			int userId = 0;
+			if (rs.next()) {
+				userId = rs.getInt(1);
+			}
+			return userId;
 		}catch(SQLException | NoSuchAlgorithmException e){
 			e.printStackTrace();
 			return 0;
@@ -341,8 +348,101 @@ public class UserDao extends CommonDao{
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-	                return 0;
+					return 0;
 	            }
+			}
+		}
+	}
+
+	public void userUpdate(String[] userData) {
+		//コネクション取得
+		Connection conn = null;
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String password;
+			if(strCheck(userData[2])) {
+				password = "";
+			}else {
+				password = " password = ?,";
+			}
+
+			String set = "SET"
+					+ password
+					+ " grade = ?,"
+					+ " user_name_phonetic = ?,"
+					+ " user_name = ?,"
+					+ " sex = ?,"
+					+ " birthday = ?,"
+					+ " contact_info = ?,"
+					+ " address = ? ";
+			String where = "WHERE user_id = ?";
+
+			String sql = "UPDATE user " + set + where;
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			for(int i=2; i<userData.length; i++) {
+		        stmt.setString(i-1, userData[i]);
+			}
+			if(strCheck(userData[2])) {
+				for(int i=3; i<userData.length; i++) {
+			        stmt.setString(i-2, userData[i]);
+				}
+			}else {
+				for(int i=2; i<userData.length; i++) {
+			        stmt.setString(i-1, userData[i]);
+				}
+			}
+			// 追加したレコードの数を返す
+			stmt.executeUpdate();
+			System.out.println("ユーザID：" + userData[0] + "の情報を更新");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void userDelete(String userId) {
+		// コネクション取得
+		Connection conn = null;
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "DELETE FROM user WHERE user_id = ?";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			stmt.setString(1, userId);
+			System.out.println("アカウント削除件数：" + stmt.executeUpdate() + "件");
+
+			return ;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return ;
+				}
 			}
 		}
 	}
@@ -405,7 +505,6 @@ public class UserDao extends CommonDao{
 		if(strCheck(passwordRe)) {
 			return true;
 		}
-
 		for(String x: userData) {
 			if( strCheck(x) ) {
 				return true;
@@ -414,6 +513,25 @@ public class UserDao extends CommonDao{
 
 		// パスワード(userData[1]に配置)が確認用のもの(passwordRe)と一致しているか判定
 		if(!userData[1].equals(passwordRe)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateFormCheck(String[] userData, String passwordRe) {
+
+		// 入力フォームに空欄があるか(loginIDはログインIDの一意性を調べた際に確認済) 判定
+		if(strCheck(passwordRe)) {
+			return true;
+		}
+		for(int i=0; i<userData.length; i++) {
+			if(i != 2 && strCheck(userData[i])) {
+				return true;
+			}
+		}
+
+		// パスワード(userData[1]に配置)が確認用のもの(passwordRe)と一致しているか判定
+		if(!strCheck(userData[2]) && !userData[2].equals(passwordRe)) {
 			return true;
 		}
 		return false;

@@ -134,9 +134,9 @@
 					<td>${user.sex}</td>
 					<td>${user.contactInfo}</td>
 					<td>
-						<a href="UserDetailServlet" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
-						<a href="UserUpdateServlet" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
-						<a href="UserDeleteServlet" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
+						<a href="UserDetailServlet?userId=${user.userId}" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
+						<a href="UserUpdateServlet?userId=${user.userId}" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
+						<a href="UserDeleteServlet?userId=${user.userId}" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
 					</td>
 				</tr>
 			</c:forEach>

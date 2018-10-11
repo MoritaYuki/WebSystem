@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommonDao;
+import dao.ExamDao;
 import dao.UserDao;
 import model.User;
 
@@ -52,6 +53,7 @@ public class UserSignUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDao userDao = new UserDao();
+		ExamDao examDao = new ExamDao();
 
 		// リクエストパラメータの文字コードを指定
         request.setCharacterEncoding("UTF-8");
@@ -107,10 +109,9 @@ public class UserSignUpServlet extends HttpServlet {
             return;
 		}
 
-        // signupメソッドを使って、DB上に入力された情報を登録
-        int insertNum = userDao.signup(userData);
-        // 確認用
-        System.out.println(insertNum);
+        // signupメソッドを使って、DB上に入力された情報を登録し、3年分のテスト結果マスタを同時に作成する
+        int userId = userDao.signup(userData);
+        examDao.signup(Integer.parseInt(userData[2]), userId);
 
         // 登録が成功した場合はユーザ一覧へリダイレクト
         request.getSession().setAttribute("signMsg", "アカウント情報を登録しました");

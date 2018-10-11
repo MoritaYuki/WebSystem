@@ -131,6 +131,47 @@ public class ExamDao extends CommonDao {
 		return examList;
 	}
 
+	public void signup(int uGrade, int userId) {
+		//コネクション取得
+		Connection conn = null;
+		//SELECT文準備
+		for (int grade = 1; grade <= 3; grade++) {
+			for (int term = 1; term <= 3; term++) {
+				try {
+					//DBに接続
+					conn = DBManager.getConnection();
+					String column = "(user_id, year, grade, term, create_date)";
+					String value = "VALUE (?, ?, ?, ?, now())";
+
+					String sql = "INSERT INTO score" + column + value;
+
+					//ステートメントの準備
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					//それぞれの入力項目を代入
+					stmt.setInt(1, userId);
+					stmt.setInt(2, new Exam().getYearNow() + (grade-uGrade));
+					stmt.setInt(3, grade);
+					stmt.setInt(4, term);
+
+					// 追加したレコードの数を表示
+					System.out.println(stmt.executeUpdate() + "件の新規テスト結果マスタを登録");
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					// データベース切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+
 	// 入力情報からテスト結果を更新
 	public void updateScore(List<Exam> examList) {
 		//コネクション取得
@@ -176,6 +217,38 @@ public class ExamDao extends CommonDao {
 			}
 		}
 	}
+
+	public void examDelete(String userId) {
+		// コネクション取得
+		Connection conn = null;
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "DELETE FROM score WHERE user_id = ?";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			stmt.setString(1, userId);
+			System.out.println("テスト結果マスタ削除件数：" + stmt.executeUpdate() + "件");
+			return ;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return ;
+				}
+			}
+		}
+	}
+
 
 	// フォーム入力に不備がないかを判定
 	public boolean formCheck(String[] examData) {

@@ -2,6 +2,8 @@ package model;
 
 //JavaBeans作成条件（java.io.Serializableのインポートと実装）
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User implements Serializable{
@@ -49,6 +51,22 @@ public class User implements Serializable{
 		this.address = address;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+	}
+
+	// ユーザ情報更新時のコンストラクタ
+	public User(int userId, String loginId, String password, int grade, String userNamePhonetic, String userName,
+			String sex, Date birthday, String contactInfo, String address) {
+		super();
+		this.userId = userId;
+		this.loginId = loginId;
+		this.password = password;
+		this.grade = grade;
+		this.userNamePhonetic = userNamePhonetic;
+		this.userName = userName;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.contactInfo = contactInfo;
+		this.address = address;
 	}
 
 	public int getUserId() {
@@ -145,5 +163,16 @@ public class User implements Serializable{
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public Date getFormatBirthday(String birthday) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date fBirthday = sdf.parse(birthday);
+			return fBirthday;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

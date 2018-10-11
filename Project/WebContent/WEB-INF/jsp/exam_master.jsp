@@ -120,7 +120,7 @@
 				<tbody>
 					<c:forEach var="exam" items="${examList}">
 						<tr>
-							<c:if test="${eGradeNo == exam.grade && eTermNo == exam.term}">
+							<c:if test="${year == exam.year && eGradeNo == exam.grade && eTermNo == exam.term}">
 								<input type="hidden" name="userId${exam.userId}" value="${exam.userId}">
 								<th scope="row">${exam.loginId}</th>
 								<td>${exam.userNamePhonetic}</td>
