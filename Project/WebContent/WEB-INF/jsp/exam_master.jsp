@@ -88,7 +88,7 @@
 	<form method="post" action="ExamMasterServlet">
 		<div class="table-box">
 			<div class="signup">
-				<a class="table-title"> ２０１８年度　${eGradeNo}学年　${eTermNo}学期末テスト </a>
+				<a class="table-title"> ${year}年度　${eGradeNo}学年　${eTermNo}学期末テスト </a>
 				<c:if test="${jspFg == 0}">
 					<a href="ExamMasterServlet?jspFg=0&eGradeNo=${eGradeNo}&eTermNo=${eTermNo}" class="signup-btn btn btn-secondary btn-lg active disabled" role="button" aria-pressed="true">閲覧画面</a>
 				</c:if>

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
+import model.Exam;
 import model.User;
 
 /**
  * Servlet implementation class ExamMasterServlet
  */
-@WebServlet("/ExamMasterSignUpUserServlet")
-public class SSExamMasterSignUpUserServlet extends HttpServlet {
+@WebServlet("/ExamMasterSignUpServlet")
+public class ZZExamMasterSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SSExamMasterSignUpUserServlet() {
+    public ZZExamMasterSignUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,10 +40,10 @@ public class SSExamMasterSignUpUserServlet extends HttpServlet {
 		}
 
 		// リクエストスコープにユーザ一覧情報をセット
-		request.setAttribute("userList", new UserDao().findAll());
+		request.setAttribute("user", new UserDao().searchByUserId(request.getParameter("userId")));
 
 		//exam_master_signup.jspにフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/exam_master_signup_user.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/exam_master_signup.jsp").forward(request, response);
 	}
 
 	/**
@@ -54,19 +54,26 @@ public class SSExamMasterSignUpUserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String loginId = request.getParameter("inputLoginId");
-		String userName = request.getParameter("inputUserName");
-		String grade = request.getParameter("inputGrade");
-		String address = null;
+        int userId = Integer.parseInt(request.getParameter("inputUserId"));
+        int year = Integer.parseInt(request.getParameter("inputYear"));
+        int term = Integer.parseInt(request.getParameter("inputTerm"));
+        int grade = Integer.parseInt(request.getParameter("inputTerm"));
+        int japanese = Integer.parseInt(request.getParameter("inputJapanese"));
+        int math = Integer.parseInt(request.getParameter("inputMath"));
+        int english = Integer.parseInt(request.getParameter("inputEnglish"));
+        int science = Integer.parseInt(request.getParameter("inputScience"));
+        int social = Integer.parseInt(request.getParameter("inputSocial"));
+		String comment = request.getParameter("inputComment");
 
-		// 入力情報を元に該当ユーザを検索
-		List<User> userList = new UserDao().search(loginId, userName, grade, address);
+		// scoreテーブルに入力情報を挿入
+		Exam exam = new Exam(userId, year, grade, term, japanese, math, english, science, social, comment);
+		//new ExamDao().insertScore(exam);
 
 		// リクエストスコープにユーザ一覧情報をセット
-		request.setAttribute("userList", userList);
+		request.getSession().setAttribute("signMsg", "登録が完了しました。");
 
-		// ユーザ一覧のjspにフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/exam_master_signup_user.jsp").forward(request, response);
+		// テスト結果マスタの一覧にリダイレクト
+		response.sendRedirect("ExamMasterServlet");
 	}
 
 }

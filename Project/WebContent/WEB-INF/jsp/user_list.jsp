@@ -61,6 +61,11 @@
 
 	<!-- 検索フォーム -->
 	<h1 class="sub-title"> 生徒一覧 </h1>
+	<div class="signMsg">
+		<c:if test="${signMsg != null}">
+			${signMsg}
+		</c:if>
+	</div>
 	<div class="signup">
 		<a href="UserSignUpServlet" class="signup-btn btn btn-secondary btn-lg active" role="button" aria-pressed="true">新規登録</a>
 	</div>

@@ -52,15 +52,15 @@
 					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
 					<div class="col-sm-7">
 						<c:forEach var="i" begin="1" end="3">
-							<c:if test="${grade != i}" >
+							<c:if test="${csGradeNo != i}" >
 								<div class="form-check">
-									<input class="form-check-input " type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+									<input class="form-check-input " type="radio" name="inputCsGradeNo" id="gridRadios${i}" value="${i}">
 									<label class="form-check-label " for="gridRadios${i}"> ${i}年生</label>
 								</div>
 							</c:if>
-							<c:if test="${grade == i}" >
+							<c:if test="${csGradeNo == i}" >
 								<div class="form-check">
-									<input class="form-check-input " type="radio" name="inputGrade" id="gridRadios${i}" value="${i}" checked>
+									<input class="form-check-input " type="radio" name="inputCsGradeNo" id="gridRadios${i}" value="${i}" checked>
 									<label class="form-check-label " for="gridRadios${i}"> ${i}年生</label>
 								</div>
 							</c:if>
@@ -74,20 +74,20 @@
 					<div class="col-sm-7">
 						<c:forEach var="t" begin="1" end="3">
 							<div class="form-check">
-								<c:if test="${term != t}" >
-									<input class="form-check-input " type="radio" name="inputTerm" id="gridRadios${t}" value="${t}">
+								<c:if test="${csTermNo != t}" >
+									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t}" value="${t}">
 									<label class="form-check-label " for="gridRadios${t}"> ${t}学期</label>
 								</c:if>
-								<c:if test="${term == t}" >
-									<input class="form-check-input " type="radio" name="inputTerm" id="gridRadios${t}" value="${t}" checked>
+								<c:if test="${csTermNo == t}" >
+									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t}" value="${t}" checked>
 									<label class="form-check-label " for="gridRadios${t}"> ${t}学期</label>
 								</c:if>
-								<c:if test="${term != t+3}" >
-									<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${t+3}" value="${t+3}">
+								<c:if test="${csTermNo != t+3}" >
+									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t+3}">
 									<label class="form-check-label event-lavel" for="gridRadios${t+3}"> ${sCourseList[t-1]}講習</label>
 								</c:if>
-								<c:if test="${term == t+3}" >
-									<input class="form-check-input event" type="radio" name="inputTerm" id="gridRadios${t+3}" value="${t+3}" checked>
+								<c:if test="${csTermNo == t+3}" >
+									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t+3}" checked>
 									<label class="form-check-label event-lavel" for="gridRadios${t+3}"> ${sCourseList[t-1]}講習</label>
 								</c:if>
 							</div>

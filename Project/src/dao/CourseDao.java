@@ -187,7 +187,7 @@ public class CourseDao extends CommonDao {
 		return courseList;
 	}
 
-	public int signup(String[] courseData) {
+	public void signup(String[] courseData) {
 		//コネクション取得
 		Connection conn = null;
 
@@ -216,11 +216,10 @@ public class CourseDao extends CommonDao {
 			}
 
 	        // 追加したレコードの数を返す
-	        return stmt.executeUpdate();
+	        System.out.println("講座マスタ新規登録件数：" + stmt.executeUpdate() + "件");
 
 		}catch(SQLException e){
 			e.printStackTrace();
-			return 0;
 		}finally {
 			// データベース切断
 			if (conn != null) {
@@ -228,7 +227,6 @@ public class CourseDao extends CommonDao {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-	                return 0;
 	            }
 			}
 		}

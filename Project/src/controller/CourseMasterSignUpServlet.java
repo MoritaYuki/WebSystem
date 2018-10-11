@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CourseDao;
 import model.Course;
@@ -50,24 +51,25 @@ public class CourseMasterSignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		CourseDao courseDao = new CourseDao();
 
 		// リクエストパラメータの文字コードを指定
         request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を配列に取得
-		String [] courseData = {request.getParameter("inputGrade"),
+		String [] courseData = {request.getParameter("inputCsGradeNo"),
 								request.getParameter("inputCourseName"),
 								request.getParameter("inputTeacher"),
-								request.getParameter("inputTerm"),
+								request.getParameter("inputCsTermNo"),
 								request.getParameter("inputPrice"),
 								request.getParameter("inputCourseDetail")
 								};
 
-		String [] lavelList = {"grade",
+		String [] lavelList = {"csGradeNo",
 							   "courseName",
 							   "teacher",
-							   "term",
+							   "csTermNo",
 							   "price",
 							   "courseDetail"
 							   };
@@ -81,7 +83,7 @@ public class CourseMasterSignUpServlet extends HttpServlet {
         	request.setAttribute("errMsg", "入力内容が正しくありません");
 
         	for(int i=0; i<lavelList.length; i++) {
-        		if(lavelList[i].equals("grade") && courseData[i] != null) {
+        		if(lavelList[i].equals("csGradeNo") && courseData[i] != null) {
         			request.setAttribute(lavelList[i], Integer.parseInt(courseData[i]));
         			continue;
         		}
@@ -97,12 +99,17 @@ public class CourseMasterSignUpServlet extends HttpServlet {
 		}
 
         // signupメソッドを使って、DB上に入力された情報を登録
-        int insertNum = courseDao.signup(courseData);
-        // 確認用
-        System.out.println(insertNum);
+        courseDao.signup(courseData);
 
-        // 登録が成功した場合は講座マスタ一覧へリダイレクト
+        // 登録が成功した場合は検索条件を保存して講座マスタ一覧へリダイレクト
         request.getSession().setAttribute("signMsg", "講座マスタ情報を登録しました");
+        String cGradeNo = (String)session.getAttribute("cGradeNo");
+		if(cGradeNo.equals("全")) {
+			cGradeNo = null;
+		}
+		String courseName = (String)session.getAttribute("courseName");
+		String teacher = (String)session.getAttribute("teacher");
+		request.getSession().setAttribute("courseList", new CourseDao().search(cGradeNo, courseName, teacher));
         response.sendRedirect("CourseMasterServlet");
 	}
 

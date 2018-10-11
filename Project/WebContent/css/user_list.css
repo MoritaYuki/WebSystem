@@ -24,6 +24,13 @@ body{
 	letter-spacing: 30px;
 }
 
+.signMsg{
+	text-align: center;
+	color: blue;
+	font-size: 25px;
+	padding: 20px 0;
+}
+
 .signup{
 	width: 70%;
 	margin: 30px auto;

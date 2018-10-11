@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class CourseSignUpServlet
  */
 @WebServlet("/CourseSignUpServlet")
-public class CourseSignUpServlet extends HttpServlet {
+public class ZZCourseSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CourseSignUpServlet() {
+    public ZZCourseSignUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

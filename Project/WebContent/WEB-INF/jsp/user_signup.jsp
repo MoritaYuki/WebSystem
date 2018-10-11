@@ -70,15 +70,15 @@
 					<legend class="col-form-label col-sm-3 pt-0">学年</legend>
 					<div class="col-sm-7">
 						<c:forEach var="i" begin="1" end="3">
-							<c:if test="${grade != i}" >
+							<c:if test="${uGradeNo != i}" >
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}">
+									<input class="form-check-input" type="radio" name="inputUGradeNo" id="gridRadios${i}" value="${i}">
 									<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
 								</div>
 							</c:if>
-							<c:if test="${grade == i}" >
+							<c:if test="${uGradeNo == i}" >
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios${i}" value="${i}" checked>
+									<input class="form-check-input" type="radio" name="inputUGradeNo" id="gridRadios${i}" value="${i}" checked>
 									<label class="form-check-label" for="gridRadios${i}"> ${i}年生</label>
 								</div>
 							</c:if>
@@ -140,7 +140,7 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-10 search">
-				<button type="submit" class="btn btn-primary search-btn">講座登録へ</button>
+				<button type="submit" class="btn btn-primary search-btn">登録</button>
 			</div>
 		</div>
 	</form>

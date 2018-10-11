@@ -129,6 +129,11 @@ public class User implements Serializable{
 		return birthday;
 	}
 
+	public String getBirthdayStr() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(birthday);
+	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
@@ -165,9 +170,11 @@ public class User implements Serializable{
 		this.updateDate = updateDate;
 	}
 
-	public Date getFormatBirthday(String birthday) {
+	public static Date getFormatBirthday(String birthday) {
+		// SimpleDateFormatでString⇒Dateの際は、String値の形式とSimpleDateFormatの引数の形式を合わせる！！！
+		// 更に、jspにて表示する際はDate⇒Stringとして好きな表示形式にフォーマットしなおす必要あり。今回は
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date fBirthday = sdf.parse(birthday);
 			return fBirthday;
 		} catch (ParseException e) {

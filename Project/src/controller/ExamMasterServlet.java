@@ -66,9 +66,9 @@ public class ExamMasterServlet extends HttpServlet {
 			session.setAttribute("eTermNo", Integer.parseInt(eTermNo));
 		}
 
-		// セッションに年度がなければ、現在年度を取得
+		// セッションに現在年度がなければ、現在年度を取得
 		if(session.getAttribute("year") == null) {
-			session.setAttribute("year", new Exam().getYearNow());
+			session.setAttribute("year", Exam.getYearNow());
 		}
 
 		// jspFgがnullなら0を、それ以外のときはその値を保存する
@@ -107,7 +107,7 @@ public class ExamMasterServlet extends HttpServlet {
 		}
 
 		if(request.getParameter("search") != null) {
-			// セッションに検索したテスト一覧情報をセット(未実装)
+			// セッションに検索したテスト一覧情報をセット
 			session.setAttribute("examList", new ExamDao().search(year));
 		}else if(request.getParameter("update") != null) {
 			// 国数英理社の5科目の得点を取得し、userIdと紐づけてデータベースを更新する。
@@ -136,6 +136,7 @@ public class ExamMasterServlet extends HttpServlet {
 				}
 
 				int intYear = (int)session.getAttribute("year");
+				int eGradeNo = (int)session.getAttribute("eGradeNo");
 				int term = (int)session.getAttribute("eTermNo");
 				int japanese = Integer.parseInt(request.getParameter("japanese" + i));
 				int math = Integer.parseInt(request.getParameter("math" + i));
@@ -143,7 +144,8 @@ public class ExamMasterServlet extends HttpServlet {
 				int science = Integer.parseInt(request.getParameter("science" + i));
 				int social = Integer.parseInt(request.getParameter("social" + i));
 
-				Exam exam = new Exam(Integer.parseInt(userId), intYear, term, japanese, math, english, science, social);
+				Exam exam = new Exam(Integer.parseInt(userId), intYear, eGradeNo, term, japanese, math, english,
+									science, social);
 				examList.add(exam);
 			}
 			// 取得したexamListをセッションに保存し、不備がなければ更新する。

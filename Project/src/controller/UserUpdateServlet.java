@@ -78,10 +78,8 @@ public class UserUpdateServlet extends HttpServlet {
 
 		String passwordRe = request.getParameter("inputPasswordRe");
 
-		// parseのやり方がいまいち...？　明日聞こう！！！
-
 		User user = new User(Integer.parseInt(userData[0]), userData[1], userData[2], Integer.parseInt(userData[3]),
-							userData[4], userData[5], userData[6], new User().getFormatBirthday(userData[7]), userData[8], userData[9]);
+							userData[4], userData[5], userData[6], User.getFormatBirthday(userData[7]), userData[8], userData[9]);
 
 		// 入力フォームに不備がある場合は再度入力フォームに戻る
 		if(userDao.updateFormCheck(userData, passwordRe)) {

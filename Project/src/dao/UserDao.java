@@ -46,7 +46,6 @@ public class UserDao extends CommonDao{
 			 * にて代入する。代入した際にインスタンスstmtには既に代入後のsql分が保存されているため、最後
 			 * のexecuteQuery()で引数を指定する必要はなし
 			 */
-
 			//ステートメントの準備
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			//それぞれの入力項目を代入
@@ -357,7 +356,6 @@ public class UserDao extends CommonDao{
 	public void userUpdate(String[] userData) {
 		//コネクション取得
 		Connection conn = null;
-
 		try {
 			//DBに接続
 			conn = DBManager.getConnection();
@@ -366,6 +364,14 @@ public class UserDao extends CommonDao{
 			if(strCheck(userData[2])) {
 				password = "";
 			}else {
+				// ハッシュ生成前にバイト配列へ置き換える際のCharset
+				Charset charset = StandardCharsets.UTF_8;
+				// ハッシュ生成アルゴリズム
+				String algorithm = "MD5";
+
+				//ハッシュ生成処理（passwordはuserData[1]に配置）
+				byte[] bytes = MessageDigest.getInstance(algorithm).digest(userData[2].getBytes(charset));
+				userData[2] = DatatypeConverter.printHexBinary(bytes);
 				password = " password = ?,";
 			}
 
@@ -400,7 +406,7 @@ public class UserDao extends CommonDao{
 			// 追加したレコードの数を返す
 			stmt.executeUpdate();
 			System.out.println("ユーザID：" + userData[0] + "の情報を更新");
-		} catch (SQLException e) {
+		} catch (SQLException | NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} finally {
 			// データベース切断
@@ -521,9 +527,6 @@ public class UserDao extends CommonDao{
 	public boolean updateFormCheck(String[] userData, String passwordRe) {
 
 		// 入力フォームに空欄があるか(loginIDはログインIDの一意性を調べた際に確認済) 判定
-		if(strCheck(passwordRe)) {
-			return true;
-		}
 		for(int i=0; i<userData.length; i++) {
 			if(i != 2 && strCheck(userData[i])) {
 				return true;

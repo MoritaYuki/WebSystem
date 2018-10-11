@@ -69,10 +69,11 @@ public class Exam implements Serializable{
 	}
 
 	// テスト結果更新時のコンストラクタ
-	public Exam(int userId, int year, int term, int japanese, int math, int english, int science, int social) {
+	public Exam(int userId, int year, int grade, int term, int japanese, int math, int english, int science, int social) {
 		super();
 		this.userId = userId;
 		this.year = year;
+		this.grade = grade;
 		this.term = term;
 		this.japanese = japanese;
 		this.math = math;
@@ -209,7 +210,7 @@ public class Exam implements Serializable{
 		this.updateDate = updateDate;
 	}
 
-	public int getYearNow() {
+	public static int getYearNow() {
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);

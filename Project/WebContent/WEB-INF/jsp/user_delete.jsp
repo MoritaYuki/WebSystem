@@ -46,7 +46,7 @@
 	</div>
 	<div class="btn-box">
 		<a class="btn btn-primary no" href="UserListServlet" role="button">キャンセル</a>
-		<a class="btn btn-primary yes" href="UserDeleteServlet?delFg=1" role="button">OK</a>
+		<a class="btn btn-primary yes" href="UserDeleteServlet?userId=${userId}&delFg=1" role="button">OK</a>
 	</div>
 </body>
 </html>

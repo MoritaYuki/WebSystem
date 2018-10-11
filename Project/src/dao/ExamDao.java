@@ -187,7 +187,7 @@ public class ExamDao extends CommonDao {
 							+ " english = ?,"
 							+ " science = ?,"
 							+ " social = ? ";
-				String where = "WHERE user_id = ?";
+				String where = "WHERE user_id = ? AND year = ? AND grade = ? AND term = ?";
 
 				String sql = "UPDATE score " + set + where;
 
@@ -200,6 +200,9 @@ public class ExamDao extends CommonDao {
 				stmt.setInt(4, exam.getScience());
 				stmt.setInt(5, exam.getSocial());
 				stmt.setInt(6, exam.getUserId());
+				stmt.setInt(7, exam.getYear());
+				stmt.setInt(8, exam.getGrade());
+				stmt.setInt(9, exam.getTerm());
 				// 追加したレコードの数を返す
 				stmt.executeUpdate();
 				System.out.println("ユーザID：" + exam.getUserId() + "のスコアを更新");

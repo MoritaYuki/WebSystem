@@ -122,7 +122,7 @@
 			<div class="form-group row">
 				<label for="inputBirthday" class="col-sm-2 col-form-label">生年月日</label>
 				<div class="col-sm-7">
-					<input type="text" name="inputBirthday" class="form-control" id="inputBirthday" value="${user.birthday}">
+					<input type="text" name="inputBirthday" class="form-control" id="inputBirthday" value="${user.birthdayStr}">
 				</div>
 			</div>
 			<div class="form-group row">

@@ -63,7 +63,7 @@ public class UserSignUpServlet extends HttpServlet {
 
 		String [] userData = {request.getParameter("inputLoginId"),
 							   request.getParameter("inputPassword"),
-							   request.getParameter("inputGrade"),
+							   request.getParameter("inputUGradeNo"),
 							   request.getParameter("inputUserNamePhonetic"),
 							   request.getParameter("inputUserName"),
 							   request.getParameter("inputSex"),
@@ -74,7 +74,7 @@ public class UserSignUpServlet extends HttpServlet {
 
 		String [] lavelList = {"loginId",
 							   "password",
-							   "grade",
+							   "uGradeNo",
 							   "userNamePhonetic",
 							   "userName",
 							   "sex",
@@ -93,7 +93,7 @@ public class UserSignUpServlet extends HttpServlet {
         	request.setAttribute("passwordRe", passwordRe);
 
         	for(int i=0; i<lavelList.length; i++) {
-        		if(lavelList[i].equals("grade") && !new CommonDao().strCheck(userData[i])) {
+        		if(lavelList[i].equals("uGradeNo") && !new CommonDao().strCheck(userData[i])) {
         			request.setAttribute(lavelList[i], Integer.parseInt(userData[i]));
         			continue;
         		}
@@ -115,6 +115,6 @@ public class UserSignUpServlet extends HttpServlet {
 
         // 登録が成功した場合はユーザ一覧へリダイレクト
         request.getSession().setAttribute("signMsg", "アカウント情報を登録しました");
-        response.sendRedirect("CourseSignUpServlet");
+        response.sendRedirect("UserListServlet");
 	}
 }
