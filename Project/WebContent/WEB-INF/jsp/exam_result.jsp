@@ -1,13 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="model.User" %>
+<%@ page import="model.User"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>アカウント詳細</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="/StudentManagement/css/user_detail.css">
+<title>テスト結果</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/StudentManagement/css/exam_result.css">
 </head>
 <body>
 	<!-- ヘッダー -->
@@ -58,9 +61,8 @@
 		<a class="nav-link header-right" href="LogoutServlet">ログアウト<span class="sr-only">(current)</span></a>
 	</nav>
 
+	<h1 class="sub-title"> テスト成績 </h1>
 
-	<h1 class="sub-title"> アカウント情報 </h1>
-	<!-- アカウント情報と、テスト結果の切り替えボタンの設置をしたい！！！  -->
 	<div class="info-btn-box">
 		<c:if test="${fg == 0}">
 			<a class="info-btn btn btn-secondary btn-lg disabled" href="UserDetailServlet?fg=0">アカウント情報</a>
@@ -75,72 +77,63 @@
 			<a class="exam-btn info-btn btn btn-secondary btn-lg " href="UserDetailServlet?fg=1">成績情報</a>
 		</c:if>
 	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> ログインID </div>
-			<div class="col col-lg-5"> ${userData.loginId} </div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> 学年 </div>
-			<div class="col col-lg-5"> 中学${userData.grade}年生 </div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> 生徒氏名 </div>
-			<div class="col col-lg-5"> ${userData.userName} </div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> 生年月日 </div>
-			<div class="col col-lg-5"> ${userData.birthday}</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> 連絡先 </div>
-			<div class="col col-lg-5"> ${userData.contactInfo} </div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-4"> 住所 </div>
-			<div class="col col-lg-5"> ${userData.address} </div>
-		</div>
-	</div>
 
-	<div class="table-container">
-		<h3 class="table-name">受講講座一覧</h3>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">学年</th>
-					<th scope="col">講座名</th>
-					<th scope="col">担当教員</th>
-					<th scope="col">期間</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="course" items="${appCourseList}">
-					<tr>
-						<th scope="row">中${course.grade}</th>
-						<td>${course.courseName}</td>
-						<td>${course.teacher}</td>
-						<td>
-							<c:if test="${course.term <= 3}">
-								${course.term}学期
+	<!-- ユーザ一覧表 -->
+	<c:forEach var="i" begin="1" end="3">
+		<c:if test="${examList != null}">
+			<div class="table-box">
+				<p class="table-title"> 第${i}学年 </p>
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">学年</th>
+							<th scope="col">テスト名</th>
+							<th scope="col">国語</th>
+							<th scope="col">数学</th>
+							<th scope="col">英語</th>
+							<th scope="col">理科</th>
+							<th scope="col">社会</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="exam" items="${examList}">
+							<c:if test="${exam.grade == i}">
+								<tr>
+									<th scope="row">${exam.grade}学年</th>
+									<td>${exam.term}学期末</td>
+									<td>${exam.japanese}</td>
+									<td>${exam.math}</td>
+									<td>${exam.english}</td>
+									<td>${exam.science}</td>
+									<td>${exam.social}</td>
+								</tr>
 							</c:if>
-							<c:if test="${course.term > 3}">
-								${sCourseList[course.term-4]}
-							</c:if>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="comment-box">
+					<div class="col-sm-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">担当教員からのコメント</h5>
+								<p class="card-text">${exam.comment}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:if>
+	</c:forEach>
+	<div class="text-center">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#">前</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">後</a></li>
+			</ul>
+		</nav>
 	</div>
 </body>
 </html>

@@ -62,7 +62,6 @@ public class ApplicationDao extends CommonDao{
 		return applicationList;
 	}
 
-
 	// 申込番号から申込・入金情報を取得
 	public Application findApplicationByApplicationNo(String sApplicationNo) {
 		Connection con = null;
@@ -152,7 +151,6 @@ public class ApplicationDao extends CommonDao{
 		}
 		return applicationList;
 	}
-
 
 	// 申込情報を挿入する
 	public int applicationInsert(Application application) {

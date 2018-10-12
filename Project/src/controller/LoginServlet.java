@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//ログインセッションがある場合、ユーザ一覧画面にリダイレクトさせる。
+		//ログインセッションがある場合、管理メニューかマイページ画面にリダイレクトさせる。
 		User user = (User) request.getSession().getAttribute("loginInfo");
 		if(!(user == null)){
 			if (user.getLoginId().equals("admin")) {

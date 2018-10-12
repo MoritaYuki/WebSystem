@@ -64,6 +64,75 @@ public class ExamDao extends CommonDao {
 		return examList;
 	}
 
+	public List<Exam> findByUserId(String sUserId){
+		// コネクションを取得
+		Connection conn = null;
+
+		//ユーザ情報保管用のリストを準備
+		List<Exam> examList = new ArrayList<Exam>();
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String sql = "SELECT * FROM score INNER JOIN user ON score.user_id = user.user_id WHERE score.user_id = ?";
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, sUserId);
+			ResultSet rs = stmt.executeQuery();
+
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+				int userId = rs.getInt("user_id");
+				String loginId = rs.getString("login_id");
+				String userNamePhinetic = rs.getString("user_name_phonetic");
+				String userName = rs.getString("user_name");
+				String sex = rs.getString("sex");
+				int year = rs.getInt("year");
+				int grade = rs.getInt("grade");
+				int term = rs.getInt("term");
+				int japanese = rs.getInt("japanese");
+				int math = rs.getInt("math");
+				int english = rs.getInt("english");
+				int science = rs.getInt("science");
+				int social = rs.getInt("social");
+				String comment = rs.getString("comment");
+				Date createDate = rs.getDate("create_date");
+				Date updateDate = rs.getDate("update_date");
+				Exam exam = new Exam(userId, loginId, userNamePhinetic, userName, sex, year, grade, term, japanese,
+									math, english, science, social, comment, createDate, updateDate);
+
+				// 各教科の得点を配列に格納し、全て0点の場合はexamListに入れない
+				int[] scoreList = {japanese,
+									math,
+									english,
+									science,
+									social
+									};
+				if(Exam.scoreCheck(scoreList)) {
+					continue;
+				}
+				examList.add(exam);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return examList;
+	}
+
 	// テスト結果を検索
 	public List<Exam> search(String sYear) {
 		// コネクションを取得
@@ -251,7 +320,6 @@ public class ExamDao extends CommonDao {
 			}
 		}
 	}
-
 
 	// フォーム入力に不備がないかを判定
 	public boolean formCheck(String[] examData) {

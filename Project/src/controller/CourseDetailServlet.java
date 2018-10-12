@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CourseDao;
+import dao.UserDao;
 import model.Course;
 import model.User;
 
@@ -40,14 +40,19 @@ public class CourseDetailServlet extends HttpServlet {
 			return;
 		}
 
-		// 取得した講座idを用いてインスタンスを取得
-		Course course = new CourseDao().findByCourseId(request.getParameter("courseId"));
-		request.setAttribute("course", course);
+		// 取得したユーザidを用いてインスタンスを取得
+		user = new UserDao().searchByUserId(request.getParameter("userId"));
+		request.setAttribute("user", user);
+
+
 
 		// 講習情報を取得
 		session.setAttribute("sCourseList", new Course().getsCourseList());
+		// 性別情報の取得
+		String[] sexlist = {"男","女"};
+    	request.setAttribute("sexlist", sexlist);
 
-		// 講座詳細のjspにフォワード
+		// アカウント詳細のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/course_detail.jsp").forward(request, response);
 	}
 }

@@ -29,12 +29,27 @@ body{
 }
 
 .info-btn{
-	margin: 20px 35px 40px 35px;
+	margin: 20px 35px 0 35px;
 	color: white!important;
 }
 
 .exam-btn{
 	padding: .5rem 2rem;
+}
+
+.table-box{
+	width: 70%;
+	margin: 70px auto;
+}
+
+.table-box p{
+	padding-left: 50px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.comment-box{
+	margin-top: 50px;
 }
 
 .navbar-brand{
@@ -43,30 +58,4 @@ body{
 
 .nav-link{
 	margin: 0 10px;
-}
-
-.container{
-	font-size: 20px;
-	padding: 20px 0px;
-}
-
-.col-lg-4{
-	font-weight: bold;
-}
-
-.col{
-	text-align: center;
-}
-
-.table-container{
-	width: 60%;
-	margin: 65px auto;
-}
-
-.table{
-	table-layout: fixed;
-}
-
-.table-name{
-	padding: 0 0 10px 50px;
 }

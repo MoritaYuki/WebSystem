@@ -220,4 +220,13 @@ public class Exam implements Serializable{
 		return year;
 	}
 
+	public static boolean scoreCheck(int[] scoreList) {
+		for(int score: scoreList) {
+			if(score != 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
