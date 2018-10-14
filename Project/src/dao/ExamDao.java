@@ -20,7 +20,11 @@ public class ExamDao extends CommonDao {
 		try {
 			con = DBManager.getConnection();
 
-			String sql = "SELECT * FROM score INNER JOIN user ON score.user_id = user.user_id";
+			String join = "INNER JOIN user AS u "
+					+ "ON s.user_id = u.user_id "
+					+ "INNER JOIN comment AS c "
+					+ "ON s.user_id = c.user_id AND s.grade = c.grade";
+			String sql = "SELECT * FROM score AS s " + join;
 
 			ResultSet rs = con.createStatement().executeQuery(sql);
 
@@ -75,7 +79,11 @@ public class ExamDao extends CommonDao {
 			//DBに接続
 			conn = DBManager.getConnection();
 			//SELECT文準備
-			String sql = "SELECT * FROM score INNER JOIN user ON score.user_id = user.user_id WHERE score.user_id = ?";
+			String join = "INNER JOIN user AS u "
+						+ "ON s.user_id = u.user_id "
+						+ "INNER JOIN comment AS c "
+						+ "ON s.user_id = c.user_id AND s.grade = c.grade ";
+			String sql = "SELECT * FROM score AS s " + join + "WHERE s.user_id = ?";
 
 			//ステートメントの準備
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -145,7 +153,12 @@ public class ExamDao extends CommonDao {
 			//DBに接続
 			conn = DBManager.getConnection();
 			//SELECT文準備
-			String sql = "SELECT * FROM score INNER JOIN user ON score.user_id = user.user_id WHERE year >= ? AND year <= ?";
+			String sql = "SELECT * FROM score AS s "
+						+ "INNER JOIN user AS u "
+						+ "ON s.user_id = u.user_id "
+						+ "INNER JOIN comment AS c "
+						+ "ON s.user_id = c.user_id AND s.grade = c.grade "
+						+ "WHERE year >= ? AND year <= ?";
 
 			//ステートメントの準備
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -205,36 +218,42 @@ public class ExamDao extends CommonDao {
 		Connection conn = null;
 		//SELECT文準備
 		for (int grade = 1; grade <= 3; grade++) {
-			for (int term = 1; term <= 3; term++) {
-				try {
-					//DBに接続
-					conn = DBManager.getConnection();
-					String column = "(user_id, year, grade, term, create_date)";
-					String value = "VALUE (?, ?, ?, ?, now())";
-
-					String sql = "INSERT INTO score" + column + value;
-
+			try {
+				//DBに接続
+				conn = DBManager.getConnection();
+				// commentテーブルのレコード作成
+				String intoComment = "INTO comment "
+									+ "(user_id, grade) "
+									+ "VALUES (?, ?)";
+				String sqlComment = "INSERT " + intoComment;
+				PreparedStatement stmtComment = conn.prepareStatement(sqlComment);
+				stmtComment.setInt(1, userId);
+				stmtComment.setInt(2, grade);
+				stmtComment.executeUpdate();
+				// scoreテーブルのレコード作成
+				for (int term = 1; term <= 3; term++) {
+					String intoScore = "INTO score(user_id, year, grade, term, create_date) "
+									+ "VALUES (?, ?, ?, ?, now()) ";
+					String sqlScore = "INSERT " + intoScore;
 					//ステートメントの準備
-					PreparedStatement stmt = conn.prepareStatement(sql);
+					PreparedStatement stmtScore = conn.prepareStatement(sqlScore);
 					//それぞれの入力項目を代入
-					stmt.setInt(1, userId);
-					stmt.setInt(2, new Exam().getYearNow() + (grade-uGrade));
-					stmt.setInt(3, grade);
-					stmt.setInt(4, term);
-
+					stmtScore.setInt(1, userId);
+					stmtScore.setInt(2, Exam.getYearNow() + (grade - uGrade));
+					stmtScore.setInt(3, grade);
+					stmtScore.setInt(4, term);
 					// 追加したレコードの数を表示
-					System.out.println(stmt.executeUpdate() + "件の新規テスト結果マスタを登録");
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					// データベース切断
-					if (conn != null) {
-						try {
-							conn.close();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
+					System.out.println(stmtScore.executeUpdate() + "件の新規テスト結果マスタを登録");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				// データベース切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			}
@@ -321,6 +340,42 @@ public class ExamDao extends CommonDao {
 		}
 	}
 
+	public void updateComment(String userId, String grade, String comment) {
+		//コネクション取得
+		Connection conn = null;
+
+		try {
+			//DBに接続
+			conn = DBManager.getConnection();
+			//SELECT文準備
+			String set = "SET comment = ? ";
+			String where = "WHERE user_id = ? AND grade = ?";
+
+			String sql = "UPDATE comment " + set + where;
+
+			//ステートメントの準備
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			//それぞれの入力項目を代入
+			stmt.setString(1, comment);
+			stmt.setString(2, userId);
+			stmt.setString(3, grade);
+			// 追加したレコードの数を返す
+			stmt.executeUpdate();
+			System.out.println("ユーザID：" + userId + "学年：" + grade + "のコメントを更新");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	// フォーム入力に不備がないかを判定
 	public boolean formCheck(String[] examData) {
 
@@ -337,6 +392,45 @@ public class ExamDao extends CommonDao {
 			}
 		}
 		return false;
+	}
+
+	// テストのコメントリストを取得する
+	public List<String[]> getCommentList(String sUserId) {
+		Connection con = null;
+		//講座情報保管用のリストを準備
+		List<String[]> commentList = new ArrayList<String[]>();
+		try {
+			con = DBManager.getConnection();
+			String sql = "SELECT * FROM comment WHERE user_id = ?";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, sUserId);
+			ResultSet rs = stmt.executeQuery();
+
+			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
+			while (rs.next()) {
+                String comment = rs.getString("comment");
+                String[] splitComment = null;
+                if(comment != null) {
+                	splitComment = comment.split("\r\n",0);
+                }
+                commentList.add(splitComment);
+            }
+		}catch(SQLException e) {
+			e.printStackTrace();
+            return null;
+		}finally{
+			// データベース切断
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+		}
+		return commentList;
 	}
 
 //	public void insertScore(Exam exam) {

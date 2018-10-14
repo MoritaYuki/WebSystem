@@ -47,6 +47,11 @@ public class UserListServlet extends HttpServlet {
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", new UserDao().findAll());
 
+		// リクエストに学年がなければ、全学年のリストを取得
+		if (request.getParameter("uGradeNo") == null) {
+			request.setAttribute("uGradeNo", "全");
+		}
+
 		// ユーザ一覧のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/user_list.jsp").forward(request, response);
 	}
@@ -61,11 +66,17 @@ public class UserListServlet extends HttpServlet {
 		// リクエストパラメータの入力項目を取得
 		String loginId = request.getParameter("inputLoginId");
 		String userName = request.getParameter("inputUserName");
-		String grade = request.getParameter("inputGrade");
+		String uGradeNo = request.getParameter("inputUGradeNo");
 		String address = request.getParameter("inputAddress");
 
+		// 検索条件の表示のため、リクエストスコープに検索条件を保存
+		request.setAttribute("loginId", loginId);
+		request.setAttribute("userName", userName);
+		request.setAttribute("uGradeNo", uGradeNo);
+		request.setAttribute("address", address);
+
 		// 入力情報を元に該当ユーザを検索
-		List<User> userList = new UserDao().search(loginId, userName, grade, address);
+		List<User> userList = new UserDao().search(loginId, userName, uGradeNo, address);
 
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("userList", userList);

@@ -84,7 +84,6 @@
 		</c:forEach>
 	</div>
 
-	<!-- ユーザ一覧表 -->
 	<form method="post" action="ExamMasterServlet">
 		<div class="table-box">
 			<div class="signup">
@@ -166,7 +165,7 @@
 										<input type="text" class="form-control" name="social${exam.userId}" value="${exam.social}">
 									</td>
 								</c:if>
-								<td><a href="ExamResultServlet" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a></td>
+								<td><a href="UserDetailServlet?admin=${user.userId}" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a></td>
 							</c:if>
 						</tr>
 					</c:forEach>

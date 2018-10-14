@@ -39,6 +39,8 @@ public class UserDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ExamDao examDao = new ExamDao();
+
 		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("loginInfo");
@@ -47,61 +49,74 @@ public class UserDetailServlet extends HttpServlet {
 			return;
 		}
 
-		// fgの値によって、アカウント詳細かテスト結果の画面に分岐
-		int fg;
-		if(request.getParameter("fg") ==null) {
-			fg = 0;
-		}else {
-			fg = Integer.parseInt(request.getParameter("fg"));
-		}
-		request.setAttribute("fg", fg);
-
-		// examListが空なら表示しなくてもいいのでは？？
-
 		// ユーザIDの取得
 		int userId = user.getUserId();
-		// 分岐点
-		if(fg == 1) {
-			// ユーザIDに紐づいたテスト結果リストを取得する
-			List<Exam> examList = new ExamDao().findByUserId(String.valueOf(userId));
-			request.setAttribute("examList", examList);
-
-			// 成績一覧のjspにフォワード
-			request.getRequestDispatcher("/WEB-INF/jsp/exam_result.jsp").forward(request, response);
-			return;
-		}else {
-			// 取得したユーザidを用いてユーザ情報と申込情報を取得
-			User userData = new UserDao().searchByUserId(String.valueOf(userId));
-			request.setAttribute("userData", userData);
-
-			// ユーザIDに紐づいた申込リストを取得後、入金済みのものだけ受講講座リストに追加していく
-			List<Application> applicationList = new ApplicationDao().findApplicationByUserId(userId);
-			List<Course> appCourseList = new ArrayList<Course>();
-			for(Application application: applicationList) {
-				if(application.isPayFg()) {
-					List<Course> applicationDetail = new CourseDao().findCourseByApplicationNo(String.valueOf(application.getApplicationNo()));
-					appCourseList.addAll(applicationDetail);
-				}
-			}
-			request.setAttribute("appCourseList", appCourseList);
-
-			// 講習情報を取得
-			session.setAttribute("sCourseList", new Course().getsCourseList());
-			// 性別情報の取得
-			String[] sexlist = { "男", "女" };
-			request.setAttribute("sexlist", sexlist);
-
-			// アカウント詳細のjspにフォワード
-			request.getRequestDispatcher("/WEB-INF/jsp/user_detail.jsp").forward(request, response);
+		// 管理者で各マスタの詳細から遷移してきた場合の処理（userIdを上書きして表示する）
+		if (request.getParameter("admin") != null) {
+			userId = Integer.parseInt(request.getParameter("admin"));
 		}
+		request.setAttribute("userId", userId);
+
+		// 取得したユーザidを用いてユーザ情報と申込情報を取得
+		User userData = new UserDao().searchByUserId(String.valueOf(userId));
+		request.setAttribute("userData", userData);
+
+		// ユーザIDに紐づいた申込リストを取得後、入金済みのものだけ受講講座リストに追加していく
+		List<Application> applicationList = new ApplicationDao().findApplicationByUserId(userId);
+		List<Course> appCourseList = new ArrayList<Course>();
+		for (Application application : applicationList) {
+			if (application.isPayFg()) {
+				List<Course> applicationDetail =
+						new CourseDao().findCourseByApplicationNo(String.valueOf(application.getApplicationNo()));
+				appCourseList.addAll(applicationDetail);
+			}
+		}
+		request.setAttribute("appCourseList", appCourseList);
+
+		// ユーザIDに紐づいたテスト結果リストを取得する
+		List<Exam> examList = examDao.findByUserId(String.valueOf(userId));
+		request.setAttribute("examList", examList);
+		// コメントリストを取得する
+		List<String[]> commentList = examDao.getCommentList(String.valueOf(userId));
+		request.setAttribute("commentList", commentList);
+
+		// 講習情報を取得
+		session.setAttribute("sCourseList", new Course().getsCourseList());
+		// 性別情報の取得
+		String[] sexlist = { "男", "女" };
+		request.setAttribute("sexlist", sexlist);
+
+		// アカウント詳細のjspにフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/user_detail.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		ExamDao examDao = new ExamDao();
+		// リクエストパラメータの文字コードを指定
+        request.setCharacterEncoding("UTF-8");
 
+		// リクエストパラメータの入力項目を取得
+		String userId = request.getParameter("inputUserId");
+		String comment = request.getParameter("inputComment");
+		String grade = request.getParameter("inputGrade");
+		request.setAttribute("userId", userId);
+
+		// コメントの更新
+		new ExamDao().updateComment(userId, grade, comment);
+
+		// ユーザIDに紐づいたテスト結果リストを取得する
+		List<Exam> examList = examDao.findByUserId(userId);
+		request.setAttribute("examList", examList);
+
+		// コメントリストを取得する
+		List<String[]> commentList = examDao.getCommentList(userId);
+		request.setAttribute("commentList", commentList);
+
+
+		// 成績一覧のjspにフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/user_detail.jsp").forward(request, response);
+	}
 }

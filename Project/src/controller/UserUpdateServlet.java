@@ -100,9 +100,8 @@ public class UserUpdateServlet extends HttpServlet {
         // userUpdateメソッドを使って、DB上に入力された情報を登録
         userDao.userUpdate(userData);
 
-        // 登録が成功した場合は講座マスタ一覧へリダイレクト
+        // 登録が成功した場合はユーザ一覧へリダイレクト
         request.getSession().setAttribute("signMsg", "アカウント情報を更新しました");
-        session.setAttribute("userList", new UserDao().findAll());
         response.sendRedirect("UserListServlet");
 	}
 }

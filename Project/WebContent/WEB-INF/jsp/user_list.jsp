@@ -88,15 +88,15 @@
 					<legend class="col-form-label col-sm-2 pt-0">学年</legend>
 					<div class="col-sm-7">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios1" value="1">
+							<input class="form-check-input" type="radio" name="inputUGradeNo" id="gridRadios1" value="1">
 							<label class="form-check-label" for="gridRadios1"> １年生</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios2" value="2">
+							<input class="form-check-input" type="radio" name="inputUGradeNo" id="gridRadios2" value="2">
 							<label class="form-check-label" for="gridRadios2"> ２年生 </label>
 						</div>
 						<div class="form-check disabled">
-							<input class="form-check-input" type="radio" name="inputGrade" id="gridRadios3" value="3">
+							<input class="form-check-input" type="radio" name="inputUGradeNo" id="gridRadios3" value="3">
 							<label class="form-check-label" for="gridRadios3"> ３年生 </label>
 						</div>
 					</div>
@@ -117,6 +117,10 @@
 	</form>
 
 	<!-- ユーザ一覧表 -->
+	<div class="search-style">
+		${uGradeNo}学年　　
+		【検索ワード】ログインID："${loginId}"　　生徒氏名："${userName}"　　住所："${address}"
+	</div>
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
@@ -139,7 +143,7 @@
 					<td>${user.sex}</td>
 					<td>${user.contactInfo}</td>
 					<td>
-						<a href="UserDetailServlet?userId=${user.userId}" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
+						<a href="UserDetailServlet?admin=${user.userId}" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
 						<a href="UserUpdateServlet?userId=${user.userId}" class="update button btn btn-secondary btn-lg active" role="button" aria-pressed="true">更新</a>
 						<a href="UserDeleteServlet?userId=${user.userId}" class="delete button btn btn-secondary btn-lg active" role="button" aria-pressed="true">削除</a>
 					</td>
@@ -147,16 +151,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="text-center">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">前</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">後</a></li>
-			</ul>
-		</nav>
-	</div>
 </body>
 </html>

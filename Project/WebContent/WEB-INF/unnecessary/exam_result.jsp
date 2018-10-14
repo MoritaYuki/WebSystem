@@ -63,24 +63,26 @@
 
 	<h1 class="sub-title"> テスト成績 </h1>
 
-	<div class="info-btn-box">
-		<c:if test="${fg == 0}">
-			<a class="info-btn btn btn-secondary btn-lg disabled" href="UserDetailServlet?fg=0">アカウント情報</a>
-		</c:if>
-		<c:if test="${fg != 0}">
-			<a class="info-btn btn btn-secondary btn-lg " href="UserDetailServlet?fg=0">アカウント情報</a>
-		</c:if>
-		<c:if test="${fg == 1}">
-			<a class="exam-btn info-btn btn btn-secondary btn-lg disabled" href="UserDetailServlet?fg=1">成績情報</a>
-		</c:if>
-		<c:if test="${fg != 1}">
-			<a class="exam-btn info-btn btn btn-secondary btn-lg " href="UserDetailServlet?fg=1">成績情報</a>
-		</c:if>
-	</div>
+	<!-- 管理者ログインのときは表示しない -->
+	<c:if test="${loginInfo.userId != 1}">
+		<div class="info-btn-box">
+			<c:if test="${fg == 0}">
+				<a class="info-btn btn btn-secondary btn-lg disabled" href="UserDetailServlet?fg=0">アカウント情報</a>
+			</c:if>
+			<c:if test="${fg != 0}">
+				<a class="info-btn btn btn-secondary btn-lg " href="UserDetailServlet?fg=0">アカウント情報</a>
+			</c:if>
+			<c:if test="${fg == 1}">
+				<a class="exam-btn info-btn btn btn-secondary btn-lg disabled" href="UserDetailServlet?fg=1">成績情報</a>
+			</c:if>
+			<c:if test="${fg != 1}">
+				<a class="exam-btn info-btn btn btn-secondary btn-lg " href="UserDetailServlet?fg=1">成績情報</a>
+			</c:if>
+		</div>
+	</c:if>
 
 	<!-- ユーザ一覧表 -->
 	<c:forEach var="i" begin="1" end="3">
-		<c:if test="${examList != null}">
 			<div class="table-box">
 				<p class="table-title"> 第${i}学年 </p>
 				<table class="table">
@@ -112,17 +114,40 @@
 					</tbody>
 				</table>
 				<div class="comment-box">
-					<div class="col-sm-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">担当教員からのコメント</h5>
-								<p class="card-text">${exam.comment}</p>
+					<div class="col-sm-10">
+						<c:if test="${loginInfo.userId != 1}">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">【担当教員からのコメント】</h5>
+									<p class="card-text">
+										<c:forEach var="comment" items="${commentList[i-1]}">
+											${comment} <br>
+										</c:forEach>
+									</p>
+								</div>
 							</div>
-						</div>
+						</c:if>
+						<c:if test="${loginInfo.userId == 1}">
+							<form class="form bold" method="post" action="UserDetailServlet">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">【担当教員からのコメント】</h5>
+										<!-- 表示の開業を作り出すための不自然なインデント -->
+										<textarea class="card-text" name="inputComment"><c:forEach var="comment" items="${commentList[i-1]}">${comment}</c:forEach></textarea>
+										<input type="hidden" name="inputUserId" value="${userId}">
+										<input type="hidden" name="inputGrade" value="${i}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-10 search">
+										<button type="submit" class="btn btn-primary search-btn">コメントを更新</button>
+									</div>
+								</div>
+							</form>
+						</c:if>
 					</div>
 				</div>
 			</div>
-		</c:if>
 	</c:forEach>
 	<div class="text-center">
 		<nav aria-label="Page navigation example">

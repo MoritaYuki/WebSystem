@@ -391,18 +391,18 @@ public class UserDao extends CommonDao{
 			//ステートメントの準備
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			//それぞれの入力項目を代入
-			for(int i=2; i<userData.length; i++) {
-		        stmt.setString(i-1, userData[i]);
-			}
 			if(strCheck(userData[2])) {
 				for(int i=3; i<userData.length; i++) {
 			        stmt.setString(i-2, userData[i]);
+			        stmt.setString(8, userData[0]);
 				}
 			}else {
 				for(int i=2; i<userData.length; i++) {
 			        stmt.setString(i-1, userData[i]);
+			        stmt.setString(9, userData[0]);
 				}
 			}
+
 			// 追加したレコードの数を返す
 			stmt.executeUpdate();
 			System.out.println("ユーザID：" + userData[0] + "の情報を更新");
