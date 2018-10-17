@@ -16,22 +16,53 @@ CREATE TABLE `application_detail` (
   `course_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-CREATE TABLE `application_detail` (
-  `application_no` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL
+CREATE TABLE `comment` (
+  `user_id` int(11) NOT NULL,
+  `grade` int(11) NOT NULL,
+  `comment` varchar(5000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-CREATE TABLE `application_detail` (
-  `application_no` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL
+CREATE TABLE `course` (
+  `course_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `grade` int(11) NOT NULL,
+  `course_name` varchar(30) NOT NULL,
+  `teacher` varchar(30) NOT NULL,
+  `term` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `course_detail` varchar(256) DEFAULT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY `course_id` (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8
+
+CREATE TABLE `score` (
+  `user_id` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `grade` int(11) NOT NULL,
+  `term` int(11) NOT NULL,
+  `japanese` int(11) DEFAULT '0',
+  `math` int(11) DEFAULT '0',
+  `english` int(11) DEFAULT '0',
+  `science` int(11) DEFAULT '0',
+  `social` int(11) DEFAULT '0',
+  `comment` text,
+  `create_date` datetime NOT NULL,
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-CREATE TABLE `application_detail` (
-  `application_no` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
-
-CREATE TABLE `application_detail` (
-  `application_no` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+CREATE TABLE `user` (
+  `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `login_id` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `grade` int(11) NOT NULL,
+  `user_name_phonetic` varchar(50) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
+  `sex` varchar(1) NOT NULL,
+  `birthday` date NOT NULL,
+  `contact_info` varchar(30) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY `user_id` (`user_id`),
+  UNIQUE KEY `login_id` (`login_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8
