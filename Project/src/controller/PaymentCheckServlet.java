@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ApplicationDao;
-import dao.CommonDao;
 import dao.CourseDao;
 import model.Application;
+import model.Common;
 import model.Course;
 import model.User;
 
@@ -78,7 +78,7 @@ public class PaymentCheckServlet extends HttpServlet {
 			request.setAttribute("payment", request.getParameter("payment"));
 
 			// 入金金額が空欄でなければ処理を実行
-			if(!new CommonDao().strCheck(payment)) {
+			if(!Common.strCheck(payment)) {
 				int calPayment = Integer.parseInt(payment);
 				int totalDef = (application.getPayAmount()+calPayment)-totalPrice;
 				request.setAttribute("totalDef", totalDef);
@@ -90,7 +90,7 @@ public class PaymentCheckServlet extends HttpServlet {
 			return;
 		}else if(request.getParameter("sign") != null) {
 			// 入金金額が空欄でなければ処理を実行
-			if(!new CommonDao().strCheck(payment)) {
+			if(!Common.strCheck(payment)) {
 				int calPayment = Integer.parseInt(payment);
 
 				// 過不足金が生じた場合は確認画面に遷移
@@ -100,6 +100,11 @@ public class PaymentCheckServlet extends HttpServlet {
 				if(totalDef != 0 && defFg == null) {
 					request.setAttribute("totalDef", totalDef);
 					request.setAttribute("calPayment", calPayment);
+					if(totalDef < 0) {
+						application.setPayFg(3);
+					}else if(totalDef > 0) {
+						application.setPayFg(2);
+					}
 					request.getRequestDispatcher("/WEB-INF/jsp/payment_check_err.jsp").forward(request, response);
 					return;
 

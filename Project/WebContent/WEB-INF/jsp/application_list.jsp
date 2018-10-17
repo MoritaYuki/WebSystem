@@ -29,7 +29,7 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 				</li>
 			</ul>
@@ -124,11 +124,17 @@
 					<td>中${application.grade}</td>
 					<td>${application.userName}</td>
 					<td>${application.appAmount} 円</td>
-					<c:if test="${application.payFg == true}">
-						<td><span class="check1"> ${payFgList[1]} </span>(${application.payDate})</td>
+					<c:if test="${application.payFg == 1}">
+						<td><span class="check1"> ${application.payFgList[1]}</span>(${application.payDate})</td>
 					</c:if>
-					<c:if test="${application.payFg == false}">
-						<td><span class="check2"> ${payFgList[0]} </span></td>
+					<c:if test="${application.payFg == 0}">
+						<td><span class="check2"> ${application.payFgList[0]} </span></td>
+					</c:if>
+					<c:if test="${application.payFg == 2}">
+						<td><span class="check3"> ${application.payFgList[2]} </span></td>
+					</c:if>
+					<c:if test="${application.payFg == 3}">
+						<td><span class="check3"> ${application.payFgList[3]} </span></td>
 					</c:if>
 					<td>
 						<a href="ApplicationDetailServlet?applicationNo=${application.applicationNo}&payFg=${application.payFg}" class="detail button btn btn-secondary btn-lg active" role="button" aria-pressed="true">詳細</a>
@@ -138,16 +144,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="text-center">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">前</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">後</a></li>
-			</ul>
-		</nav>
-	</div>
 </body>
 </html>

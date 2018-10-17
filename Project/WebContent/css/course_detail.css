@@ -20,7 +20,6 @@ body{
 
 .sub-title{
 	text-align: center;
-	font-size: 49px;
 	margin: 50px 0 80px 0;
 	letter-spacing: 20px;
 }
@@ -42,16 +41,10 @@ body{
 	font-weight: bold;
 }
 
-
-.table-container{
-	width: 60%;
+.info-container{
+	border-radius: 20px;
+	background-color: #DDDDDD;
+	padding: 30px;
+	width: 70%;
 	margin: 65px auto;
-}
-
-.table{
-	table-layout: fixed;
-}
-
-.table-name{
-	padding: 0 0 10px 50px;
 }

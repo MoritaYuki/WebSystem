@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Common;
 import model.Exam;
 
-public class ExamDao extends CommonDao {
+public class ExamDao extends Common {
 
 	// 全テスト結果情報を取得する
 	public List<Exam> findAll() {
@@ -361,7 +362,7 @@ public class ExamDao extends CommonDao {
 			stmt.setString(3, grade);
 			// 追加したレコードの数を返す
 			stmt.executeUpdate();
-			System.out.println("ユーザID：" + userId + "学年：" + grade + "のコメントを更新");
+			System.out.println("ユーザID：" + userId + "　　　学年：" + grade + "のコメントを更新");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -395,10 +396,10 @@ public class ExamDao extends CommonDao {
 	}
 
 	// テストのコメントリストを取得する
-	public List<String[]> getCommentList(String sUserId) {
+	public List<String> getCommentList(String sUserId) {
 		Connection con = null;
 		//講座情報保管用のリストを準備
-		List<String[]> commentList = new ArrayList<String[]>();
+		List<String> commentList = new ArrayList<String>();
 		try {
 			con = DBManager.getConnection();
 			String sql = "SELECT * FROM comment WHERE user_id = ?";
@@ -410,11 +411,7 @@ public class ExamDao extends CommonDao {
 			//取得したユーザデータの表から１レコードずつ値を取得して、リストに代入していく
 			while (rs.next()) {
                 String comment = rs.getString("comment");
-                String[] splitComment = null;
-                if(comment != null) {
-                	splitComment = comment.split("\r\n",0);
-                }
-                commentList.add(splitComment);
+                commentList.add(comment);
             }
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -37,7 +37,7 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 					</li>
 				</c:if>
@@ -46,9 +46,6 @@
 						<a class="nav-link" href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="ExamResultServlet">成績</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" href="CourseListServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
 					</li>
 				</c:if>

@@ -39,19 +39,17 @@
 						href="ApplicationListServlet">申込管理</a></li>
 					<li class="nav-item active"><a class="nav-link"
 						href="ExamMasterServlet">成績マスタ</a></li>
-					<li class="nav-item"><a class="nav-link"
+					<li class="nav-item active"><a class="nav-link"
 						href="CourseMasterServlet" role="button" aria-haspopup="true"
 						aria-expanded="false"> 講座マスタ </a></li>
 				</c:if>
 				<c:if test="${loginInfo.userId != 1}">
-					<li class="nav-item active"><a class="nav-link"
-						href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
+					<li class="nav-item active">
+						<a class="nav-link" href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item active"><a class="nav-link"
-						href="ExamResultServlet">成績</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="CourseListServlet" role="button" aria-haspopup="true"
-						aria-expanded="false"> 講座一覧 </a></li>
+					<li class="nav-item active">
+						<a class="nav-link" href="CourseListServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
+					</li>
 				</c:if>
 			</ul>
 		</div>
@@ -165,11 +163,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">【担当教員からのコメント】</h5>
-								<p class="card-text">
-									<c:forEach var="comment" items="${commentList[i-1]}">
-											${comment} <br>
-									</c:forEach>
-								</p>
+								<pre class="card-text">${commentList[i-1]}</pre>
 							</div>
 						</div>
 					</c:if>
@@ -178,8 +172,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">【担当教員からのコメント】</h5>
-									<!-- 表示の開業を作り出すための不自然なインデント -->
-									<textarea class="card-text" name="inputComment"><c:forEach var="comment" items="${commentList[i-1]}">${comment}</c:forEach></textarea>
+									<textarea class="card-text" name="inputComment">${commentList[i-1]}</textarea>
 									<input type="hidden" name="inputUserId" value="${userId}">
 									<input type="hidden" name="inputGrade" value="${i}">
 								</div>

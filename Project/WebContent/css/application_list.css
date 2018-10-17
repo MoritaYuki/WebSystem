@@ -84,6 +84,11 @@ table a {
 	font-weight: bold;
 }
 
+.check3{
+	color: green;
+	font-weight: bold;
+}
+
 .button{
 	font-size: 15px;
 	padding: 5px 5px;

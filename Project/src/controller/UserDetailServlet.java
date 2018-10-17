@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ApplicationDao;
-import dao.CourseDao;
+import dao.ApplicationDetailDao;
 import dao.ExamDao;
 import dao.UserDao;
-import model.Application;
 import model.Course;
 import model.Exam;
 import model.User;
@@ -57,34 +54,26 @@ public class UserDetailServlet extends HttpServlet {
 		}
 		request.setAttribute("userId", userId);
 
-		// 取得したユーザidを用いてユーザ情報と申込情報を取得
+		// 取得したユーザidを用いてユーザ情報を取得
 		User userData = new UserDao().searchByUserId(String.valueOf(userId));
 		request.setAttribute("userData", userData);
 
 		// ユーザIDに紐づいた申込リストを取得後、入金済みのものだけ受講講座リストに追加していく
-		List<Application> applicationList = new ApplicationDao().findApplicationByUserId(userId);
-		List<Course> appCourseList = new ArrayList<Course>();
-		for (Application application : applicationList) {
-			if (application.isPayFg()) {
-				List<Course> applicationDetail =
-						new CourseDao().findCourseByApplicationNo(String.valueOf(application.getApplicationNo()));
-				appCourseList.addAll(applicationDetail);
-			}
-		}
+		List<Course> appCourseList = new ApplicationDetailDao().findTakedCourse(userId);
 		request.setAttribute("appCourseList", appCourseList);
 
 		// ユーザIDに紐づいたテスト結果リストを取得する
 		List<Exam> examList = examDao.findByUserId(String.valueOf(userId));
 		request.setAttribute("examList", examList);
 		// コメントリストを取得する
-		List<String[]> commentList = examDao.getCommentList(String.valueOf(userId));
+		List<String> commentList = examDao.getCommentList(String.valueOf(userId));
 		request.setAttribute("commentList", commentList);
 
 		// 講習情報を取得
 		session.setAttribute("sCourseList", new Course().getsCourseList());
 		// 性別情報の取得
 		String[] sexlist = { "男", "女" };
-		request.setAttribute("sexlist", sexlist);
+		session.setAttribute("sexlist", sexlist);
 
 		// アカウント詳細のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/user_detail.jsp").forward(request, response);
@@ -112,9 +101,16 @@ public class UserDetailServlet extends HttpServlet {
 		request.setAttribute("examList", examList);
 
 		// コメントリストを取得する
-		List<String[]> commentList = examDao.getCommentList(userId);
+		List<String> commentList = examDao.getCommentList(userId);
 		request.setAttribute("commentList", commentList);
 
+		// 取得したユーザidを用いてユーザ情報を取得
+		User userData = new UserDao().searchByUserId(String.valueOf(userId));
+		request.setAttribute("userData", userData);
+
+		// ユーザIDに紐づいた申込リストを取得後、入金済みのものだけ受講講座リストに追加していく
+		List<Course> appCourseList = new ApplicationDetailDao().findTakedCourse(Integer.parseInt(userId));
+		request.setAttribute("appCourseList", appCourseList);
 
 		// 成績一覧のjspにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/user_detail.jsp").forward(request, response);

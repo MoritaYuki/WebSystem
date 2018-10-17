@@ -31,7 +31,7 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 				</li>
 			</ul>
@@ -105,14 +105,14 @@
 						<c:forEach var="s" items="${sexlist}">
 							<c:if test="${s != sex}" >
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios" value="${s}" >
-									<label class="form-check-label" for="gridRadios">${s}</label>
+									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios${s}" value="${s}" >
+									<label class="form-check-label" for="gridRadios${s}">${s}</label>
 								</div>
 							</c:if>
 							<c:if test="${s == sex}" >
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios" value="${s}" checked>
-									<label class="form-check-label" for="gridRadios1">${s}</label>
+									<input class="form-check-input" type="radio" name="inputSex" id="gridRadios${s}" value="${s}" checked>
+									<label class="form-check-label" for="gridRadios${s}">${s}</label>
 								</div>
 							</c:if>
 						</c:forEach>

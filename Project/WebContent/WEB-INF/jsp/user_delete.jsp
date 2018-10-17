@@ -29,7 +29,7 @@
 					href="ApplicationListServlet">申込管理</a></li>
 				<li class="nav-item active"><a class="nav-link"
 					href="ExamMasterServlet">成績マスタ</a></li>
-				<li class="nav-item"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link"
 					href="CourseMasterServlet" role="button" aria-haspopup="true"
 					aria-expanded="false"> 講座マスタ </a></li>
 			</ul>

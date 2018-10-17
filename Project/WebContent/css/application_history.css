@@ -48,13 +48,18 @@ body{
 	text-align: center;
 }
 
-.check{
+.check1{
 	color: blue;
 	font-weight: bold;
 }
 
 .check2{
 	color: red;
+	font-weight: bold;
+}
+
+.check3{
+	color: green;
 	font-weight: bold;
 }
 

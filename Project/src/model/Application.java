@@ -2,7 +2,6 @@ package model;
 
 //JavaBeans作成条件（java.io.Serializableのインポートと実装）
 import java.io.Serializable;
-import java.util.Date;
 
 public class Application implements Serializable {
 	private int applicationNo;
@@ -10,12 +9,12 @@ public class Application implements Serializable {
 	private String loginId;
 	private int grade;
 	private String userName;
-	private Date appDate;
+	private String appDate;
 	private int appAmount;
-	private Date payDate;
+	private String payDate;
 	private int payAmount;
-	private boolean payFg;
-	private String[] payFgList = {"未", "済"};
+	private int payFg;
+	private String[] payFgList = {"未", "済", "過", "不"};
 
 	//JavaBeans作成条件（引数を持たないコンストラクタ）
 	public Application(){
@@ -29,7 +28,7 @@ public class Application implements Serializable {
 	}
 
 	// 申込履歴取得時のコンストラクタ
-	public Application(int applicationNo, int userId, Date appDate, int appAmount, Date payDate, int payAmount, boolean payFg) {
+	public Application(int applicationNo, int userId, String appDate, int appAmount, String payDate, int payAmount, int payFg) {
 		super();
 		this.applicationNo = applicationNo;
 		this.userId = userId;
@@ -41,8 +40,8 @@ public class Application implements Serializable {
 	}
 
 	// 申込一覧取得時のコンストラクタ
-	public Application(int applicationNo, int userId, String loginId, int grade, String userName, Date appDate, int appAmount,
-			Date payDate, int payAmount, boolean payFg) {
+	public Application(int applicationNo, int userId, String loginId, int grade, String userName, String appDate, int appAmount,
+			String payDate, int payAmount, int payFg) {
 		super();
 		this.applicationNo = applicationNo;
 		this.userId = userId;
@@ -80,11 +79,11 @@ public class Application implements Serializable {
 		this.loginId = loginId;
 	}
 
-	public Date getAppDate() {
+	public String getAppDate() {
 		return appDate;
 	}
 
-	public void setAppDate(Date appDate) {
+	public void setAppDate(String appDate) {
 		this.appDate = appDate;
 	}
 
@@ -100,11 +99,11 @@ public class Application implements Serializable {
 		return payAmount;
 	}
 
-	public Date getPayDate() {
+	public String getPayDate() {
 		return payDate;
 	}
 
-	public void setPayDate(Date payDate) {
+	public void setPayDate(String payDate) {
 		this.payDate = payDate;
 	}
 
@@ -112,11 +111,11 @@ public class Application implements Serializable {
 		this.payAmount = payAmount;
 	}
 
-	public boolean isPayFg() {
+	public int getPayFg() {
 		return payFg;
 	}
 
-	public void setPayFg(boolean payFg) {
+	public void setPayFg(int payFg) {
 		this.payFg = payFg;
 	}
 

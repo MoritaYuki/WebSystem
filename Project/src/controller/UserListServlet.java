@@ -72,7 +72,11 @@ public class UserListServlet extends HttpServlet {
 		// 検索条件の表示のため、リクエストスコープに検索条件を保存
 		request.setAttribute("loginId", loginId);
 		request.setAttribute("userName", userName);
-		request.setAttribute("uGradeNo", uGradeNo);
+		if(uGradeNo == null) {
+			request.setAttribute("uGradeNo", "全");
+		}else {
+			request.setAttribute("uGradeNo", uGradeNo);
+		}
 		request.setAttribute("address", address);
 
 		// 入力情報を元に該当ユーザを検索

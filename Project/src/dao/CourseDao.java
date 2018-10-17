@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Common;
 import model.Course;
 
-public class CourseDao extends CommonDao {
+public class CourseDao extends Common {
 
 	// 全講座情報を取得する
 	public List<Course> findAll() {

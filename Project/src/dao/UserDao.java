@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +14,10 @@ import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
+import model.Common;
 import model.User;
 
-public class UserDao extends CommonDao{
+public class UserDao extends Common{
 
 	//ログインIDとパスワードで検索をかける。
 	public User findByLoginInfo(String loginId, String password) {
@@ -106,7 +106,7 @@ public class UserDao extends CommonDao{
                 String userName = rs.getString("user_name");
                 String userNamePhonetic = rs.getString("user_name_phonetic");
                 String sex = rs.getString("sex");
-                Date birthday = rs.getDate("birthday");
+                String birthday = getFormatDate(rs.getDate("birthday"), "yyyy/MM/dd");
                 String contactInfo = rs.getString("contact_info");
                 String address = rs.getString("address");
                 String createDate = rs.getString("create_date");
@@ -166,7 +166,7 @@ public class UserDao extends CommonDao{
 				String userName = rs.getString("user_name");
 				String userNamePhonetic = rs.getString("user_name_phonetic");
 				String sex = rs.getString("sex");
-				Date birthday = rs.getDate("birthday");
+                String birthday = getFormatDate(rs.getDate("birthday"), "yyyy/MM/dd");
 				String contactInfo = rs.getString("contact_info");
 				String address = rs.getString("address");
 				String createDate = rs.getString("create_date");
@@ -261,7 +261,7 @@ public class UserDao extends CommonDao{
                 String userName = rs.getString("user_name");
                 String userNamePhonetic = rs.getString("user_name_phonetic");
                 String sex = rs.getString("sex");
-                Date birthday = rs.getDate("birthday");
+                String birthday = getFormatDate(rs.getDate("birthday"), "yyyy/MM/dd");
                 String contactInfo = rs.getString("contact_info");
                 String address = rs.getString("address");
                 String createDate = rs.getString("create_date");

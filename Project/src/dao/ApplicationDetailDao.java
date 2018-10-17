@@ -3,8 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Application;
 import model.ApplicationDetail;
+import model.Course;
 
 public class ApplicationDetailDao {
 	// 申込詳細情報を挿入する
@@ -40,5 +44,20 @@ public class ApplicationDetailDao {
 				}
 			}
 		}
+	}
+
+	// ユーザIDから受講している講座を取得する
+	public List<Course> findTakedCourse(int userId) {
+		// ユーザIDに紐づいた申込詳細情報を取得し、入金済みのものを受講講座リストとして取得
+		List<Application> applicationList = new ApplicationDao().findApplicationByUserId(userId);
+		List<Course> appCourseList = new ArrayList<Course>();
+		for (Application application : applicationList) {
+			if (application.getPayFg() == 1) {
+				List<Course> applicationDetail =
+						new CourseDao().findCourseByApplicationNo(String.valueOf(application.getApplicationNo()));
+				appCourseList.addAll(applicationDetail);
+			}
+		}
+		return appCourseList;
 	}
 }

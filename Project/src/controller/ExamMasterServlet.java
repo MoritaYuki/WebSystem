@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommonDao;
 import dao.ExamDao;
 import dao.UserDao;
+import model.Common;
 import model.Exam;
 
 /**
@@ -36,8 +36,6 @@ public class ExamMasterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		CommonDao commonDao = new CommonDao();
-
 		// 登録完了メッセージを取得、セッションスコープを削除
 		HttpSession session = request.getSession();
 		request.setAttribute("signMsg", session.getAttribute("signMsg"));
@@ -46,7 +44,7 @@ public class ExamMasterServlet extends HttpServlet {
 		// 表示するテスト結果の学年を変更するための代入
 		// eGradeNoを受け取って、セッションに保存
 		String eGradeNo = request.getParameter("eGradeNo");
-		if(commonDao.strCheck(eGradeNo)) {
+		if(Common.strCheck(eGradeNo)) {
 			session.setAttribute("eGradeNo", 1);
 		}else {
 			session.setAttribute("eGradeNo", Integer.parseInt(eGradeNo));
@@ -54,29 +52,30 @@ public class ExamMasterServlet extends HttpServlet {
 
 		// 最初にgetアクセスしてきたときの表示を作るための代入
 		// セッションにテスト結果リストがなければ、全テスト結果リストを取得
+		// セッションに現在年度がなければ、現在年度を取得
+		String year = (String)session.getAttribute("year");
+		if (Common.strCheck(year)) {
+			session.setAttribute("year", String.valueOf(Exam.getYearNow()));
+		}
+
 		if(session.getAttribute("examList") == null) {
-			session.setAttribute("examList", new ExamDao().findAll());
+			session.setAttribute("examList", new ExamDao().search(year));
 		}
 
 		// セッションに学期がなければ、全学期のリストを取得
 		String eTermNo = request.getParameter("eTermNo");
-		if(commonDao.strCheck(eTermNo)) {
+		if(Common.strCheck(eTermNo)) {
 			session.setAttribute("eTermNo", 1);
 		}else {
 			session.setAttribute("eTermNo", Integer.parseInt(eTermNo));
 		}
 
-		// セッションに現在年度がなければ、現在年度を取得
-		if(session.getAttribute("year") == null) {
-			session.setAttribute("year", Exam.getYearNow());
-		}
-
 		// jspFgがnullなら0を、それ以外のときはその値を保存する
 		String jspFg = request.getParameter("jspFg");
-		if(commonDao.strCheck(jspFg)) {
+		if(Common.strCheck(jspFg)) {
 			session.setAttribute("jspFg", 0);
 		}
-		if(!commonDao.strCheck(jspFg)) {
+		if(!Common.strCheck(jspFg)) {
 			session.setAttribute("jspFg", Integer.parseInt(jspFg));
 		}
 		//exam_master.jspにフォワード
@@ -90,7 +89,6 @@ public class ExamMasterServlet extends HttpServlet {
 		// リクエストパラメータの文字コードを指定
         request.setCharacterEncoding("UTF-8");
 
-		CommonDao commonDao = new CommonDao();
 		ExamDao examDao = new ExamDao();
 		HttpSession session = request.getSession();
 
@@ -99,11 +97,11 @@ public class ExamMasterServlet extends HttpServlet {
 		String eTermNo = request.getParameter("eTermNo");
 
 		// 各フォームにて空欄で検索された際に値を保持する
-		if (!commonDao.strCheck(eTermNo)) {
+		if (!Common.strCheck(eTermNo)) {
 			session.setAttribute("eTermNo", eTermNo);
 		}
-		if (!commonDao.strCheck(year)) {
-			session.setAttribute("year", Integer.parseInt(year));
+		if (!Common.strCheck(year)) {
+			session.setAttribute("year", year);
 		}
 
 		if(request.getParameter("search") != null) {
@@ -132,10 +130,9 @@ public class ExamMasterServlet extends HttpServlet {
 					// テスト結果一覧のjspにフォワード
 					request.getRequestDispatcher("/WEB-INF/jsp/exam_master.jsp").forward(request, response);
 					return;
-
 				}
 
-				int intYear = (int)session.getAttribute("year");
+				int intYear = Integer.parseInt((String)session.getAttribute("year"));
 				int eGradeNo = (int)session.getAttribute("eGradeNo");
 				int term = (int)session.getAttribute("eTermNo");
 				int japanese = Integer.parseInt(request.getParameter("japanese" + i));

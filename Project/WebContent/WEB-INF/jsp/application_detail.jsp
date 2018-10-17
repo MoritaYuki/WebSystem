@@ -37,7 +37,7 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 					</li>
 				</c:if>
@@ -46,9 +46,6 @@
 						<a class="nav-link" href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="ExamResultServlet">成績</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" href="CourseListServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
 					</li>
 				</c:if>
@@ -97,11 +94,17 @@
 					<td></td>
 					<td><a>合計金額</a></td>
 					<td><a>${totalPrice} 円</a></td>
-					<c:if test="${application.payFg == true}">
-						<td><span class="check1"> 入金${payFgList[1]}(${application.payDate}) </span></td>
+					<c:if test="${application.payFg == 1}">
+						<td><span class="check1"> 入金${payFgList[1]}</span>(${application.payDate}) </td>
 					</c:if>
-					<c:if test="${application.payFg == false}">
+					<c:if test="${application.payFg == 0}">
 						<td><span class="check2"> ${payFgList[0]}入金 </span></td>
+					</c:if>
+					<c:if test="${application.payFg == 2}">
+						<td><span class="check3"> ${payFgList[2]}入金 </span>(${application.payDate})</td>
+					</c:if>
+					<c:if test="${application.payFg == 3}">
+						<td><span class="check3"> 入金${payFgList[3]}足 </span></td>
 					</c:if>
 				</tr>
 			</tbody>

@@ -32,7 +32,7 @@
 					href="ApplicationListServlet">申込管理</a></li>
 				<li class="nav-item active"><a class="nav-link"
 					href="ExamMasterServlet">成績マスタ</a></li>
-				<li class="nav-item"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link"
 					href="CourseMasterServlet" role="button" aria-haspopup="true"
 					aria-expanded="false"> 講座マスタ </a></li>
 			</ul>
@@ -160,16 +160,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="text-center">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">前</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">後</a></li>
-			</ul>
-		</nav>
-	</div>
 </body>
 </html>

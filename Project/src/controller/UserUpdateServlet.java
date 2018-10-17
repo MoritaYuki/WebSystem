@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
@@ -58,7 +57,6 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		UserDao userDao = new UserDao();
 
 		// リクエストパラメータの文字コードを指定
@@ -79,7 +77,7 @@ public class UserUpdateServlet extends HttpServlet {
 		String passwordRe = request.getParameter("inputPasswordRe");
 
 		User user = new User(Integer.parseInt(userData[0]), userData[1], userData[2], Integer.parseInt(userData[3]),
-							userData[4], userData[5], userData[6], User.getFormatBirthday(userData[7]), userData[8], userData[9]);
+							userData[4], userData[5], userData[6], userData[7], userData[8], userData[9]);
 
 		// 入力フォームに不備がある場合は再度入力フォームに戻る
 		if(userDao.updateFormCheck(userData, passwordRe)) {

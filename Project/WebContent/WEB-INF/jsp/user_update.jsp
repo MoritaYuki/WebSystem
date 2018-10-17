@@ -31,7 +31,7 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 				</li>
 			</ul>
@@ -122,7 +122,7 @@
 			<div class="form-group row">
 				<label for="inputBirthday" class="col-sm-2 col-form-label">生年月日</label>
 				<div class="col-sm-7">
-					<input type="text" name="inputBirthday" class="form-control" id="inputBirthday" value="${user.birthdayStr}">
+					<input type="text" name="inputBirthday" class="form-control" id="inputBirthday" value="${user.birthday}">
 				</div>
 			</div>
 			<div class="form-group row">

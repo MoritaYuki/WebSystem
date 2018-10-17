@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommonDao;
 import dao.CourseDao;
+import model.Common;
 import model.Course;
 import model.User;
 
@@ -43,7 +43,7 @@ public class CourseListServlet extends HttpServlet {
 
 		// termNoを受け取って、セッションに保存
 		String cTermNo = request.getParameter("cTermNo");
-		if(new CommonDao().strCheck(cTermNo)) {
+		if(Common.strCheck(cTermNo)) {
 			session.setAttribute("cTermNo", 1);
 		}else {
 			session.setAttribute("cTermNo", Integer.parseInt(cTermNo));

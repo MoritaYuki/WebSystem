@@ -57,7 +57,7 @@ public class UserDeleteServlet extends HttpServlet {
 			examDao.examDelete(userId);
 
 			// 新たなリストを取得後、ユーザ一覧画面に遷移ユーザ一覧画面へ遷移
-			request.setAttribute("userList", new UserDao().findAll());
+			session.setAttribute("signMsg", "アカウント情報を削除しました");
 			response.sendRedirect("UserListServlet");
 			return;
 		}

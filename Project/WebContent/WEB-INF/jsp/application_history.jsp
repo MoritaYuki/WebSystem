@@ -37,7 +37,7 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="ExamMasterServlet">成績マスタ</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="CourseMasterServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座マスタ </a>
 					</li>
 				</c:if>
@@ -46,9 +46,6 @@
 						<a class="nav-link" href="UserDetailServlet">プロフィール<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="ExamResultServlet">成績</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" href="CourseListServlet" role="button" aria-haspopup="true" aria-expanded="false"> 講座一覧 </a>
 					</li>
 				</c:if>
@@ -75,11 +72,17 @@
 				<c:forEach var="application" items="${applicationList}">
 					<tr>
 						<th scope="row">${application.appDate}</th>
-						<c:if test="${application.payFg == true}">
-							<td><span class="check1"> ${application.payFgList[1]}(${application.payDate}) </span></td>
+						<c:if test="${application.payFg == 1}">
+							<td><span class="check1"> ${application.payFgList[1]}</span>(${application.payDate})</td>
 						</c:if>
-						<c:if test="${application.payFg == false}">
+						<c:if test="${application.payFg == 0}">
 							<td><span class="check2"> ${application.payFgList[0]} </span></td>
+						</c:if>
+						<c:if test="${application.payFg == 2}">
+							<td><span class="check3"> ${application.payFgList[2]} </span></td>
+						</c:if>
+						<c:if test="${application.payFg == 3}">
+							<td><span class="check3"> ${application.payFgList[3]} </span></td>
 						</c:if>
 						<td>${application.appAmount} 円</td>
 						<td>${application.payAmount} 円</td>

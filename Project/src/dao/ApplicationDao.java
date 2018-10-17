@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.Application;
+import model.Common;
 
-public class ApplicationDao extends CommonDao{
+public class ApplicationDao extends Common{
 
 	// 全申込情報の一覧を取得する
 	public List<Application> findAllApplication() {
@@ -35,16 +35,15 @@ public class ApplicationDao extends CommonDao{
 				String loginId = rs.getString("login_id");
 				int grade = rs.getInt("grade");
 				String userName = rs.getString("user_name");
-				Date appDate = rs.getDate("app_date");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
                 int appAmount = rs.getInt("app_amount");
-                Date payDate = rs.getDate("pay_date");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
                 int payAmount = rs.getInt("app_amount");
-                boolean payFg = rs.getBoolean("pay_fg");
+                int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, loginId, grade, userName, appDate, appAmount,
                 											payDate, payAmount, payFg);
                 applicationList.add(application);
             }
-
 		}catch(SQLException e) {
 			e.printStackTrace();
             return null;
@@ -82,11 +81,11 @@ public class ApplicationDao extends CommonDao{
 
 			int applicationNo = rs.getInt("application_no");
 			int userId = rs.getInt("user_id");
-			Date appDate = rs.getTimestamp("app_date");
-			int appAmount = rs.getInt("app_amount");
-			Date payDate = rs.getTimestamp("pay_date");
+            String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
+            int appAmount = rs.getInt("app_amount");
+            String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
 			int payAmount = rs.getInt("pay_amount");
-			boolean payFg = rs.getBoolean("pay_fg");
+            int payFg = rs.getInt("pay_fg");
 			Application application = new Application(applicationNo, userId, appDate, appAmount, payDate,
 														payAmount, payFg);
 			return application;
@@ -126,11 +125,11 @@ public class ApplicationDao extends CommonDao{
 			while (rs.next()) {
                 int applicationNo = rs.getInt("application_no");
                 int userId = rs.getInt("user_id");
-                Date appDate = rs.getTimestamp("app_date");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
                 int appAmount = rs.getInt("app_amount");
-                Date payDate = rs.getTimestamp("pay_date");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
                 int payAmount = rs.getInt("pay_amount");
-                boolean payFg = rs.getBoolean("pay_fg");
+                int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, appDate, appAmount, payDate,
                 											payAmount, payFg);
                 applicationList.add(application);
@@ -276,11 +275,11 @@ public class ApplicationDao extends CommonDao{
 				String loginId = rs.getString("login_id");
 				int grade = rs.getInt("grade");
 				String userName = rs.getString("user_name");
-				Date appDate = rs.getDate("app_date");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
                 int appAmount = rs.getInt("app_amount");
-                Date payDate = rs.getDate("pay_date");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
                 int payAmount = rs.getInt("app_amount");
-                boolean payFg = rs.getBoolean("pay_fg");
+                int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, loginId, grade, userName, appDate, appAmount,
                 											payDate, payAmount, payFg);
                 applicationList.add(application);
@@ -327,9 +326,12 @@ public class ApplicationDao extends CommonDao{
 			int totalPayament = application.getPayAmount()+calPayment;
 			stmt.setInt(1, totalPayament);
 			if(totalPayament < application.getAppAmount()) {
-				stmt.setBoolean(2, false);
-			}else {
-				stmt.setBoolean(2, true);
+				stmt.setInt(2, 3);
+			}else if(totalPayament > application.getAppAmount()){
+				stmt.setInt(2, 2);
+			}
+			else if(totalPayament == application.getAppAmount()){
+				stmt.setInt(2, 1);
 			}
 			stmt.setInt(3, application.getApplicationNo());
 

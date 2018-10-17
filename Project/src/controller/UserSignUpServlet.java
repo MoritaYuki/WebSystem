@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CommonDao;
 import dao.ExamDao;
 import dao.UserDao;
+import model.Common;
 import model.User;
 
 /**
@@ -93,7 +93,7 @@ public class UserSignUpServlet extends HttpServlet {
         	request.setAttribute("passwordRe", passwordRe);
 
         	for(int i=0; i<lavelList.length; i++) {
-        		if(lavelList[i].equals("uGradeNo") && !new CommonDao().strCheck(userData[i])) {
+        		if(lavelList[i].equals("uGradeNo") && !Common.strCheck(userData[i])) {
         			request.setAttribute(lavelList[i], Integer.parseInt(userData[i]));
         			continue;
         		}
@@ -112,7 +112,6 @@ public class UserSignUpServlet extends HttpServlet {
         // signupメソッドを使って、DB上に入力された情報を登録し、3年分のテスト結果マスタを同時に作成する
         int userId = userDao.signup(userData);
         examDao.signup(Integer.parseInt(userData[2]), userId);
-
         // 登録が成功した場合はユーザ一覧へリダイレクト
         request.getSession().setAttribute("signMsg", "アカウント情報を登録しました");
         response.sendRedirect("UserListServlet");
