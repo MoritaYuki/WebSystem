@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import dao.CourseDao;
 import model.Common;
 import model.Course;
+import model.User;
 
 /**
  * Servlet implementation class CourseMaster
@@ -32,9 +33,15 @@ public class CourseMasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginInfo");
+		if (user == null) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
 
 		// 登録完了メッセージを取得、セッションスコープを削除
-		HttpSession session = request.getSession();
 		request.setAttribute("signMsg", session.getAttribute("signMsg"));
 		session.removeAttribute("signMsg");
 

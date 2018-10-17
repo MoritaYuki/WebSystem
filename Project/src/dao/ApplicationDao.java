@@ -35,9 +35,9 @@ public class ApplicationDao extends Common{
 				String loginId = rs.getString("login_id");
 				int grade = rs.getInt("grade");
 				String userName = rs.getString("user_name");
-                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd HH:mm");
                 int appAmount = rs.getInt("app_amount");
-                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd HH:mm");
                 int payAmount = rs.getInt("app_amount");
                 int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, loginId, grade, userName, appDate, appAmount,
@@ -81,9 +81,9 @@ public class ApplicationDao extends Common{
 
 			int applicationNo = rs.getInt("application_no");
 			int userId = rs.getInt("user_id");
-            String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
+            String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd HH:mm");
             int appAmount = rs.getInt("app_amount");
-            String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
+            String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd HH:mm");
 			int payAmount = rs.getInt("pay_amount");
             int payFg = rs.getInt("pay_fg");
 			Application application = new Application(applicationNo, userId, appDate, appAmount, payDate,
@@ -125,9 +125,9 @@ public class ApplicationDao extends Common{
 			while (rs.next()) {
                 int applicationNo = rs.getInt("application_no");
                 int userId = rs.getInt("user_id");
-                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd HH:mm");
                 int appAmount = rs.getInt("app_amount");
-                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd HH:mm");
                 int payAmount = rs.getInt("pay_amount");
                 int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, appDate, appAmount, payDate,
@@ -275,9 +275,9 @@ public class ApplicationDao extends Common{
 				String loginId = rs.getString("login_id");
 				int grade = rs.getInt("grade");
 				String userName = rs.getString("user_name");
-                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd hh:mm");
+                String appDate = getFormatDate(rs.getTimestamp("app_date"), "yyyy/MM/dd HH:mm");
                 int appAmount = rs.getInt("app_amount");
-                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd hh:mm");
+                String payDate = getFormatDate(rs.getTimestamp("pay_date"), "yyyy/MM/dd HH:mm");
                 int payAmount = rs.getInt("app_amount");
                 int payFg = rs.getInt("pay_fg");
                 Application application = new Application(applicationNo, userId, loginId, grade, userName, appDate, appAmount,

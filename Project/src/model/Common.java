@@ -2,6 +2,7 @@ package model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Common {
 	// String型のstrが空白文字列や、nullでないかを判定
@@ -18,7 +19,9 @@ public class Common {
 		if(date == null) {
 			formatDate = null;
 		}else {
-			formatDate = new SimpleDateFormat(format).format(date);
+			SimpleDateFormat sf = new SimpleDateFormat(format);
+			sf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+			formatDate = sf.format(date);
 		}
 		return formatDate;
 	}

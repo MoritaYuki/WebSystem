@@ -15,6 +15,7 @@ import dao.ExamDao;
 import dao.UserDao;
 import model.Common;
 import model.Exam;
+import model.User;
 
 /**
  * Servlet implementation class ExamMasterServlet
@@ -36,8 +37,15 @@ public class ExamMasterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 登録完了メッセージを取得、セッションスコープを削除
+		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
 		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginInfo");
+		if (user == null) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+
+		// 登録完了メッセージを取得、セッションスコープを削除
 		request.setAttribute("signMsg", session.getAttribute("signMsg"));
 		session.removeAttribute("signMsg");
 
