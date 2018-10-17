@@ -1,0 +1,37 @@
+use sm_db;
+
+CREATE TABLE `application` (
+  `application_no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `app_date` datetime NOT NULL,
+  `app_amount` int(11) NOT NULL DEFAULT '0',
+  `pay_date` text,
+  `pay_amount` int(11) NOT NULL DEFAULT '0',
+  `pay_fg` int(11) DEFAULT NULL,
+  UNIQUE KEY `application_no` (`application_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8
+
+CREATE TABLE `application_detail` (
+  `application_no` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `application_detail` (
+  `application_no` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `application_detail` (
+  `application_no` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `application_detail` (
+  `application_no` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `application_detail` (
+  `application_no` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
