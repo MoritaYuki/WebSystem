@@ -88,3 +88,7 @@ body{
 .justify-content-center{
 	margin-top: 50px;
 }
+
+.card-box{
+	margin: 30px 50px;
+}

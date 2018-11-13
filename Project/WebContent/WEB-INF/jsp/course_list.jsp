@@ -125,11 +125,11 @@
 
 	<!-- 講座一覧 -->
 	<div class="container">
-		<div class="row">
-			<div class="col-sm">
+		<div class="col-sm">
+			<div class="row">
 				<c:forEach var="course" items="${courseList}">
 					<c:if test="${cTermNo == course.term}">
-						<div class="card" style="width: 15rem;">
+						<div class="card card-box" style="width: 15rem;">
 							<img class="card-img-top" src="/StudentManagement/img/s00023.jpg"
 								alt="Card image cap">
 							<div class="card-body">

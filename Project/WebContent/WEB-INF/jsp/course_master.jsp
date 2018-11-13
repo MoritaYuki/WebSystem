@@ -71,13 +71,13 @@
 			<div class="form-group row">
 				<label for="inputCourseName" class="col-sm-2 col-form-label">講座名</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="inputCourseName" id="inputCourseName">
+					<input type="text" class="form-control" name="inputCourseName" id="inputCourseName" placeholder="部分一致">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputTeacher" class="col-sm-2 col-form-label">担当教員</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="inputTeacher" id="inputTeacher">
+					<input type="text" class="form-control" name="inputTeacher" id="inputTeacher" placeholder="部分一致">
 				</div>
 			</div>
 		</div>

@@ -50,29 +50,29 @@
 			<div class="form-group row">
 				<label for="inputApplicationNo" class="col-sm-2 col-form-label">申込番号</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputApplicationNo" id="inputApplicationNo">
+					<input type="text" class="form-control" name="inputApplicationNo" id="inputApplicationNo" placeholder="完全一致">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputBetween" class="col-sm-2 col-form-label">申込日</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="inputStart" id="inputBetween">
+					<input type="text" class="form-control" name="inputStart" id="inputBetween" placeholder="年/月/日">
 				</div>
 				<div class="between col-sm-1">～</div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="inputEnd" id="inputBetween">
+					<input type="text" class="form-control" name="inputEnd" id="inputBetween" placeholder="年/月/日">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId">
+					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId" placeholder="完全一致">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputUserName" class="col-sm-2 col-form-label">ユーザ名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputUserName" id="inputUserName">
+					<input type="text" class="form-control" name="inputUserName" id="inputUserName" placeholder="部分一致">
 				</div>
 			</div>
 			<fieldset class="form-group">

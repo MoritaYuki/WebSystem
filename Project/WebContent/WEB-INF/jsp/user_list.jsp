@@ -55,13 +55,13 @@
 			<div class="form-group row">
 				<label for="inputLoginId" class="col-sm-2 col-form-label">ログインID</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId">
+					<input type="text" class="form-control" name="inputLoginId" id="inputLoginId" placeholder="完全一致">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputUserName" class="col-sm-2 col-form-label">生徒氏名</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputUserName" id="inputUserName">
+					<input type="text" class="form-control" name="inputUserName" id="inputUserName" placeholder="部分一致">
 				</div>
 			</div>
 			<fieldset class="form-group">
@@ -86,7 +86,7 @@
 			<div class="form-group row">
 				<label for="inputAddress" class="col-sm-2 col-form-label">住所</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="inputAddress" id="inputAddress">
+					<input type="text" class="form-control" name="inputAddress" id="inputAddress" placeholder="部分一致">
 				</div>
 			</div>
 		</div>

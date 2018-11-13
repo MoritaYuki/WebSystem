@@ -75,20 +75,20 @@
 						<c:forEach var="t" begin="1" end="3">
 							<div class="form-check">
 								<c:if test="${csTermNo != t}" >
-									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t}" value="${t}">
-									<label class="form-check-label " for="gridRadios${t}"> ${t}学期</label>
+									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t}">
+									<label class="form-check-label " for="gridRadios${t+3}"> ${t}学期</label>
 								</c:if>
 								<c:if test="${csTermNo == t}" >
-									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t}" value="${t}" checked>
-									<label class="form-check-label " for="gridRadios${t}"> ${t}学期</label>
+									<input class="form-check-input " type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t}" checked>
+									<label class="form-check-label " for="gridRadios${t+3}"> ${t}学期</label>
 								</c:if>
 								<c:if test="${csTermNo != t+3}" >
-									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t+3}">
-									<label class="form-check-label event-lavel" for="gridRadios${t+3}"> ${sCourseList[t-1]}講習</label>
+									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+6}" value="${t+3}">
+									<label class="form-check-label event-lavel" for="gridRadios${t+6}"> ${sCourseList[t-1]}講習</label>
 								</c:if>
 								<c:if test="${csTermNo == t+3}" >
-									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+3}" value="${t+3}" checked>
-									<label class="form-check-label event-lavel" for="gridRadios${t+3}"> ${sCourseList[t-1]}講習</label>
+									<input class="form-check-input event" type="radio" name="inputCsTermNo" id="gridRadios${t+6}" value="${t+3}" checked>
+									<label class="form-check-label event-lavel" for="gridRadios${t+6}"> ${sCourseList[t-1]}講習</label>
 								</c:if>
 							</div>
 						</c:forEach>
